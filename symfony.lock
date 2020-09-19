@@ -1,4 +1,7 @@
 {
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -11,14 +14,90 @@
             "./config/routes/annotations.yaml"
         ]
     },
+    "doctrine/cache": {
+        "version": "1.10.2"
+    },
+    "doctrine/collections": {
+        "version": "1.6.7"
+    },
+    "doctrine/common": {
+        "version": "3.0.2"
+    },
+    "doctrine/dbal": {
+        "version": "2.10.4"
+    },
+    "doctrine/doctrine-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "a9f2463b9f73efe74482f831f03a204a41328555"
+        },
+        "files": [
+            "./config/packages/doctrine.yaml",
+            "./config/packages/prod/doctrine.yaml",
+            "./src/Entity/.gitignore",
+            "./src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "baaa439e3e3179e69e3da84b671f0a3e4a2f56ad"
+        },
+        "files": [
+            "./config/packages/doctrine_migrations.yaml",
+            "./migrations/.gitignore"
+        ]
+    },
+    "doctrine/event-manager": {
+        "version": "1.1.1"
+    },
     "doctrine/inflector": {
         "version": "1.4.3"
+    },
+    "doctrine/instantiator": {
+        "version": "1.3.1"
     },
     "doctrine/lexer": {
         "version": "1.2.1"
     },
+    "doctrine/migrations": {
+        "version": "3.0.1"
+    },
+    "doctrine/orm": {
+        "version": "v2.7.3"
+    },
+    "doctrine/persistence": {
+        "version": "2.0.0"
+    },
+    "doctrine/reflection": {
+        "version": "1.2.1"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
+    "monolog/monolog": {
+        "version": "1.25.5"
+    },
     "nikic/php-parser": {
         "version": "v4.9.1"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.8.0"
     },
     "php": {
         "version": "7.4"
@@ -43,6 +122,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "symfony/asset": {
+        "version": "v4.4.13"
     },
     "symfony/cache": {
         "version": "v4.4.13"
@@ -69,7 +151,25 @@
     "symfony/debug": {
         "version": "v4.4.13"
     },
+    "symfony/debug-bundle": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "f8863cbad2f2e58c4b65fa1eac892ab189971bea"
+        },
+        "files": [
+            "./config/packages/dev/debug.yaml"
+        ]
+    },
+    "symfony/debug-pack": {
+        "version": "v1.0.8"
+    },
     "symfony/dependency-injection": {
+        "version": "v4.4.13"
+    },
+    "symfony/doctrine-bridge": {
         "version": "v4.4.13"
     },
     "symfony/dotenv": {
@@ -140,6 +240,27 @@
     "symfony/mime": {
         "version": "v4.4.13"
     },
+    "symfony/monolog-bridge": {
+        "version": "v4.4.13"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "d7249f7d560f6736115eee1851d02a65826f0a56"
+        },
+        "files": [
+            "./config/packages/dev/monolog.yaml",
+            "./config/packages/prod/deprecations.yaml",
+            "./config/packages/prod/monolog.yaml",
+            "./config/packages/test/monolog.yaml"
+        ]
+    },
+    "symfony/orm-pack": {
+        "version": "v2.0.0"
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.18.1"
     },
@@ -158,6 +279,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.18.1"
     },
+    "symfony/profiler-pack": {
+        "version": "v1.0.5"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -174,6 +298,9 @@
     },
     "symfony/service-contracts": {
         "version": "v2.2.0"
+    },
+    "symfony/stopwatch": {
+        "version": "v4.4.13"
     },
     "symfony/translation-contracts": {
         "version": "v2.2.0"
@@ -204,6 +331,39 @@
     "symfony/var-exporter": {
         "version": "v4.4.13"
     },
+    "symfony/web-profiler-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
+        },
+        "files": [
+            "./config/packages/dev/web_profiler.yaml",
+            "./config/packages/test/web_profiler.yaml",
+            "./config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+        },
+        "files": [
+            "./assets/css/app.css",
+            "./assets/js/app.js",
+            "./config/packages/assets.yaml",
+            "./config/packages/prod/webpack_encore.yaml",
+            "./config/packages/test/webpack_encore.yaml",
+            "./config/packages/webpack_encore.yaml",
+            "./package.json",
+            "./webpack.config.js"
+        ]
+    },
     "symfony/yaml": {
         "version": "v4.4.13"
     },
@@ -212,5 +372,8 @@
     },
     "twig/twig": {
         "version": "v3.0.5"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
     }
 }
