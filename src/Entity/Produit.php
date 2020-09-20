@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,31 @@ class Produit
      * @ORM\Column(type="date")
      */
     private $creation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Assureur::class, inversedBy="produits")
+     */
+    private $assureur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
+     */
+    private $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Gestion::class, inversedBy="produits")
+     */
+    private $gestion;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AvisProduit::class, mappedBy="produit")
+     */
+    private $avisProduits;
+
+    public function __construct()
+    {
+        $this->avisProduits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +198,73 @@ class Produit
     public function setCreation(\DateTimeInterface $creation): self
     {
         $this->creation = $creation;
+
+        return $this;
+    }
+
+    public function getAssureur(): ?Assureur
+    {
+        return $this->assureur;
+    }
+
+    public function setAssureur(?Assureur $assureur): self
+    {
+        $this->assureur = $assureur;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getGestion(): ?Gestion
+    {
+        return $this->gestion;
+    }
+
+    public function setGestion(?Gestion $gestion): self
+    {
+        $this->gestion = $gestion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AvisProduit[]
+     */
+    public function getAvisProduits(): Collection
+    {
+        return $this->avisProduits;
+    }
+
+    public function addAvisProduit(AvisProduit $avisProduit): self
+    {
+        if (!$this->avisProduits->contains($avisProduit)) {
+            $this->avisProduits[] = $avisProduit;
+            $avisProduit->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvisProduit(AvisProduit $avisProduit): self
+    {
+        if ($this->avisProduits->contains($avisProduit)) {
+            $this->avisProduits->removeElement($avisProduit);
+            // set the owning side to null (unless already changed)
+            if ($avisProduit->getProduit() === $this) {
+                $avisProduit->setProduit(null);
+            }
+        }
 
         return $this;
     }
