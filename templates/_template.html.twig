@@ -43,16 +43,16 @@
                                 <span class="icon"><i class="fas fa-user-circle"></i></span>
                                 <span><strong>{{app.user.username}}</strong></span>
                             </a>
-                            <a class="button is-light is-small" href="">
+                            <a class="button is-light is-small" href="{{ path('app_logout_message') }}">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                         {% else %}
-                            <a class="button is-primary is-small" href="">
+                            <a class="button is-primary is-small" href="{{ path('inscription') }}">
                                 <strong>
                                     Inscription
                                 </strong>
                             </a>
-                            <a class="button is-light is-small" href="">
+                            <a class="button is-light is-small" href="{{ path('app_login') }}">
                                 Connexion
                             </a>
                         {% endif %}

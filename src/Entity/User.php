@@ -11,6 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * HasLifecycleCallbacks + méthode prePersist =>
+ * Permet de modifier l’entité pour enregister la date de création  à la date ou on valide le produit
  * @UniqueEntity(fields={"email"}, message="Cet e-mail est déjà utilisé par quelqu'un.")
  * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo est déjà utilisé par quelqu'un.")
  */
@@ -74,7 +77,7 @@ class User implements UserInterface
      */
     private $avisAssureurs;
 
-    public function __construct()
+      public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
         $this->avisAssureurs = new ArrayCollection();
@@ -219,6 +222,18 @@ class User implements UserInterface
     }
 
     /**
+     * Méthode exécutée avant l'insertion en base
+     * Modifier l'entité pour enregistrer une date de création de l'utilisateur
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if ($this->inscription === null) {
+            $this->inscription = new \DateTime();
+        }
+    }
+
+    /**
      * @return Collection|AvisProduit[]
      */
     public function getAvisProduits(): Collection
@@ -279,5 +294,4 @@ class User implements UserInterface
 
         return $this;
     }
-
 }
