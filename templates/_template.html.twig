@@ -1,0 +1,68 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {#################       NAVBAR      #################}
+    {# sera affiché sur toutes les pages du Front-Office #}
+
+    <nav class="navbar is-light">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ path('home') }}">
+                <p class="subtitle is-4 has-text-primary">
+                    <b>ASSUM</b>
+                </p>
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="" class="navbar-item">
+                        <span class="icon"><i class="fas fa-lock"></i></span>
+                        <span>Back-Office</span>
+                    </a>
+                {% endif %}
+                <a class="navbar-item" href="">
+                    Voir tous les produits
+                </a>
+
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {# if is_granted('IS_AUTHENTICATED_FULLY') #}
+                        {% if app.user %}
+                            <a class="button is-primary is-small" href="">
+                                <span class="icon"><i class="fas fa-user-circle"></i></span>
+                                <span><strong>{{app.user.username}}</strong></span>
+                            </a>
+                            <a class="button is-light is-small" href="">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        {% else %}
+                            <a class="button is-primary is-small" href="">
+                                <strong>
+                                    Inscription
+                                </strong>
+                            </a>
+                            <a class="button is-light is-small" href="">
+                                Connexion
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% include 'includes/flashes.html.twig' %}
+    {# Bloc qui contiendra le contenu de chaque page #}
+    {% block content %} {% endblock %}
+
+{% endblock %}

@@ -123,6 +123,14 @@ class Produit
         return $this->frais_adhesion;
     }
 
+    /**
+     * Obtenir les frais_adhesion en décimal: 1500 -> 15.00
+     */
+    public function getFraisAdhesionFloat(): ?float
+    {
+        return $this->frais_adhesion === null ? null : $this->frais_adhesion/100;
+    }
+
     public function setFraisAdhesion(int $frais_adhesion): self
     {
         $this->frais_adhesion = $frais_adhesion;
@@ -133,6 +141,14 @@ class Produit
     public function getFraisVersement(): ?int
     {
         return $this->frais_versement;
+    }
+
+    /**
+     * Obtenir les frais_versement en décimal: 1500 -> 15.00
+     */
+    public function getFraisVersementFloat(): ?float
+    {
+        return $this->frais_versement === null ? null : $this->frais_versement/100;
     }
 
     public function setFraisVersement(int $frais_versement): self
@@ -147,6 +163,14 @@ class Produit
         return $this->frais_gestion;
     }
 
+    /**
+     * Obtenir les frais_gestion en décimal: 1500 -> 15.00
+     */
+    public function getFraisGestionFloat(): ?float
+    {
+        return $this->frais_gestion === null ? null : $this->frais_gestion/100;
+    }
+
     public function setFraisGestion(int $frais_gestion): self
     {
         $this->frais_gestion = $frais_gestion;
@@ -159,6 +183,14 @@ class Produit
         return $this->frais_arbitrage;
     }
 
+    /**
+     * Obtenir les frais_arbitrage en décimal: 1500 -> 15.00
+     */
+    public function getFraisArbitrageFloat(): ?float
+    {
+        return $this->frais_arbitrage === null ? null : $this->frais_arbitrage/100;
+    }
+
     public function setFraisArbitrage(int $frais_arbitrage): self
     {
         $this->frais_arbitrage = $frais_arbitrage;
@@ -169,6 +201,14 @@ class Produit
     public function getRendement(): ?int
     {
         return $this->rendement;
+    }
+
+    /**
+     * Obtenir le rendement en décimal: 1500 -> 15.00
+     */
+    public function getRendementFloat(): ?float
+    {
+        return $this->rendement === null ? null : $this->rendement/100;
     }
 
     public function setRendement(?int $rendement): self

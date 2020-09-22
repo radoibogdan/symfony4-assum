@@ -2,19 +2,24 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
+     * @param ProduitRepository $produitRepository
+     * @return Response
      */
-    public function index()
+    public function index(ProduitRepository $produitRepository)
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/HomeController.php',
+        $list_produits = $produitRepository->findNewProduits();
+
+        return $this->render('home/index.html.twig', [
+            'list_produits' => $list_produits
         ]);
     }
 }
