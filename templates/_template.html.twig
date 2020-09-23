@@ -39,11 +39,11 @@
                     <div class="buttons">
                         {# if is_granted('IS_AUTHENTICATED_FULLY') #}
                         {% if app.user %}
-                            <a class="button is-primary is-small" href="">
+                            <a class="button is-primary is-small" href="{{ path('profil') }}">
                                 <span class="icon"><i class="fas fa-user-circle"></i></span>
                                 <span><strong>{{app.user.username}}</strong></span>
                             </a>
-                            <a class="button is-light is-small" href="{{ path('app_logout_message') }}">
+                            <a class="button is-light is-small" href="{{ path('app_logout') }}">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                         {% else %}

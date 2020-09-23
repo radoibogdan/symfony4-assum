@@ -41,14 +41,13 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * Route déconnexion : On réactualise la page login mais on rajoute un message flash
+     * Route déconnexion : On rédirige vers "/" et on rajoute un message flash
      * @Route("/logout-message", name="app_logout_message")
      */
     public function logoutMessage()
     {
         // Ajout d'un message flash
-        $this->addFlash('info','Vous avez été déconnecté.');
-
+        $this->addFlash('info','Vous avez été déconnecté(e).');
         // Redirection vers la page de connexion
         return $this->redirectToRoute('home');
     }
