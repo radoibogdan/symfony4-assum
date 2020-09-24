@@ -1,0 +1,24 @@
+{% extends "_admin_template.html.twig" %}
+
+{% block title %}
+    Suppression {{ produit.titre }}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title">Supprimer le produit d'assurance-vie : {{ produit.titre }}</h1>
+
+        {{ form_start(deletionForm) }}
+
+        {{ form_row(deletionForm.confirmation, {
+            label: 'Je confirme la suppression du produit.'
+        }) }}
+
+        <button type="submit" class="button is-danger is-fullwidth">
+            Supprimer
+        </button>
+
+        {{ form_end(deletionForm)}}
+
+    </div>
+{% endblock %}

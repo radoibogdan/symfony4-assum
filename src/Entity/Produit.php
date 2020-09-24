@@ -223,6 +223,11 @@ class Produit
         return $this->label;
     }
 
+    public function getLabelValue()
+    {
+        return $this->label == 1 ? 'Oui' : 'Non';
+    }
+
     public function setLabel(bool $label): self
     {
         $this->label = $label;

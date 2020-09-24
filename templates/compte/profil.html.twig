@@ -23,7 +23,7 @@
                 label : "Téléphone"
             }) }}
             <button class="button is-primary is-fullwidth" type="submit">Enregister</button>
-            <a href="" class="button is-fullwidth is-success mt-2">Modifier le mot de passe</a>
+            <a href="{{ path('reset_pass') }}" class="button is-fullwidth is-success mt-2">Modifier le mot de passe</a>
         {{ form_end(profilForm) }}
     </div>
 {% endblock %}

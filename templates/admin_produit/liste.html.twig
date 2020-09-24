@@ -1,0 +1,65 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste des produits d'assurance-vie{% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <h1 class="title">Liste des produits d'assurance-vie</h1>
+
+        {% include 'includes/flashes.html.twig' %}
+
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Frais d'adhésion</th>
+                <th>Frais versement</th>
+                <th>Frais de gestion</th>
+                <th>Frais d'arbitrage</th>
+                <th>Assureur</th>
+                <th>Rendement</th>
+                <th>Catégorie</th>
+                <th>Type Gestion</th>
+                <th>Label Assum</th>
+                <th>Disponible depuis</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {# La boucle sur produits_list, dernière colonne : Modifier & Supprimer #}
+            {% for produit in list_produits %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>
+                        {#<a href="{{ path('produit_show', {id:produit.id}) }}" target="_blank">#}
+                        {#{{ produit.titre }}#}
+                        {#</a>#}
+                        {{ produit.titre }}
+                    </td>
+                    <td>{{ produit.description | slice(0, 20) }}</td>
+                    <td class="has-text-right">{{ produit.fraisAdhesionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-right">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-right">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-right">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
+                    <td>{{ produit.assureur.nom }} </td>
+                    <td class="has-text-right">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
+                    <td>{{ produit.categorie.nom }} </td>
+                    <td>{{ produit.gestion.nom }} </td>
+                    <td>{{ produit.labelValue }} </td>
+                    <td>{{ produit.creation | date("d/m/y") }} </td>
+                    <td>
+                        <div class="buttons is-pulled-right">
+                            <a href="{{ path('admin_produit_edit', {id:produit.id}) }} " class="button is-success">Modifier</a>
+                            <a href="{{ path('admin_produit_delete', {id:produit.id}) }} " class="button is-danger">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

@@ -24,6 +24,7 @@ class AvisProduit
 
     /**
      * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="avisProduits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $produit;
 

@@ -1,0 +1,58 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Modifier le produit {% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title">Modifier le produit d'assurance vie "{{ produit.titre}}"</h1>
+
+        {% include 'includes/flashes.html.twig' %}
+
+        {{ form_start(produitForm) }}
+        {{ form_row(produitForm.titre,{
+            label : 'Titre du produit'
+        }) }}
+        {{ form_row(produitForm.description,{
+            label : 'Description'
+        }) }}
+        {{ form_row(produitForm.frais_adhesion,{
+            label : 'Fraix d\'adhésion'
+        }) }}
+        {{ form_row(produitForm.frais_versement,{
+            label : 'Frais de versement'
+        }) }}
+        {{ form_row(produitForm.frais_gestion,{
+            label : 'Frais de gestion'
+        }) }}
+        {{ form_row(produitForm.frais_arbitrage,{
+            label : 'Frais d\'arbitrage'
+        }) }}
+        {{ form_row(produitForm.assureur,{
+            label : 'Assureur'
+        }) }}
+        {{ form_row(produitForm.categorie,{
+            label : 'Catégorie de l\'produit'
+        }) }}
+        {{ form_row(produitForm.rendement,{
+            label : 'Rendement'
+        }) }}
+        {{ form_row(produitForm.categorie,{
+            label : 'Catégorie'
+        }) }}
+        {{ form_row(produitForm.gestion,{
+            label : 'Gestion'
+        }) }}
+        {{ form_row(produitForm.label,{
+            label : 'Label'
+        }) }}
+        {{ form_row(produitForm.creation,{
+            label : 'Disponible depuis'
+        }) }}
+        <button type="submit" class="button is-success is-fullwidth">
+            Enregistrer
+        </button>
+        {{ form_end(produitForm) }}
+
+    </div>
+
+{% endblock %}

@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\ResetPasswordFormType;
 use App\Security\LoginFormAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +20,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -93,6 +98,34 @@ class SecurityController extends AbstractController
 
         return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/reset", name="reset_pass")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     * @IsGranted("ROLE_USER")
+     */
+    public function reset(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface  $passwordEncoder)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ResetPasswordFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            ));
+            $entityManager->flush();
+            $this->addFlash('success','Le mot de pass a été modifié.');
+            return $this->redirectToRoute('profil');
+        }
+
+        return $this->render('security/reset.html.twig',[
+            'resetForm' => $form->createView()
         ]);
     }
 }

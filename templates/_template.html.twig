@@ -23,7 +23,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="" class="navbar-item">
+                    <a href="{{ path('admin_produit_liste') }}" class="navbar-item">
                         <span class="icon"><i class="fas fa-lock"></i></span>
                         <span>Back-Office</span>
                     </a>
