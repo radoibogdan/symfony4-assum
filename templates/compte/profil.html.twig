@@ -1,6 +1,6 @@
 {% extends '_template.html.twig' %}
 
-{% block title %} Mon Profil {% endblock %}
+{% block title %}Mon Profil{% endblock %}
 
 {% block content %}
     <div class="section">
@@ -8,7 +8,7 @@
         {% include 'includes/flashes.html.twig' %}
         {{ form_start(profilForm) }}
             {{ form_row(profilForm.email, {
-                label : "Adresse email"
+                label : "Adresse e-mail"
             }) }}
             {{ form_row(profilForm.pseudo, {
                 label : "Pseudo"

@@ -1,0 +1,24 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Suppression l'utilisateur{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Suppréssion définitive de l'utilisateur : {{ user.prenom }} {{ user.nom | upper }}</h1>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                {{ form_start(deleteForm) }}
+                    {{ form_row(deleteForm.confirmation, {
+                        label : 'Je confirme la suppréssion de ' ~ user.prenom ~ ' ' ~ user.nom ~ '.'
+                    }) }}
+                <button type="submit" class="button is-fullwidth is-danger">Supprimer</button>
+                {{ form_end(deleteForm) }}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,49 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <h1 class="title">Liste des utilisateurs</h1>
+
+        {% include 'includes/flashes.html.twig' %}
+
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>E-mail</th>
+                <th>Pseudo</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Date inscription</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {# La boucle sur user_list, dernière colonne : Modifier & Supprimer #}
+            {% for user in user_list %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.pseudo}}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.telephone}}</td>
+                    <td>{{ user.inscription | date("d/m/y")}}</td>
+                    <td>
+                        <div class="buttons is-pulled-right">
+                            <a href="{{ path('admin_user_edit', {id:user.id}) }}" class="button is-success">Modifier</a>
+                            <a href="{{ path('admin_user_delete', {id:user.id}) }}" class="button is-danger">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

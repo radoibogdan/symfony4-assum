@@ -1,0 +1,36 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Modifier l'utilisateur{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Profil utilisateur : {{ user.prenom }} {{ user.nom | upper }} </h1>
+        {% include 'includes/flashes.html.twig' %}
+
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                {{ form_start(userForm) }}
+                {{ form_row(userForm.email, {
+                    label : "Adresse e-mail"
+                }) }}
+                {{ form_row(userForm.pseudo, {
+                    label : "Pseudo"
+                }) }}
+                {{ form_row(userForm.nom, {
+                    label : "Nom"
+                }) }}
+                {{ form_row(userForm.prenom, {
+                    label : "Prénom"
+                }) }}
+                {{ form_row(userForm.telephone, {
+                    label : "Téléphone"
+                }) }}
+                <button type="submit" class="button is-primary is-fullwidth">Modifier</button>
+                {{ form_end(userForm) }}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}
+

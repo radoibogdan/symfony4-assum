@@ -19,6 +19,7 @@ class AvisProduit
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="avisProduits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $auteur;
 
