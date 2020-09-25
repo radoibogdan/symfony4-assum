@@ -5,41 +5,46 @@
 {% block content %}
     <div class="section">
 
-        <h1 class="title">Liste des types de gestion</h1>
+        <h1 class="title has-text-centered">Liste des types de gestion</h1>
 
-        <a href="{{ path('admin_gestion_add') }}" class="button is-success mb-4">
-            Créer un nouveau type de gestion
-        </a>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                <a href="{{ path('admin_gestion_add') }}" class="button is-success mb-4">
+                    Créer un nouveau type de gestion
+                </a>
 
-        {% include 'includes/flashes.html.twig' %}
+                {% include 'includes/flashes.html.twig' %}
 
-        <table class="table is-fullwidth">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom de la gestion</th>
-                <th>Nombre de produits</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {# La boucle sur list_gestions, dernière colonne : Modifier & Supprimer #}
-            {% for gestion in list_gestions %}
-                <tr>
-                    <td>{{ gestion.id }}</td>
-                    <td>{{ gestion.nom }}</td>
-                    <td>{{ gestion.getProduits|length }}</td>
-                    <td>
-                        <div class="buttons is-pulled-right">
-                            <a href="{{ path('admin_gestion_edit', {id:gestion.id}) }}" class="button is-success">Modifier</a>
-                            <a href="{{ path('admin_gestion_delete', {id:gestion.id}) }}" class="button is-danger">Supprimer</a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom de la gestion</th>
+                        <th>Nombre de produits</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# La boucle sur list_gestions, dernière colonne : Modifier & Supprimer #}
+                    {% for gestion in list_gestions %}
+                        <tr>
+                            <td>{{ gestion.id }}</td>
+                            <td>{{ gestion.nom }}</td>
+                            <td>{{ gestion.getProduits|length }}</td>
+                            <td>
+                                <div class="buttons is-pulled-right">
+                                    <a href="{{ path('admin_gestion_edit', {id:gestion.id}) }}" class="button is-success">Modifier</a>
+                                    <a href="{{ path('admin_gestion_delete', {id:gestion.id}) }}" class="button is-danger">Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-            </tbody>
-        </table>
-
+                    </tbody>
+                </table>
+            </div>
+            <div class="column"></div>
+        </div>
     </div>
 {% endblock %}

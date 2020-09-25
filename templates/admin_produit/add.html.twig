@@ -1,18 +1,16 @@
 {% extends '_admin_template.html.twig' %}
 
-{% block title %}Modifier le produit {% endblock %}
+{% block title %}Nouveau Produit{% endblock %}
 
 {% block content %}
     <div class="section">
-        <h1 class="title has-text-centered">Modifier le produit d'assurance vie "{{ produit.titre}}"</h1>
+        <h1 class="title has-text-centered">Nouveau produit</h1>
         <div class="columns">
             <div class="column"></div>
-            <div class="column is-half">
-                {% include 'includes/flashes.html.twig' %}
+            <div class="column is-one-third">
                 {% include 'admin_produit/_produit_form.html.twig' %}
             </div>
             <div class="column"></div>
         </div>
     </div>
-
 {% endblock %}

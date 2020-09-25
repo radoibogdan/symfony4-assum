@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("s", name="list")
+     * @Route("s", name="liste")
      * @param UserRepository $userRepository
      * @return Response
      */

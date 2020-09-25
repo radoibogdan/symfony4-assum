@@ -44,10 +44,10 @@
                     <td class="has-text-right">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-right">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-right">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
-                    <td>{{ produit.assureur.nom }} </td>
+                    <td>{{ produit.assureur.nom | default('non disponible') }} </td>
                     <td class="has-text-right">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
-                    <td>{{ produit.categorie.nom }} </td>
-                    <td>{{ produit.gestion.nom }} </td>
+                    <td>{{ produit.categorie.nom | default('non disponible') }} </td>
+                    <td>{{ produit.gestion.nom | default('non disponible')}} </td>
                     <td>{{ produit.labelValue }} </td>
                     <td>{{ produit.creation | date("d/m/y") }} </td>
                     <td>

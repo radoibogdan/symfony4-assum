@@ -1,0 +1,11 @@
+{{ form_start(assureurForm) }}
+    {{ form_row(assureurForm.nom,{
+        label : 'Assureur produit'
+    }) }}
+    {{  form_row(assureurForm.site, {
+        label : 'Site internet de l\'assureur'
+    }) }}
+<button type="submit" class="button is-success is-fullwidth">
+    Enregistrer
+</button>
+{{ form_end(assureurForm) }}

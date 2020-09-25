@@ -25,6 +25,7 @@ class AvisAssureur
 
     /**
      * @ORM\ManyToOne(targetEntity=Assureur::class, inversedBy="avisAssureurs")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $assureur;
 

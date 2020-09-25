@@ -1,0 +1,53 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste d'assureurs{% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-two-thirds">
+                <h1 class="title has-text-centered">Liste d'assureurs</h1>
+
+                <a href="{{ path('admin_assureur_add') }}" class="button is-success mb-4">
+                    Créer un nouveau assureur
+                </a>
+
+                {% include 'includes/flashes.html.twig' %}
+
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom de l'assureur</th>
+                        <th>Site internet</th>
+                        <th>Nombre de produits</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# La boucle sur list_assureurs, dernière colonne : Modifier & Supprimer #}
+                    {% for assureur in list_assureurs %}
+                        <tr>
+                            <td>{{ assureur.id }}</td>
+                            <td>{{ assureur.nom }}</td>
+                            <td>{{ assureur.site }}</td>
+                            <td>{{ assureur.getProduits|length }}</td>
+                            <td>
+                                <div class="buttons is-pulled-right">
+                                    <a href="{{ path('admin_assureur_edit', {id:assureur.id}) }}" class="button is-success">Modifier</a>
+                                    <a href="{{ path('admin_assureur_delete', {id:assureur.id}) }}" class="button is-danger">Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="column"></div>
+        </div>
+
+    </div>
+{% endblock %}

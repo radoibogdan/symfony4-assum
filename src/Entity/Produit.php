@@ -66,16 +66,19 @@ class Produit
 
     /**
      * @ORM\ManyToOne(targetEntity=Assureur::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $assureur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $categorie;
 
     /**
      * @ORM\ManyToOne(targetEntity=Gestion::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $gestion;
 

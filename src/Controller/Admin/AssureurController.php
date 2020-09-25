@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-use App\Entity\Gestion;
+use App\Entity\Assureur;
+use App\Form\AssureurFormType;
 use App\Form\ConfirmDeletionFormType;
-use App\Form\GestionFormType;
-use App\Repository\GestionRepository;
+use App\Repository\AssureurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,20 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Autoriser l'accès qu'aux administrateurs sur toutes les routes de ce controlleur
  * @IsGranted ("ROLE_ADMIN")
- * @Route ("/admin/gestion", name="admin_gestion_")
+ * @Route ("/admin/assureur", name="admin_assureur_")
  */
-class GestionController extends AbstractController
+class AssureurController extends AbstractController
 {
     /**
      * @Route("s", name="liste")
-     * @param GestionRepository $gestionRepository
+     * @param AssureurRepository $assureurRepository
      * @return Response
      */
-    public function index(GestionRepository $gestionRepository)
+    public function index(AssureurRepository $assureurRepository)
     {
-        $list_gestions = $gestionRepository->findAll();
-        return $this->render('admin_gestion/liste.html.twig', [
-            'list_gestions' => $list_gestions
+        $list_assureurs = $assureurRepository->findAll();
+        return $this->render('admin_assureur/liste.html.twig', [
+            'list_assureurs' => $list_assureurs
         ]);
     }
 
@@ -41,68 +41,68 @@ class GestionController extends AbstractController
      */
     public function add(EntityManagerInterface $entityManager, Request $request)
     {
-        $form = $this->createForm(GestionFormType::class);
+        $form = $this->createForm(AssureurFormType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             // pour rajouter une entité dans la bdd on a besoin de récupérer l'entité (getData) et de la méthode persist()
-            // getData retourne une Gestion
-            $gestion = $form->getData();
-            $entityManager->persist($gestion);
+            // getData retourne une Assureur
+            $assureur = $form->getData();
+            $entityManager->persist($assureur);
             $entityManager->flush();
-            $this->addFlash('success', 'La type de gestion a été ajouté.');
-            return $this->redirectToRoute('admin_gestion_liste');
+            $this->addFlash('success', 'L\'assureur a été ajouté.');
+            return $this->redirectToRoute('admin_assureur_liste');
         }
-        return $this->render('admin_gestion/add.html.twig', [
-            'gestionForm' => $form->createView()
+        return $this->render('admin_assureur/add.html.twig', [
+            'assureurForm' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{id}/modifier", name="edit")
-     * @param Gestion $gestion
+     * @param Assureur $assureur
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function edit(Gestion $gestion, Request $request, EntityManagerInterface $entityManager)
+    public function edit(Assureur $assureur, Request $request, EntityManagerInterface $entityManager)
     {
-        // Le fait de mettre Gestion comme argument va récupérer la bonne Gestion de la base
+        // Le fait de mettre Assureur comme argument va récupérer le bon Assureur de la base
         // Pas besoin de récupérer l'id dans la fonction et de le passer à la méthode find()
-        $form = $this->createForm(GestionFormType::class, $gestion);
+        $form = $this->createForm(AssureurFormType::class, $assureur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             // pas besoin de getData et persist(). Les modifications sont faites automatiquement
             $entityManager->flush();
-            $this->addFlash('success','Les modifications apportées à la gestion ont été enregistrées!');
+            $this->addFlash('success','Les modifications apportées à l\'assureur ont été enregistrées!');
         }
-        return $this->render('/admin_gestion/edit.html.twig', [
-            'gestion' => $gestion, // pour rajouter des informations en plus du formulaire
-            'gestionForm' => $form->createView()
+        return $this->render('/admin_assureur/edit.html.twig', [
+            'assureur' => $assureur, // pour rajouter des informations en plus du formulaire
+            'assureurForm' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{id}/suppression", name="delete")
-     * @param Gestion $gestion
+     * @param Assureur $assureur
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function delete(Gestion $gestion, Request $request, EntityManagerInterface $entityManager)
+    public function delete(Assureur $assureur, Request $request, EntityManagerInterface $entityManager)
     {
         // ConfirmDeletionFormType n'est pas lié à une entité
         $form = $this->createForm(ConfirmDeletionFormType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             //A l'inverse de persist(), remove() prépare à la suppression d'une entité
-            $entityManager->remove($gestion);
+            $entityManager->remove($assureur);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le type de gestion a été supprimé');
-            return $this->redirectToRoute('admin_gestion_liste');
+            $this->addFlash('success', 'L\'assureur a été supprimé.');
+            return $this->redirectToRoute('admin_assureur_liste');
         }
-        return $this->render('/admin_gestion/delete.html.twig', [
-            'gestion' => $gestion,
+        return $this->render('/admin_assureur/delete.html.twig', [
+            'assureur' => $assureur,
             'deleteForm' => $form->createView()
         ]);
     }

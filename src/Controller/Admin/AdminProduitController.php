@@ -77,7 +77,7 @@ class AdminProduitController extends AbstractController
         }
         return $this->render('admin_produit/delete.html.twig', [
             'produit' => $produit, // pour rajouter des informations en plus du formulaire
-            'deletionForm' => $form->createView()
+            'deleteForm' => $form->createView()
         ]);
     }
 }
