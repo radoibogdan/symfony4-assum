@@ -1,0 +1,18 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Modifier le type de gestion{% endblock %}
+
+{% block content %}
+    <div class="section">
+    <h1 class="title has-text-centered">Modifier le type de gestion : {{ gestion.nom }}</h1>
+
+    <div class="columns">
+        <div class="column"></div>
+        <div class="column is-one-third">
+            {% include 'includes/flashes.html.twig' %}
+            {% include 'admin_gestion/_gestion_form.html.twig' %}
+        </div>
+        <div class="column"></div>
+    </div>
+
+{% endblock %}
