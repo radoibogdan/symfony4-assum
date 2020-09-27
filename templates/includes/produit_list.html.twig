@@ -14,23 +14,25 @@
                                 <a href="" class="has-text-primary">
                                     <strong>{{produit.titre}}</strong>
                                 </a>
-                                <small>{{produit.creation|date('d/m/Y')}}</small>
                                 <br>
-                                <a href="{#{{ path('category_show',{id: produit.category.id}) }}#}" class="has-background-success has-text-white">
+                                <a href="{#{{ path('category_show',{id: produit.category.id}) }}#}" class="has-background-success has-text-white px-1">
                                     <strong>{{produit.categorie.nom}}</strong>
                                 </a>
+                                <br>
+                                Disponible depuis : {{produit.creation|date('m/yy')}}
                                 {#
                                     <br>
                                     <small class="has-background-success has-text-white">{{product.category.name}}</small>
                                     <br>
                                 #}
+                                <br>
                                 {{produit.description|slice(0,50)}}
                             </p>
                             <div class="tags has-addons">
                                 <span class="tag">{{ produit.rendementFloat|number_format(2, '.', ' ') }}</span>
                                 <span class="tag is-primary">
                                     <span class="icon">
-                                        <i class="fas fa-euro-sign"></i>
+                                        <i class="fas fa-percentage"></i>
                                     </span>
                                 </span>
                             </div>

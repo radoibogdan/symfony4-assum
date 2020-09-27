@@ -6,7 +6,9 @@
     <div class="section">
 
         <h1 class="title">Liste des produits d'assurance-vie</h1>
-
+        <a href="{{ path('admin_produit_add') }}" class="button mb-4 is-success">
+            Créer un nouveau produit d'assurance vie
+        </a>
         {% include 'includes/flashes.html.twig' %}
 
         <table class="table is-fullwidth">
@@ -49,7 +51,7 @@
                     <td>{{ produit.categorie.nom | default('non disponible') }} </td>
                     <td>{{ produit.gestion.nom | default('non disponible')}} </td>
                     <td>{{ produit.labelValue }} </td>
-                    <td>{{ produit.creation | date("d/m/y") }} </td>
+                    <td>{{ produit.creation | date("d/m/yy") }} </td>
                     <td>
                         <div class="buttons is-pulled-right">
                             <a href="{{ path('admin_produit_edit', {id:produit.id}) }} " class="button is-success">Modifier</a>

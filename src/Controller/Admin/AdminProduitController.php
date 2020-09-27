@@ -34,6 +34,28 @@ class AdminProduitController extends AbstractController
     }
 
     /**
+     * @Route ("/ajouter", name="add")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function add(EntityManagerInterface $entityManager, Request $request)
+    {
+        $form = $this->createForm(ProduitFormType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $produit = $form->getData();
+            $entityManager->persist($produit);
+            $entityManager->flush();
+            $this->addFlash('success','Le produit a été ajouté dans la base de données.');
+            return $this->redirectToRoute('admin_produit_liste');
+        }
+        return $this->render('admin_produit/add.html.twig',[
+            'produitForm' => $form->createView()
+        ]);
+    }
+
+    /**
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
      * @param Request $request

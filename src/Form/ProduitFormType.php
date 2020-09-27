@@ -89,9 +89,7 @@ class ProduitFormType extends AbstractType
                 'required' => false
             ])
             ->add('creation', DateType::class, [
-                'widget' => 'single_text',
-                'html5' => false,
-                'attr' => ['class' => 'js-datepicker'],
+                'widget' => 'single_text'
             ])
         ;
     }
