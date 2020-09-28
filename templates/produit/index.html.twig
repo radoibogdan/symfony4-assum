@@ -1,0 +1,10 @@
+{% extends "_template.html.twig" %}
+
+{% block title %}Liste des produits d'assurance vie{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title mt-4">Liste des produits : {{ list_produits|length }}</h1>
+        {% include "includes/produit_list.html.twig" with {produits: list_produits} %}
+    </div>
+{% endblock %}

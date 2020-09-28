@@ -1,0 +1,55 @@
+{% extends "_template.html.twig" %}
+
+{% block title %} {{produit.titre}} {% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                {# Column 1/2 #}
+                <div class="column is-one-fifth">
+                    <figure class="image is-1by1">
+                        <img alt="img" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}">
+                    </figure>
+                </div>
+
+                {# Column 2/2 #}
+                <div class="column is-two-fifths">
+                    <h1 class="title has-text-primary">
+                        {{produit.titre}}
+                    </h1>
+
+                    <a class="has-background-success has-text-white px-1">
+                        <strong> {{produit.categorie.nom | default('catégorie non disponible')}}</strong>
+                    </a>
+
+                    <p class="content">
+                        {{produit.description}}
+                    </p>
+
+                    <div class="tags has-addons are-large mt-4">
+                        <span class="tag">
+                            {{produit.rendementFloat |number_format(2 , '.' , ' ')}} {# . pour les centimes #}
+                        </span>
+                        <span class="tag is-primary">
+                            <span class="icon"><i class="fas fa-percent"></i></span>
+                        </span>
+                        <span class="tag">
+                            {{produit.fraisGestionFloat |number_format(2 , '.' , ' ')}}
+                        </span>
+                        <span class="tag is-danger">
+                            <span class="icon"><i class="fas fa-percent"></i></span>
+                        </span>
+                    </div>
+
+                    <hr>
+                    <h6 class="is-size-7">
+                        <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
+                        <span>Produit disponible depuis {{produit.creation|date('d/m/Y')}}</span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

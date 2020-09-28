@@ -11,12 +11,12 @@
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <a href="" class="has-text-primary">
+                                <a href="{{ path('affichage_produit',{id: produit.id}) }}" class="has-text-primary">
                                     <strong>{{produit.titre}}</strong>
                                 </a>
                                 <br>
                                 <a href="{#{{ path('category_show',{id: produit.category.id}) }}#}" class="has-background-success has-text-white px-1">
-                                    <strong>{{produit.categorie.nom}}</strong>
+                                    <strong>{{produit.categorie.nom | default('non disponible')}}</strong>
                                 </a>
                                 <br>
                                 Disponible depuis : {{produit.creation|date('m/yy')}}
@@ -32,7 +32,7 @@
                                 <span class="tag">{{ produit.rendementFloat|number_format(2, '.', ' ') }}</span>
                                 <span class="tag is-primary">
                                     <span class="icon">
-                                        <i class="fas fa-percentage"></i>
+                                        <i class="fas fa-percent"></i>
                                     </span>
                                 </span>
                             </div>
