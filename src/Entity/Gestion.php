@@ -25,7 +25,7 @@ class Gestion
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="gestion")
+     * @ORM\ManyToMany(targetEntity=Produit::class, mappedBy="gestion")
      */
     private $produits;
 
@@ -63,7 +63,7 @@ class Gestion
     {
         if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
-            $produit->setGestion($this);
+            $produit->addGestion($this);
         }
 
         return $this;
@@ -73,12 +73,10 @@ class Gestion
     {
         if ($this->produits->contains($produit)) {
             $this->produits->removeElement($produit);
-            // set the owning side to null (unless already changed)
-            if ($produit->getGestion() === $this) {
-                $produit->setGestion(null);
-            }
+            $produit->removeGestion($this);
         }
 
         return $this;
     }
+
 }

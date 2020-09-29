@@ -79,7 +79,9 @@ class ProduitFormType extends AbstractType
                 ])
             ->add('gestion', EntityType::class, [
                 'class' => Gestion::class,
-                'choice_label' => 'nom'
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true
             ])
             ->add('label', ChoiceType::class, [
                 'choices' => [

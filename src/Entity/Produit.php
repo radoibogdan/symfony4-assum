@@ -77,19 +77,20 @@ class Produit
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Gestion::class, inversedBy="produits")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     */
-    private $gestion;
-
-    /**
      * @ORM\OneToMany(targetEntity=AvisProduit::class, mappedBy="produit")
      */
     private $avisProduits;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Gestion::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $gestion;
+
     public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
+        $this->gestion = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,18 +275,6 @@ class Produit
         return $this;
     }
 
-    public function getGestion(): ?Gestion
-    {
-        return $this->gestion;
-    }
-
-    public function setGestion(?Gestion $gestion): self
-    {
-        $this->gestion = $gestion;
-
-        return $this;
-    }
-
     /**
      * @return Collection|AvisProduit[]
      */
@@ -312,6 +301,32 @@ class Produit
             if ($avisProduit->getProduit() === $this) {
                 $avisProduit->setProduit(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gestion[]
+     */
+    public function getGestion(): Collection
+    {
+        return $this->gestion;
+    }
+
+    public function addGestion(Gestion $gestion): self
+    {
+        if (!$this->gestion->contains($gestion)) {
+            $this->gestion[] = $gestion;
+        }
+
+        return $this;
+    }
+
+    public function removeGestion(Gestion $gestion): self
+    {
+        if ($this->gestion->contains($gestion)) {
+            $this->gestion->removeElement($gestion);
         }
 
         return $this;

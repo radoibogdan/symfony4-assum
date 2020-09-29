@@ -40,17 +40,19 @@ class ProduitFixtures extends Fixture implements DependentFixtureInterface
 
             // Récupération aléatoire d'une catégorie par une référence
             $categorieReference = 'categorie_' . $faker->numberBetween(1,2);
-            /** @var Categorie$categorie */
+            /** @var Categorie $categorie */
             $categorie = $this->getReference($categorieReference);
             $produit->setCategorie($categorie);
 
+            $t = random_int(2,4);
             // Récupération aléatoire d'une gestion par une référence
-            $gestionReference = 'gestion_' . $faker->numberBetween(1,3);
-            /** @var Gestion $gestion */
-            $gestion = $this->getReference($gestionReference);
-            $produit->setGestion($gestion);
-            $manager->persist($produit);
-
+            for ($j = 1; $j < $t; $j++) {
+                $gestionReference = 'gestion_' . $j;
+                /** @var Gestion $gestion */
+                $gestion = $this->getReference($gestionReference);
+                $produit->addGestion($gestion);
+                $manager->persist($produit);
+            }
             // Lier la référence ($reference) à l'entité ($produit), pour la récupérer dans d'autres fixtures
             $reference = 'produit_' . $i;
             $this->addReference($reference,$produit);

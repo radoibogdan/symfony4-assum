@@ -49,7 +49,9 @@
                     <td>{{ produit.assureur.nom | default('non disponible') }} </td>
                     <td class="has-text-right">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
                     <td>{{ produit.categorie.nom | default('non disponible') }} </td>
-                    <td>{{ produit.gestion.nom | default('non disponible')}} </td>
+                    <td>{% for gest in produit.getGestion %}
+                            <li>{{ gest.nom }}</li>
+                        {% endfor %}</td>
                     <td>{{ produit.labelValue }} </td>
                     <td>{{ produit.creation | date("d/m/yy") }} </td>
                     <td>
