@@ -62,5 +62,68 @@
     {% include 'includes/flashes.html.twig' %}
     {# Bloc qui contiendra le contenu de chaque page #}
     {% block content %} {% endblock %}
+    <footer class="footer">
+        <div class="tile is-ancestor">
+            <div class="tile">
+                <div class="tile is-7 is-parent">
+                    <div class="tile is-child box">
+                        <p class="title">Dernier article publié</p>
+                        <p class="subtitle">Titre article</p>
+                        <p class="content"> Début de l'article, ensuite des ... (<a href="">Lire la suite</a>)</p>
+                    </div>
+                </div>
+                <div class="tile is-parent">
+                    <div class="tile is-child box">
+                        <p class="title pb-2 has-text-centered">Décovrez le produit du mois</p>
+                        <p>{{ produit.title | default('') }}</p>
+{#                        <figure class="image is-4by3 ">#}
+{#                            <img alt="signe d'intérogation" src="https://bulma.io/images/placeholders/640x480.png">#}
+{#                        </figure>#}
+                        <div class="tile is-child has-text-centered">
+                            <a href="" class="">
+                                <span class="icon is-large has-text-success ">
+                                <i class="fas fa-7x fa-question-circle"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile is-parent">
+                    <div class="tile is-child box">
+                        RIGHT TILE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <nav class="level has-text-weight-bold">
+                        <p class="level-item has-text-centered">
+                            <a class="link is-info">Qui sommes nous</a>
+                        </p>
+                        <p class="level-item has-text-centered">
+                            <a class="link is-info">Nous contacter</a>
+                        </p>
+                        <p class="level-item has-text-centered is-hidden-tablet-only">
+                            <a class="link is-info">Newsletter</a>
+                        </p>
+                        <p class="level-item has-text-centered">
+                            <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">
+                        </p>
+                        <p class="level-item has-text-centered">
+                            <a class="link is-info">Mentions légales</a>
+                        </p>
+                        <p class="level-item has-text-centered">
+                            <a class="link is-info">Données personelles</a>
+                        </p>
+                        <p class="level-item has-text-centered is-hidden-tablet-only">
+                            <a class="link is-info">Partenaires</a>
+                        </p>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 {% endblock %}

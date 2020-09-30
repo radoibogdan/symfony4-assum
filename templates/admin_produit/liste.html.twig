@@ -11,9 +11,9 @@
         </a>
         {% include 'includes/flashes.html.twig' %}
 
-        <table class="table is-fullwidth">
+        <table class="table is-fullwidth is-hoverable liste-produits-admin">
             <thead>
-            <tr>
+            <tr class="has-text-centered">
                 <th>#</th>
                 <th>Nom</th>
                 <th>Description</th>
@@ -42,22 +42,26 @@
                         {{ produit.titre }}
                     </td>
                     <td>{{ produit.description | slice(0, 20) }}</td>
-                    <td class="has-text-right">{{ produit.fraisAdhesionFloat | number_format(2, '.', ' ') }} % </td>
-                    <td class="has-text-right">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
-                    <td class="has-text-right">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
-                    <td class="has-text-right">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
                     <td>{{ produit.assureur.nom | default('non disponible') }} </td>
-                    <td class="has-text-right">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
                     <td>{{ produit.categorie.nom | default('non disponible') }} </td>
                     <td>{% for gest in produit.getGestion %}
-                            <li>{{ gest.nom }}</li>
+                            {{ gest.nom }} <br>
                         {% endfor %}</td>
-                    <td>{{ produit.labelValue }} </td>
-                    <td>{{ produit.creation | date("d/m/yy") }} </td>
+                    <td class="has-text-centered">{{ produit.labelValue }} </td>
+                    <td class="has-text-centered">{{ produit.creation | date("d/m/yy") }} </td>
                     <td>
-                        <div class="buttons is-pulled-right">
-                            <a href="{{ path('admin_produit_edit', {id:produit.id}) }} " class="button is-success">Modifier</a>
-                            <a href="{{ path('admin_produit_delete', {id:produit.id}) }} " class="button is-danger">Supprimer</a>
+                        <div class="buttons are-small is-pulled-right">
+                            <a href="{{ path('admin_produit_edit', {id:produit.id}) }} " class="button is-success is-outlined">
+                                Modifier
+                            </a>
+                            <a href="{{ path('admin_produit_delete', {id:produit.id}) }} " class="button is-danger is-outlined">
+                                Supprimer
+                            </a>
                         </div>
                     </td>
                 </tr>

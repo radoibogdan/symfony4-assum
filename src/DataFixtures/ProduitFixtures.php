@@ -44,8 +44,9 @@ class ProduitFixtures extends Fixture implements DependentFixtureInterface
             $categorie = $this->getReference($categorieReference);
             $produit->setCategorie($categorie);
 
+
+            // Récupération aléatoire de ( 1 2 ou 3) gestions par référence
             $t = random_int(2,4);
-            // Récupération aléatoire d'une gestion par une référence
             for ($j = 1; $j < $t; $j++) {
                 $gestionReference = 'gestion_' . $j;
                 /** @var Gestion $gestion */
