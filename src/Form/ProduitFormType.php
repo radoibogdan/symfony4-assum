@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class ProduitFormType extends AbstractType
 {
@@ -39,27 +40,27 @@ class ProduitFormType extends AbstractType
             ])
             ->add('frais_adhesion',NumberType::class, [
                 'constraints' =>[
-                    new Positive(['message' => 'Les frais d\'adhéshion doivent être positifs.']),
+                    new PositiveOrZero(['message' => 'Les frais d\'adhéshion doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais d\'adhéshion sont manquants.'])
                 ],
                 'required' => false
             ])
             ->add('frais_versement', NumberType::class,[
                 'constraints' => [
-                    new Positive(['message' => 'Les frais de versement doivent être positifs.']),
+                    new PositiveOrZero(['message' => 'Les frais de versement doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais de versement sont manquants.'])
                 ],
                 'required' => false
             ])
             ->add('frais_gestion',NumberType::class, [
                 'constraints' => [
-                    new Positive(['message' => 'Les frais de gestion doivent être positifs.']),
+                    new PositiveOrZero(['message' => 'Les frais de gestion doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais de gestion sont manquants.'])
                 ]
             ])
             ->add('frais_arbitrage',NumberType::class, [
                 'constraints' => [
-                    new Positive(['message' => 'Les frais d\'arbitrage doivent être positifs.']),
+                    new PositiveOrZero(['message' => 'Les frais d\'arbitrage doivent être positifs.']),
                     new NotBlank(['message' => 'Les frais d\'arbitrage sont manquants.'])
                 ]
             ])
@@ -69,7 +70,6 @@ class ProduitFormType extends AbstractType
             ])
             ->add('rendement',NumberType::class, [
                 'constraints' => [
-                    new Positive(['message' => 'Le rendement doit être positif.']),
                     new NotBlank(['message' => 'Le rendement est manquant.'])
                 ]
             ])

@@ -22,7 +22,7 @@ class ProduitFixtures extends Fixture implements DependentFixtureInterface
             $produit = new Produit();
             $produit
                 ->setTitre($faker->sentence(2))
-                ->setDescription($faker->realText(20))
+                ->setDescription($faker->realText(200))
                 ->setFraisAdhesion($faker->numberBetween(0,100))
                 ->setFraisVersement($faker->numberBetween(0,500))
                 ->setFraisGestion($faker->numberBetween(0,60))
