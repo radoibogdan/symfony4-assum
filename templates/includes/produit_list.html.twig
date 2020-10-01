@@ -26,7 +26,7 @@
                                     <br>
                                 #}
                                 <br>
-                                {{produit.description|slice(0,50)}}
+                                {{produit.description|slice(0,100) ~ ' (...)'}}
                             </p>
                             <div class="tags has-addons">
                                 <span class="tag">{{ produit.rendementFloat|number_format(2, '.', ' ') }}</span>

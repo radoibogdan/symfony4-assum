@@ -87,6 +87,11 @@ class Produit
      */
     private $gestion;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $imageFilename;
+
     public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
@@ -328,6 +333,18 @@ class Produit
         if ($this->gestion->contains($gestion)) {
             $this->gestion->removeElement($gestion);
         }
+
+        return $this;
+    }
+
+    public function getImageFilename()
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename($imageFilename)
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

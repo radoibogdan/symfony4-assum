@@ -8,9 +8,15 @@
             <div class="columns is-centered">
                 {# Column 1/2 #}
                 <div class="column is-one-fifth">
-                    <figure class="image is-1by1">
-                        <img alt="img" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}">
-                    </figure>
+                    {% if produit.imageFilename %}
+                        <figure>
+                            <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                        </figure>
+                    {% else %}
+                        <figure class="image is-1by1">
+                            <img alt="img" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}">
+                        </figure>
+                    {% endif %}
                 </div>
 
                 {# Column 2/2 #}

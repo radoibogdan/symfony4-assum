@@ -38,6 +38,12 @@
                 {{ form_row(produitForm.creation,{
                     label : 'Disponible depuis'
                 }) }}
+                <div><strong> Image enregistrée comme logo:</strong></div>
+                {{ asset('uploads/images/' ~ produit.imageFilename) | default('Aucune image enregistrée') }}
+                <figure>
+                    <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                </figure>
+                {{ form_row(produitForm.image) }}
 <button type="submit" class="button is-success is-fullwidth">
     Enregistrer
 </button>
