@@ -95,6 +95,7 @@ class AdminProduitController extends AbstractController
                 if ($produit->getImageFilename()) {
                     $file_to_delete = $produit->getImageFilename();
                     unlink('uploads/images/'. $file_to_delete);
+                    range()
                 }
 
                 // updates the 'imageFilename' property to store the logo file name instead of its contents

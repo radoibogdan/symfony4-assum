@@ -95,7 +95,7 @@ class ProduitFormType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('image', FileType::class, [
-                'label' => 'Image (fichier JPG)',
+                'label' => 'Logo (fichiers type: png, jpeg, jpg)',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 // make it optional so you don't have to re-upload the PDF file
@@ -106,11 +106,12 @@ class ProduitFormType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '2M',
+                        'maxSizeMessage' => 'La limite est de {{ limit }}.',
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg'
                         ],
-                        'mimeTypesMessage' => 'Les formats supportés : png, jpeg, jpg, jpe',
+                        'mimeTypesMessage' => 'Les formats supportés : png, jpeg, jpg',
                     ])
                 ],
             ])
