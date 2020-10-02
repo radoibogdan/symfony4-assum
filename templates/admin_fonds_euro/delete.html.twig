@@ -1,0 +1,31 @@
+{% extends "_admin_template.html.twig" %}
+
+{% block title %}
+    Supprimer le fonds euros {{ fonds_euro.nom }}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Supprimer le fonds euro : "{{ fonds_euro.nom }}"</h1>
+
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                {{ form_start(deleteForm) }}
+
+                {{ form_row(deleteForm.confirmation, {
+                    label: 'Je confirme la suppression du fonds euro "' ~ fonds_euro.nom ~ '"'
+                }) }}
+
+                <button type="submit" class="button is-danger is-fullwidth">
+                    Supprimer
+                </button>
+
+                {{ form_end(deleteForm)}}
+            </div>
+            <div class="column"></div>
+        </div>
+
+    </div>
+{% endblock %}
+

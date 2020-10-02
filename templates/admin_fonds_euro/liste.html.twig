@@ -1,0 +1,58 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste des fonds euros {% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <h1 class="title has-text-centered">Liste des fonds euros</h1>
+
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-two-thirds">
+                <a href="{{ path('admin_fonds_euro_add') }}" class="button is-success mb-4">
+                    Créer un nouveau fonds euros
+                </a>
+
+                {% include 'includes/flashes.html.twig' %}
+
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr class="has-text-centered">
+                        <th>#</th>
+                        <th>Libellé du fonds</th>
+                        <th>Nom du fonds</th>
+                        <th>Année</th>
+                        <th>Taux de pb</th>
+                        <th>Créé le</th>
+                        <th>Nombre de produits</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# La boucle sur list_categories, dernière colonne : Modifier & Supprimer #}
+                    {% for fonds_euro in list_fonds_euros %}
+                        <tr class="has-text-centered">
+                            <td class="px-1">{{ fonds_euro.id }}</td>
+                            <td>{{ fonds_euro.labelFonds }}</td>
+                            <td>{{ fonds_euro.nom }}</td>
+                            <td>{{ fonds_euro.annee }}</td>
+                            <td>{{ fonds_euro.tauxPbFloat | number_format(2,'.',' ') }} %</td>
+                            <td>{{ fonds_euro.creation | date("d/m/Y") }} </td>
+                            <td>{{ fonds_euro.getProduits|length }}</td>
+                            <td>
+                                <div class="buttons are-small is-pulled-right">
+                                    <a href="{{ path('admin_fonds_euro_edit', {id:fonds_euro.id}) }}" class="button is-success">Modifier</a>
+                                    <a href="{{ path('admin_fonds_euro_delete', {id:fonds_euro.id}) }}" class="button is-danger">Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}

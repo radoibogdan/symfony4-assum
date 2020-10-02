@@ -92,10 +92,17 @@ class Produit
      */
     private $imageFilename;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=FondsEuro::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $fonds_euro;
+
     public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
         $this->gestion = new ArrayCollection();
+        $this->fonds_euro = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -345,6 +352,32 @@ class Produit
     public function setImageFilename($imageFilename)
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FondsEuro[]
+     */
+    public function getFondsEuro(): Collection
+    {
+        return $this->fonds_euro;
+    }
+
+    public function addFondsEuro(FondsEuro $fondsEuro): self
+    {
+        if (!$this->fonds_euro->contains($fondsEuro)) {
+            $this->fonds_euro[] = $fondsEuro;
+        }
+
+        return $this;
+    }
+
+    public function removeFondsEuro(FondsEuro $fondsEuro): self
+    {
+        if ($this->fonds_euro->contains($fondsEuro)) {
+            $this->fonds_euro->removeElement($fondsEuro);
+        }
 
         return $this;
     }

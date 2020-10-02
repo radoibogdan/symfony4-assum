@@ -1,0 +1,16 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Nouveau fonds euros{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Nouveau fonds euros</h1>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-one-third">
+                {% include 'admin_fonds_euro/_fonds_euro_form.html.twig' %}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}

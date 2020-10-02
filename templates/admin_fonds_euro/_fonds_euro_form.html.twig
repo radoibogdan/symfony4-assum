@@ -1,0 +1,17 @@
+{{ form_start(fonds_euroForm) }}
+    {{ form_row(fonds_euroForm.label_fonds,{
+        label : 'Libellé fonds euro'
+    }) }}
+    {{ form_row(fonds_euroForm.nom,{
+        label : 'Nom fonds euro'
+    }) }}
+    {{ form_row(fonds_euroForm.annee,{
+        label : 'Année'
+    }) }}
+    {{ form_row(fonds_euroForm.taux_pb,{
+        label : 'Taux de participation aux bénéfices'
+    }) }}
+<button type="submit" class="button is-success is-fullwidth">
+    Enregistrer
+</button>
+{{ form_end(fonds_euroForm) }}

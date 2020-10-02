@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Assureur;
 use App\Entity\Categorie;
+use App\Entity\FondsEuro;
 use App\Entity\Gestion;
 use App\Entity\Produit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -84,6 +85,11 @@ class ProduitFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true
             ])
+            ->add('fonds_euro', EntityType::class,[
+                'class' => FondsEuro::class,
+                'choice_label' => 'label_fonds',
+                'multiple' => true,
+            ])
             ->add('label', ChoiceType::class, [
                 'choices' => [
                     'Oui' => true,
@@ -95,7 +101,7 @@ class ProduitFormType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('image', FileType::class, [
-                'label' => 'Logo (fichiers type: png, jpeg, jpg)',
+                'label' => 'Télécharger une nouvelle image pour le logo (fichiers type: png, jpeg, jpg) :',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 // make it optional so you don't have to re-upload the PDF file
