@@ -34,12 +34,18 @@
                     </p>
 
                     <div class="tags has-addons are-large mt-4">
-                        <span class="tag">
-                            {{produit.rendementFloat |number_format(2 , '.' , ' ')}} {# . pour les centimes #}
-                        </span>
-                        <span class="tag is-primary">
-                            <span class="icon"><i class="fas fa-percent"></i></span>
-                        </span>
+                        {% for fonds_euro in produit.fondsEuro %}
+                            {% if fonds_euro.annee == annee_en_cours %}
+                                <span class="tag">
+                                            {{ fonds_euro.tauxpbfloat }}
+                                         </span>
+                                <span class="tag is-primary">
+                                            <span class="icon">
+                                                <i class="fas fa-percent"></i>
+                                            </span>
+                                        </span>
+                            {% endif %}
+                        {% endfor %}
                         <span class="tag">
                             {{produit.fraisGestionFloat |number_format(2 , '.' , ' ')}}
                         </span>

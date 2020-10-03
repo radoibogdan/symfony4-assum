@@ -22,7 +22,6 @@
                 <th>Frais de gestion</th>
                 <th>Frais d'arbitrage</th>
                 <th>Assureur</th>
-                <th>Rendement</th>
                 <th>Catégorie</th>
                 <th>Type Gestion</th>
                 <th>Label Assum</th>
@@ -47,7 +46,6 @@
                     <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
                     <td>{{ produit.assureur.nom | default('non disponible') }} </td>
-                    <td class="has-text-centered">{{ produit.rendementFloat | number_format(2, '.', ' ') }} % </td>
                     <td>{{ produit.categorie.nom | default('non disponible') }} </td>
                     <td>{% for gest in produit.getGestion %}
                             {{ gest.nom }} <br>

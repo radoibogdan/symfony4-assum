@@ -28,13 +28,21 @@
                                 <br>
                                 {{produit.description|slice(0,100) ~ ' (...)'}}
                             </p>
+                            <strong class="has-text-primary">Rendement:</strong>
                             <div class="tags has-addons">
-                                <span class="tag">{{ produit.rendementFloat|number_format(2, '.', ' ') }}</span>
-                                <span class="tag is-primary">
-                                    <span class="icon">
-                                        <i class="fas fa-percent"></i>
-                                    </span>
-                                </span>
+{#                                <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
+                                    {% for fonds_euro in produit.fondsEuro %}
+                                        {% if fonds_euro.annee == annee_en_cours %}
+                                        <span class="tag">
+                                            {{ fonds_euro.tauxpbfloat }}
+                                         </span>
+                                        <span class="tag is-primary">
+                                            <span class="icon">
+                                                <i class="fas fa-percent"></i>
+                                            </span>
+                                        </span>
+                                        {% endif %}
+                                    {% endfor %}
                             </div>
                         </div>
                     </div>

@@ -50,11 +50,6 @@ class Produit
     private $frais_arbitrage;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rendement;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $label;
@@ -210,26 +205,6 @@ class Produit
     public function setFraisArbitrage(int $frais_arbitrage): self
     {
         $this->frais_arbitrage = $frais_arbitrage;
-
-        return $this;
-    }
-
-    public function getRendement(): ?int
-    {
-        return $this->rendement;
-    }
-
-    /**
-     * Obtenir le rendement en décimal: 1500 -> 15.00
-     */
-    public function getRendementFloat(): ?float
-    {
-        return $this->rendement === null ? null : $this->rendement/100;
-    }
-
-    public function setRendement(?int $rendement): self
-    {
-        $this->rendement = $rendement;
 
         return $this;
     }

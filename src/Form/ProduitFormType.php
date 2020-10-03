@@ -7,9 +7,11 @@ use App\Entity\Categorie;
 use App\Entity\FondsEuro;
 use App\Entity\Gestion;
 use App\Entity\Produit;
+use App\Repository\FondsEuroRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -70,11 +72,6 @@ class ProduitFormType extends AbstractType
                 'class' => Assureur::class,
                 'choice_label' => 'nom'
             ])
-            ->add('rendement',NumberType::class, [
-                'constraints' => [
-                    new NotBlank(['message' => 'Le rendement est manquant.'])
-                ]
-            ])
             ->add('categorie', EntityType::class, [
                     'class' => Categorie::class,
                     'choice_label' => 'nom'
@@ -87,8 +84,19 @@ class ProduitFormType extends AbstractType
             ])
             ->add('fonds_euro', EntityType::class,[
                 'class' => FondsEuro::class,
-                'choice_label' => 'label_fonds',
+                // Limiter le nombre de fonds euros affichés aux derniers deux années
+                'query_builder' => function (FondsEuroRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.annee >= :this_year')
+                        ->setParameter('this_year', date('Y')-1)
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'choice_label' => function ($fonds_euro) {
+                    return $fonds_euro->getNom() . ' - ' . $fonds_euro->getAnnee() . ' - ' . $fonds_euro->getTauxPbFloat() . ' %';
+                },
                 'multiple' => true,
+                'expanded' => true,
+//                'group_by' => 'annee'
             ])
             ->add('label', ChoiceType::class, [
                 'choices' => [
@@ -101,7 +109,7 @@ class ProduitFormType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('image', FileType::class, [
-                'label' => 'Télécharger une nouvelle image pour le logo (fichiers type: png, jpeg, jpg) :',
+                'label' => 'Télécharger une nouvelle image pour le logo:',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 // make it optional so you don't have to re-upload the PDF file
@@ -117,9 +125,10 @@ class ProduitFormType extends AbstractType
                             'image/png',
                             'image/jpeg'
                         ],
-                        'mimeTypesMessage' => 'Les formats supportés : png, jpeg, jpg',
+                        'mimeTypesMessage' => 'Les formats supportés: png, jpeg, jpg',
                     ])
                 ],
+                'help' =>'Fichiers acceptés: png, jpeg, jpg'
             ])
         ;
     }

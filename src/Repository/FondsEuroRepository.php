@@ -19,6 +19,23 @@ class FondsEuroRepository extends ServiceEntityRepository
         parent::__construct($registry, FondsEuro::class);
     }
 
+
+    /**
+     * @param $annee
+     * @return FondsEuro[] Returns an array of FondsEuro objects
+     */
+    public function meilleurTauxDeCetteAnnee ($annee) {
+        # Création d'un QueryBuilder (constructeur de requête)
+        return $this->createQueryBuilder('a')
+            ->where('a.annee = :this_year')
+            ->setParameter('this_year', $annee)
+            ->orderBy('a.taux_pb','DESC')
+            ->setMaxResults(1)
+            ->getQuery()        # obtenir la requête
+            ->getResult()       # obtenir un tableau d'entités
+            ;
+    }
+
     // /**
     //  * @return FondsEuro[] Returns an array of FondsEuro objects
     //  */
