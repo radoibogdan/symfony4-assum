@@ -3,11 +3,11 @@
 {% block title %} {{produit.titre}} {% endblock %}
 
 {% block content %}
-    <section class="section">
-        <div class="container">
-            <div class="columns is-centered">
+    <section class="section px-0 py-0">
+        <div class="container pt-5 has-background-white-bis">
+            <div class="columns my-0 is-mobile is-centered">
                 {# Column 1/2 #}
-                <div class="column is-one-fifth">
+                <div class="column is-half-mobile is-one-fifth-tablet has-text-centered">
                     {% if produit.imageFilename %}
                         <figure>
                             <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
@@ -20,19 +20,16 @@
                 </div>
 
                 {# Column 2/2 #}
-                <div class="column is-two-fifths">
+                <div class="column is-half-mobile is-two-fifths-tablet">
                     <h1 class="title has-text-primary">
                         {{produit.titre}}
                     </h1>
-
                     <a class="has-background-success has-text-white px-1">
                         <strong> {{produit.categorie.nom | default('catégorie non disponible')}}</strong>
                     </a>
-
-                    <p class="content">
+                    <p class="content has-text-left-mobile">
                         {{produit.description}}
                     </p>
-
                     <div class="tags has-addons are-large mt-4">
                         {% for fonds_euro in produit.fondsEuro %}
                             {% if fonds_euro.annee == annee_en_cours %}
@@ -53,13 +50,73 @@
                             <span class="icon"><i class="fas fa-percent"></i></span>
                         </span>
                     </div>
-
                     <hr>
                     <h6 class="is-size-7">
                         <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
                         <span>Produit disponible depuis {{produit.creation|date('d/m/Y')}}</span>
                     </h6>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="section px-0 py-0">
+        <div class="container has-background-white-bis ">
+            <div class="mt-0 mb-5 mr-0 ml-5">
+                <h1 class="title is-size-4">Caracteristiques principales</h1>
+                <table class="table is-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="px-3">{{ produit.titre }}</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="px-3">Note Evaluation</th>
+                            <th class="has-text-centered">5/10</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td class="px-3">Frais d'adhésion</td>
+                            <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', '') }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Frais de versement</td>
+                            <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', '') }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Frais de gestion</td>
+                            <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', '') }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Frais d'arbitrage</td>
+                            <td class="has-text-centered">{{ produit.fraisArbitrageFloat | number_format(2, '.', '') }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Assureur</td>
+                            <td class="has-text-centered">{{ produit.assureur.nom }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Type de gestions disponibles</td>
+                            <td class="has-text-centered">
+                                {% for gestion in produit.gestion %}
+                                    {{ gestion.nom }} <br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="is-vcentered px-3">Rendement</td>
+                            <td class="has-text-centered">
+                                {% for fonds_euro in produit.fondsEuro %}
+                                    {% if fonds_euro.annee == annee_en_cours %}
+                                            {{ fonds_euro.tauxpbfloat | number_format(2, '.', '') }} % - {{ fonds_euro.nom }} <br>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
