@@ -43,6 +43,8 @@
                     csrf_token('authenticate') fonction qui génère un token qui ensuite va être utilisé pour confirmer l'utilisateur
                 #}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="hidden" name="_target_path" value="{{ back_to_produit }}"/>
+
                 <button class="button is-primary is-fullwidth" type="submit">
                     Connexion
                 </button>

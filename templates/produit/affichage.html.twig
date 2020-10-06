@@ -4,23 +4,10 @@
 
 {% block content %}
     <section class="section px-0 py-0">
-        <div class="container pt-5 has-background-white-bis">
-            <div class="columns my-0 is-mobile is-centered">
+        <div class="container pt-5 has-background-info-light">
+            <div class="columns my-0 is-mobile is-multiline is-centered">
                 {# Column 1/2 #}
-                <div class="column is-half-mobile is-one-fifth-tablet has-text-centered">
-                    {% if produit.imageFilename %}
-                        <figure>
-                            <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
-                        </figure>
-                    {% else %}
-                        <figure class="image is-1by1">
-                            <img alt="img" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}">
-                        </figure>
-                    {% endif %}
-                </div>
-
-                {# Column 2/2 #}
-                <div class="column is-half-mobile is-two-fifths-tablet">
+                <div class="column is-narrow px-5">
                     <h1 class="title has-text-primary">
                         {{produit.titre}}
                     </h1>
@@ -30,7 +17,7 @@
                     <p class="content has-text-left-mobile">
                         {{produit.description}}
                     </p>
-                    <div class="tags has-addons are-large mt-4">
+                    <div class="tags has-addons are-medium mt-4">
                         {% for fonds_euro in produit.fondsEuro %}
                             {% if fonds_euro.annee == annee_en_cours %}
                                 <span class="tag">
@@ -56,27 +43,41 @@
                         <span>Produit disponible depuis {{produit.creation|date('d/m/Y')}}</span>
                     </h6>
                 </div>
+
+                {# Column 2/2 #}
+                <div class="column is-narrow px-5">
+                    {% if produit.imageFilename %}
+                        <figure>
+                            <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                        </figure>
+                    {% else %}
+                        <figure class="image is-1by1">
+                            <img alt="img" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}">
+                        </figure>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </section>
     <section class="section px-0 py-0">
         <div class="container has-background-white-bis ">
-            <div class="mt-0 mb-5 mr-0 ml-5">
-                <h1 class="title is-size-4">Caracteristiques principales</h1>
-                <table class="table is-bordered">
-                    <thead>
+            <div class="columns is-mobile is-centered">
+                <div class="column is-three-quarters mt-0 pb-5 mx-0 px-5 has-text-centered-mobile">
+                    <h1 class="title is-size-4">Caracteristiques principales</h1>
+                    <table class="table is-bordered">
+                        <thead>
                         <tr>
                             <th></th>
-                            <th class="px-3">{{ produit.titre }}</th>
+                            <th class="px-3 has-text-centered">{{ produit.titre }}</th>
                         </tr>
-                    </thead>
-                    <tfoot>
+                        </thead>
+                        <tfoot>
                         <tr>
                             <th class="px-3">Note Evaluation</th>
                             <th class="has-text-centered">5/10</th>
                         </tr>
-                    </tfoot>
-                    <tbody>
+                        </tfoot>
+                        <tbody>
                         <tr>
                             <td class="px-3">Frais d'adhésion</td>
                             <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', '') }} %</td>
@@ -110,15 +111,53 @@
                             <td class="has-text-centered">
                                 {% for fonds_euro in produit.fondsEuro %}
                                     {% if fonds_euro.annee == annee_en_cours %}
-                                            {{ fonds_euro.tauxpbfloat | number_format(2, '.', '') }} % - {{ fonds_euro.nom }} <br>
+                                        {{ fonds_euro.tauxpbfloat | number_format(2, '.', '') }} % - {{ fonds_euro.nom }} <br>
                                     {% endif %}
                                 {% endfor %}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container has-background-white-bis">
+            <div class="columns is-centered mb-0">
+                {% if app.user %}
+                <div class="column is-half px-5">
+                    {{ form_start(formAvisProduit) }}
+                    {{ form_row(formAvisProduit.note, {
+                        label : 'Note'
+                    }) }}
+                    <div class="tags has-addons are-medium mt-4">
+                        <span class="tag is-success" id="note_js">50</span><span class="tag is-primary">/100</span>
+                    </div>
+                    {{ form_row(formAvisProduit.commentaire, {
+                        label : 'Commentaire'
+                    }) }}
+                    <button type="submit" class="button is-primary is-fullwidth">Valider</button>
+                    {{ form_end(formAvisProduit) }}
+                </div>
+                {% else %}
+                <div class="column is-half px-5">
+                    <span><a href="{{ path('app_login') }}">Se connecter</a> pour donner son avis</span>
+                </div>
+                {% endif %}
             </div>
         </div>
     </section>
+    <script>
+        function setNoteJs(val) {
+            document.getElementById("note_js").innerHTML = val;
+            if (val > 50) {
+                document.getElementById("note_js").classList.remove("is-danger");
+                document.getElementById("note_js").classList.add("is-success");
+            } else {
+                document.getElementById("note_js").classList.remove("is-success");
+                document.getElementById("note_js").classList.add("is-danger");
+            }
+        }
+    </script>
+
 {% endblock %}
 

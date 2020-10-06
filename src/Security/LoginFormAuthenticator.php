@@ -73,7 +73,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('E-mail non trouvé.');
         }
 
         return $user;
@@ -94,17 +94,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
+        // Rediriger l'utilisateur vers la page demandée initialement (non utile pour notre projet pour le moment)
+//        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+//            return new RedirectResponse($targetPath);
+//        }
 
-        // ROLE_ADMIN => vers admin/produits
+        // Utilisateurs avec ROLE_ADMIN redirigez vers admin/produits
         if ($this->security->isGranted("ROLE_ADMIN")) {
             return new RedirectResponse($this->urlGenerator->generate('admin_produit_liste'));
         }
+        return new RedirectResponse($request->get('_target_path'));
 
-        // ROLE_USER => vers home
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        // Utilisateurs avec ROLE_USER => vers home
+        // return new RedirectResponse($this->urlGenerator->generate('home'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

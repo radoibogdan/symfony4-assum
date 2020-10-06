@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AvisProduitRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * HasLifecycleCallbacks + méthode prePersist =>
+ * Permet de modifier l’entité pour enregister la date de création  à la date ou on valide le produit
  */
 class AvisProduit
 {
@@ -43,6 +46,11 @@ class AvisProduit
      * @ORM\Column(type="datetime")
      */
     private $creation;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $approuve = '0';
 
     public function getId(): ?int
     {
@@ -97,6 +105,18 @@ class AvisProduit
         return $this;
     }
 
+    /**
+     * Méthode exécutée avant l'insertion en base
+     * Modifier l'entité pour enregistrer une date de création de l'utilisateur
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if ($this->creation === null) {
+            $this->creation = new \DateTime();
+        }
+    }
+
     public function getCreation(): ?\DateTimeInterface
     {
         return $this->creation;
@@ -105,6 +125,18 @@ class AvisProduit
     public function setCreation(\DateTimeInterface $creation): self
     {
         $this->creation = $creation;
+
+        return $this;
+    }
+
+    public function getApprouve(): ?bool
+    {
+        return $this->approuve;
+    }
+
+    public function setApprouve(bool $approuve): self
+    {
+        $this->approuve = $approuve;
 
         return $this;
     }
