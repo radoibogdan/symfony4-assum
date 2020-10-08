@@ -23,38 +23,39 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('admin_produit_liste') }}" class="navbar-item">
+                <div class="navbar-item pt-0 pb-1">
+                    <a class="navbar-item button is-light" href="{{ path('admin_produit_liste') }}" >
                         <span class="icon"><i class="fas fa-lock"></i></span>
                         <span>Back-Office</span>
                     </a>
+                </div>
                 {% endif %}
-                <a class="navbar-item" href="{{ path('produits') }}">
-                    Voir tous les produits
-                </a>
-
+                <div class="navbar-item pt-0 pb-1">
+                    <a class="navbar-item button is-light" href="{{ path('produits') }}">
+                        <span>Voir tous les produits</span>
+                    </a>
+                </div>
             </div>
 
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
+                <div class="navbar-item py-0">
                         {# if is_granted('IS_AUTHENTICATED_FULLY') #}
                         {% if app.user %}
-                            <a class="button is-primary is-small" href="{{ path('profil') }}">
+                            <a class="navbar-item button is-primary is-small mb-1" href="{{ path('profil') }}">
                                 <span class="icon"><i class="fas fa-user-circle"></i></span>
                                 <span><strong>{{app.user.username}}</strong></span>
                             </a>
-                            <a class="button is-light is-small" href="{{ path('app_logout') }}">
+                            <a class="navbar-item button is-light is-small" href="{{ path('app_logout') }}">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                         {% else %}
-                            <a class="button is-primary is-small" href="{{ path('inscription') }}">
+                            <a class="navbar-item button is-primary is-small mb-1" href="{{ path('inscription') }}">
                                 <strong>Inscription</strong>
                             </a>
-                            <a class="button is-light is-small" href="{{ path('app_login') }}">
+                            <a class="navbar-item button is-light is-small" href="{{ path('app_login') }}">
                                 Connexion
                             </a>
                         {% endif %}
-                    </div>
                 </div>
             </div>
         </div>
@@ -125,5 +126,30 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach( el => {
+                    el.addEventListener('click', () => {
+                        // Get the value of the attr data-target="navbarBasicExample" from the burger div which is navbarBasicExample
+                        const target = el.dataset.target;
+                        // Using the targe variable(navbarBasicExample), we get the div with the id "navbarBasicExample"
+                        const $target = document.getElementById(target);
+                        // on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active'); // Toggle the "is-active" class on the burger div
+                        $target.classList.toggle('is-active'); // Toggle the "is-active" class on the div with the id "navbarBasicExample"
+
+                    });
+                });
+            }
+
+        });
+    </script>
 {% endblock %}

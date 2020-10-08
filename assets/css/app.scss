@@ -14,6 +14,32 @@ $footer-padding           : 3rem 1.5rem 3rem ;
   font-size: 0.9em;
 }
 
-//.affichage-page.section {
-//  padding: 0;
+.fixed_width_commentaire {
+  width: 40vw;
+}
+
+.is-anim {
+  //-webkit-animation-name: cssAnimation;
+  //-webkit-animation-duration:3s !important;
+  //-webkit-animation-iteration-count: 1;
+  //-webkit-animation-timing-function: ease;
+  //-webkit-animation-fill-mode: forwards;
+  transition: width 2s, height 4s;
+}
+//@-webkit-keyframes cssAnimation {
+//  from {
+//    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(100px);
+//  }
+//  to {
+//    -webkit-transform: rotate(0deg) scale(2) skew(0deg) translate(100px);
+//  }
 //}
+
+.show {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.hide {
+  opacity: 0;
+  transition: opacity 1s;
+}

@@ -1,0 +1,90 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste des avis concernant les produits{% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <h1 class="title has-text-centered">Liste des avis concernant les produits</h1>
+
+        <div class="columns">
+{#            <div class="column"></div>#}
+            <div class="column">
+
+                {% include 'includes/flashes.html.twig' %}
+
+                <table class="table is-fullwidth has-text-centered">
+                    <thead>
+                    <tr>
+                        <th class="px-2">#</th>
+                        <th>Auteur</th>
+                        <th>Produit</th>
+                        <th>Note</th>
+                        <th>Commentaire</th>
+                        <th class="px-2">Approuvé</th>
+                        <th class="px-2">Création</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# La boucle sur avisproduit_list, dernière colonne : Modifier & Supprimer #}
+                    {% for avis_produit in avisproduit_list %}
+                        <tr>
+                            <td class="px-2">{{ avis_produit.id }}</td>
+                            <td class="has-text-left">{{ avis_produit.auteur.prenom ~ ' ' ~ avis_produit.auteur.nom  }}</td>
+                            <td class="has-text-left">{{ avis_produit.produit.titre }}</td>
+                            <td>{{ avis_produit.note }}/100</td>
+                            <td class="has-text-left fixed_width_commentaire">
+                                {% if (avis_produit.commentaire | length > 100) %}
+                                    <div class="notification visible">{{ avis_produit.commentaire | slice(0, 100)}}
+                                        ... <a class="is-info">Voir tout.</a>
+                                    </div>
+                                    <div class="notification is-hidden">
+                                        <button class="delete"></button>
+                                        {{ avis_produit.commentaire }}
+                                    </div>
+                                {% else %}
+                                <div class="notification">
+                                    {{ avis_produit.commentaire }}
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>{% if(avis_produit.approuve == 0) %}Non{% else %}Oui{% endif %}</td>
+                            <td>{{ avis_produit.creation | date('m/yy') }}</td>
+                            <td>
+                                <div class="buttons is-pulled-right">
+                                    <a href="{# path('admin_avis_produit_edit', {id:avis_produit.id}) #}" class="button is-success is-small">Modifier</a>
+                                    <a href="{# path('admin_avis_produit_delete', {id:avis_produit.id}) #}" class="button is-danger is-small">Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+{#            <div class="column"></div>#}
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            (document.querySelectorAll('.notification .is-info') || []).forEach(($visible) => {
+                var $notification = $visible.parentNode;
+                $visible.addEventListener('click', () => {
+                    $notification.nextElementSibling.classList.toggle("is-hidden");
+                    $notification.classList.toggle("is-hidden");
+                });
+            });
+
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                var $notification2 = $delete.parentNode;
+                $delete.addEventListener('click', () => {
+                    console.log($notification2.parentNode.previousSibling);
+                    $notification2.previousElementSibling.classList.toggle("is-hidden");
+                    $notification2.classList.toggle("is-hidden");
+                });
+            });
+        });
+    </script>
+{% endblock %}
