@@ -40,14 +40,26 @@ class ProduitController extends AbstractController
      * @param Produit $produit
      * @return Response
      */
-    public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit, SessionInterface $session) : Response
+    public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit) : Response
     {
 //        dump($request->getRequestUri());
 //        dump($request->getSchemeAndHttpHost().$request->getPathInfo());
+//        dump($request->getUri());
 //        die();
-//        $_SESSION['back_to_produit'] = $request->getSchemeAndHttpHost().$request->getPathInfo();
+
+        $avis = $produit->getAvisProduits();
+        $cumul_notes = 0;
+        $nombre_notes = 0;
+        foreach ($avis as $avis_individuel) {
+            $cumul_notes += $avis_individuel->getNote();
+            $nombre_notes++;
+        }
+        $moyenne= $cumul_notes/$nombre_notes;
+
         $form = $this->createForm(AvisProduitFormType::class);
         $form->handleRequest($request);
+
+        // Si le user s'est connecté et il y a validé le commentaire
         if ($form->isSubmitted() && $form->isValid()) {
             // Rajouter une entité dans la bdd 1. Récupérer l'entité avec getData() 2. persist()
             // getData retourne une AvisProduit
@@ -57,12 +69,15 @@ class ProduitController extends AbstractController
             $entityManager->persist($avisproduit);
             $entityManager->flush();
             $this->addFlash('success','Votre commentaire est enregistré et soumis pour validation.');
+            return $this->redirect($request->getUri());
         }
         $annee_en_cours = date('Y');
         return $this->render('produit/affichage.html.twig',[
             'produit'           => $produit,
             'annee_en_cours'    => $annee_en_cours,
-            'formAvisProduit'   => $form->createView()
+            'formAvisProduit'   => $form->createView(),
+            'touslesavis'       => $avis,
+            'moyenne'           => $moyenne
         ]);
     }
 }

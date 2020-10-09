@@ -22,11 +22,11 @@ class AvisProduitFormType extends AbstractType
                     new NotBlank(['message' => 'Veuillez indiquer un commentaire.']),
                     new Length([
                         'max' => 1000,
-                        'maxMessage' => 'Le nom ne peut contenir plus de {{ limit }} caractères.'
+                        'maxMessage' => 'Le commentaire ne peut contenir plus de {{ limit }} caractères.'
                     ]),
                     new Length([
                         'min' => 50,
-                        'minMessage' => 'Le nom ne peut contenir en dessous de {{ limit }} caractères.'
+                        'minMessage' => 'Le commentaire ne peut contenir en dessous de {{ limit }} caractères.'
                     ])
                 ],
                 'required' => false,
@@ -37,7 +37,7 @@ class AvisProduitFormType extends AbstractType
             ->add('note', RangeType::class, [
                 'attr' => [
                     'min' => 0,
-                    'max' => 100,
+                    'max' => 10,
                     'oninput'   => 'setNoteJs(this.value)'
                 ],
                 'required' => false,

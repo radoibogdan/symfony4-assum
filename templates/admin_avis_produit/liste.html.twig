@@ -53,8 +53,10 @@
                             <td>{{ avis_produit.creation | date('m/yy') }}</td>
                             <td>
                                 <div class="buttons is-pulled-right">
-                                    <a href="{# path('admin_avis_produit_edit', {id:avis_produit.id}) #}" class="button is-success is-small">Modifier</a>
-                                    <a href="{# path('admin_avis_produit_delete', {id:avis_produit.id}) #}" class="button is-danger is-small">Supprimer</a>
+                                    <a href="{{ path('admin_avisproduit_approuver', {id:avis_produit.id}) }}" class="button {{ avis_produit.approuve == 1 ? 'is-danger' : 'is-success' }} is-small">
+                                        {{ avis_produit.approuve == 1 ? 'Invalider' : 'Approuver' }}
+                                    </a>
+                                    <a href="{{ path('admin_avisproduit_delete', {id:avis_produit.id}) }}" class="button is-danger is-small">Supprimer</a>
                                 </div>
                             </td>
                         </tr>
@@ -80,7 +82,6 @@
             (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
                 var $notification2 = $delete.parentNode;
                 $delete.addEventListener('click', () => {
-                    console.log($notification2.parentNode.previousSibling);
                     $notification2.previousElementSibling.classList.toggle("is-hidden");
                     $notification2.classList.toggle("is-hidden");
                 });

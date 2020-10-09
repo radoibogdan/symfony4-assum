@@ -4,9 +4,18 @@
             <div class="box">
                 <article class="media">
                     <div class="media-left">
-                        <figure class="image is-128x128">
-                            <img src="https://loremflickr.com/256/256/clothes/all?lock={{produit.id}}" alt="Image">
-                        </figure>
+{#                        <figure class="image is-128x128">#}
+{#                            <img src="https://loremflickr.com/256/256/clothes/all?lock={{produit.id}}" alt="Image">#}
+{#                        </figure>#}
+                        {% if produit.imageFilename %}
+                            <figure>
+                                <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                            </figure>
+                        {% else %}
+                            <figure>
+                                <img width="200" src="https://loremflickr.com/200/120?lock={{ produit.id }}" alt="Image">
+                            </figure>
+                        {% endif %}
                     </div>
                     <div class="media-content">
                         <div class="content">

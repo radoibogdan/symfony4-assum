@@ -1,0 +1,30 @@
+{% extends "_admin_template.html.twig" %}
+
+{% block title %}
+    Suppression avis
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Supprimer l'avis</h1>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                {{ form_start(deleteForm) }}
+
+                {{ form_row(deleteForm.confirmation, {
+                    label: 'Je confirme la suppression de l\'avis suivant:'
+                }) }}
+                <div class="notification is-link">
+                    {{ avisProduit.commentaire }}
+                </div>
+                <button type="submit" class="button is-danger is-fullwidth">
+                    Supprimer
+                </button>
+
+                {{ form_end(deleteForm)}}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}

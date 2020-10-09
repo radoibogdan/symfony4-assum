@@ -128,7 +128,7 @@ class ProduitFormType extends AbstractType
                         'mimeTypesMessage' => 'Les formats supportés: png, jpeg, jpg',
                     ])
                 ],
-                'help' =>'Fichiers acceptés: png, jpeg, jpg'
+                'help' =>'Type de fichiers (PNG, JPEG, JPG) - Taille maximum : 2MB'
             ])
         ;
     }
