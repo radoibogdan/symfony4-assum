@@ -45,8 +45,8 @@
                     <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
-                    <td>{{ produit.assureur.nom | default('non disponible') }} </td>
-                    <td>{{ produit.categorie.nom | default('non disponible') }} </td>
+                    <td class="has-text-centered">{{ produit.assureur.nom | default('non disponible') }} </td>
+                    <td class="has-text-centered">{{ produit.categorie.nom | default('non disponible') }} </td>
                     <td>{% for gest in produit.getGestion %}
                             {{ gest.nom }} <br>
                         {% endfor %}</td>

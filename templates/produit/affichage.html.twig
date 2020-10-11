@@ -5,9 +5,9 @@
 {% block content %}
     <section class="section px-0 py-0">
         <div class="container pt-5 has-background-info-light">
-            <div class="columns my-0 is-mobile is-multiline is-centered">
+            <div class="columns my-0 is-tablet is-multiline is-centered">
                 {# Column 1/2 #}
-                <div class="column is-narrow px-5">
+                <div class="column px-5">
                     <h1 class="title has-text-primary">
                         {{produit.titre}}
                     </h1>
@@ -37,7 +37,7 @@
                             <span class="icon"><i class="fas fa-percent"></i></span>
                         </span>
                     </div>
-                    <hr>
+{#                    <hr>#}
                     <h6 class="is-size-7">
                         <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
                         <span>Produit disponible depuis {{produit.creation|date('d/m/Y')}}</span>
@@ -45,7 +45,7 @@
                 </div>
 
                 {# Column 2/2 #}
-                <div class="column is-narrow px-5">
+                <div class="column is-narrow px-5 has-text-centered">
                     {% if produit.imageFilename %}
                         <figure>
                             <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
