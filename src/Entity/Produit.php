@@ -294,6 +294,25 @@ class Produit
     }
 
     /**
+     * N'est pas reliée à la base de données, juste renvoie la moyenne des avis
+     * @return null|integer
+     */
+    public function getMoyenneProduit()
+    {
+        if (!$this->avisProduits){
+            return null;
+        }
+
+        $cumul_notes = 0;
+        $nombre_notes = 0;
+        foreach ($this->avisProduits as $avis_individuel) {
+            $cumul_notes += $avis_individuel->getNote();
+            $nombre_notes++;
+        }
+        return $cumul_notes/$nombre_notes;
+    }
+
+    /**
      * @return Collection|Gestion[]
      */
     public function getGestion(): Collection

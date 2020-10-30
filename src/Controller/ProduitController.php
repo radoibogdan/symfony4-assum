@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitController extends AbstractController
@@ -42,19 +41,17 @@ class ProduitController extends AbstractController
      */
     public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit) : Response
     {
-//        dump($request->getRequestUri());
-//        dump($request->getSchemeAndHttpHost().$request->getPathInfo());
-//        dump($request->getUri());
-//        die();
-
-        $avis = $produit->getAvisProduits();
-        $cumul_notes = 0;
-        $nombre_notes = 0;
-        foreach ($avis as $avis_individuel) {
-            $cumul_notes += $avis_individuel->getNote();
-            $nombre_notes++;
-        }
-        $moyenne= $cumul_notes/$nombre_notes;
+        /*
+            $avis = $produit->getAvisProduits();
+            $cumul_notes = 0;
+            $nombre_notes = 0;
+            foreach ($avis as $avis_individuel) {
+                $cumul_notes += $avis_individuel->getNote();
+                $nombre_notes++;
+            }
+            $moyenne= $cumul_notes === 0 ? 0 : $cumul_notes/$nombre_notes;
+        */
+        $moyenne= $produit->getMoyenneProduit();
 
         $form = $this->createForm(AvisProduitFormType::class);
         $form->handleRequest($request);
@@ -76,7 +73,7 @@ class ProduitController extends AbstractController
             'produit'           => $produit,
             'annee_en_cours'    => $annee_en_cours,
             'formAvisProduit'   => $form->createView(),
-            'touslesavis'       => $avis,
+            'touslesavis'       => $produit->getAvisProduits(),
             'moyenne'           => $moyenne
         ]);
     }

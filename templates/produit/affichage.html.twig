@@ -74,7 +74,13 @@
                         <tfoot>
                         <tr>
                             <th class="px-3">Note Evaluation</th>
-                            <th class="has-text-centered">{{ moyenne | number_format(2,'.','') }}/10</th>
+                            <th class="has-text-centered">
+                                {% if moyenne is null %}
+                                    Non disponible
+                                {% else %}
+                                    {{ moyenne | number_format(2,'.','') }}/10
+                                {% endif %}
+                            </th>
                         </tr>
                         </tfoot>
                         <tbody>
