@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,6 +29,19 @@ class ProduitRepository extends ServiceEntityRepository
             ->getQuery()        # obtenir la requête
             ->getResult()       # obtenir un tableau d'entités
         ;
+    }
+
+    /**
+     * @return Query
+     * Pour que la pagination fonctionne on a besoin de renvoyer une query et non le résultat
+     */
+    public function findAllQuery () : Query
+    {
+        # Création d'un QueryBuilder (constructeur de requête)
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.creation','DESC')
+            ->getQuery()        # obtenir la requête
+            ;
     }
 
     // /**

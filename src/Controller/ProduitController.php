@@ -7,6 +7,7 @@ use App\Form\AvisProduitFormType;
 use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +17,24 @@ class ProduitController extends AbstractController
 {
     /**
      * @Route("/produits", name="produits")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @param ProduitRepository $produitRepository
      * @param FondsEuroRepository $fondsEuroRepository
      * @return Response
      */
-    public function index(ProduitRepository $produitRepository, FondsEuroRepository $fondsEuroRepository)
+    public function index(
+        PaginatorInterface $paginator,
+        Request $request,
+        ProduitRepository $produitRepository,
+        FondsEuroRepository $fondsEuroRepository)
     {
         $annee_en_cours = date('Y');
-        $list_produits = $produitRepository->findAll();
+        $list_produits = $paginator->paginate(
+          $produitRepository->findAllQuery(),
+          $request->query->getInt('page',1),
+          5
+        );
         $meilleur_taux = $fondsEuroRepository->meilleurTauxDeCetteAnnee($annee_en_cours);
         return $this->render('produit/liste.html.twig', [
             'list_produits' => $list_produits,
