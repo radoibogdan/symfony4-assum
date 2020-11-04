@@ -62,9 +62,16 @@
             </div>
         </div>
     </nav>
-    {% include 'includes/flashes.html.twig' %}
-    {# Bloc qui contiendra le contenu de chaque page #}
-    {% block content %} {% endblock %}
+
+    {# Les messages flash #}
+    <div class="container">
+        {% include 'includes/flashes.html.twig' %}
+    </div>
+
+    {% block content %}
+        {# Bloc qui contiendra le contenu de chaque page #}
+    {% endblock %}
+
     <footer class="footer">
         <div class="container is-fullhd">
             <div class="tile is-ancestor">
@@ -80,13 +87,10 @@
                         <div class="tile is-child box">
                             <p class="title is-size-5-touch is-size-3-desktop pb-2 has-text-centered">Décovrez le produit du mois</p>
                             <p>{{ produit.title | default('') }}</p>
-                            {#                        <figure class="image is-4by3 ">#}
-                            {#                            <img alt="signe d'intérogation" src="https://bulma.io/images/placeholders/640x480.png">#}
-                            {#                        </figure>#}
                             <div class="tile is-child has-text-centered">
-                                <a href="" class="">
+                                <a href="{{ path('show_best_produit') }}" class="">
                                 <span class="icon is-large has-text-success ">
-                                <i class="fas fa-7x fa-question-circle"></i>
+                                    <i class="fas fa-7x fa-question-circle"></i>
                                 </span>
                                 </a>
                             </div>
@@ -112,8 +116,9 @@
                             <p class="level-item has-text-centered is-hidden-tablet-only">
                                 <a class="link is-info">Newsletter</a>
                             </p>
-                            <p class="level-item has-text-centered">
-                                <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">
+                            <p class="level-item has-text-centered is-size-2">
+{#                                <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">#}
+                                ASSUM
                             </p>
                             <p class="level-item has-text-centered">
                                 <a class="link is-info">Mentions légales</a>

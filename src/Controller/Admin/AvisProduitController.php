@@ -27,7 +27,7 @@ class AvisProduitController extends AbstractController
      */
     public function index(AvisProduitRepository $avisProduitRepository)
     {
-        $avisproduit_list = $avisProduitRepository->findAll();
+        $avisproduit_list = $avisProduitRepository->findAllDesc();
         return $this->render('admin_avis_produit/liste.html.twig', [
             'avisproduit_list' => $avisproduit_list
         ]);

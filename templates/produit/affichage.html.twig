@@ -150,7 +150,8 @@
         </div>
         <div class="container has-background-white-bis">
             <div class="columns is-centered mb-0">
-                {% if app.user %}
+
+                {% if app.user and not(avis_deja_donne) %}
                 <div class="column is-half px-5">
                     {{ form_start(formAvisProduit) }}
                     {{ form_row(formAvisProduit.note, {
@@ -164,6 +165,10 @@
                     }) }}
                     <button type="submit" class="button is-primary is-fullwidth">Valider</button>
                     {{ form_end(formAvisProduit) }}
+                </div>
+                {% elseif app.user and avis_deja_donne %}
+                <div class="column is-half px-5">
+                    <span>Vous avez déjà donné votre avis concernant ce produit.</span>
                 </div>
                 {% else %}
                 <div class="column is-half px-5">

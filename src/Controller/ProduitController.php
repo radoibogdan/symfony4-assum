@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\AvisProduit;
 use App\Entity\Produit;
 use App\Form\AvisProduitFormType;
 use App\Repository\FondsEuroRepository;
@@ -33,18 +34,18 @@ class ProduitController extends AbstractController
         $list_produits = $paginator->paginate(
           $produitRepository->findAllQuery(),
           $request->query->getInt('page',1),
-          5
+          6
         );
         $meilleur_taux = $fondsEuroRepository->meilleurTauxDeCetteAnnee($annee_en_cours);
         return $this->render('produit/liste.html.twig', [
             'list_produits' => $list_produits,
             'meilleur_taux' => $meilleur_taux,
-            'annee_en_cours'=> $annee_en_cours
+            'annee_en_cours'=> $annee_en_cours,
         ]);
     }
 
     /**
-     * @Route ("/annonce/{id}", name="affichage_produit")
+     * @Route ("/produit/{id}", name="affichage_produit")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
@@ -52,22 +53,16 @@ class ProduitController extends AbstractController
      */
     public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit) : Response
     {
-        /*
-            $avis = $produit->getAvisProduits();
-            $cumul_notes = 0;
-            $nombre_notes = 0;
-            foreach ($avis as $avis_individuel) {
-                $cumul_notes += $avis_individuel->getNote();
-                $nombre_notes++;
-            }
-            $moyenne= $cumul_notes === 0 ? 0 : $cumul_notes/$nombre_notes;
-        */
+        // Obtenir la moyenne de ce produit
         $moyenne= $produit->getMoyenneProduit();
+
+        // Vérifie si le user a déjà donné son avis sur ce produit
+        $avis_deja_donne = $this->avisDejaDonne($produit);
 
         $form = $this->createForm(AvisProduitFormType::class);
         $form->handleRequest($request);
 
-        // Si le user s'est connecté et il y a validé le commentaire
+        // Si le user s'est connecté et s'il a validé le commentaire
         if ($form->isSubmitted() && $form->isValid()) {
             // Rajouter une entité dans la bdd 1. Récupérer l'entité avec getData() 2. persist()
             // getData retourne une AvisProduit
@@ -85,7 +80,59 @@ class ProduitController extends AbstractController
             'annee_en_cours'    => $annee_en_cours,
             'formAvisProduit'   => $form->createView(),
             'touslesavis'       => $produit->getAvisProduits(),
-            'moyenne'           => $moyenne
+            'moyenne'           => $moyenne,
+            'avis_deja_donne'   => $avis_deja_donne
         ]);
+    }
+
+    /**
+     * PRODUIT DU MOIS
+     * @Route ("/produit_du_mois", name="show_best_produit")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param ProduitRepository $produitRepository
+     * @return Response
+     */
+    public function show_best(Request $request, EntityManagerInterface $entityManager, ProduitRepository $produitRepository) : Response
+    {
+        $produits_mois_en_cours = $produitRepository->findNewProduits();
+        $moyenne_du_mois = 0;
+        $produit_du_mois = 0;
+        /** @var Produit $produit */
+        foreach ($produits_mois_en_cours as $produit) {
+            // Obtenir la moyenne d'un produit
+            if ($produit->getMoyenneProduit() > $moyenne_du_mois) {
+                $produit_du_mois = $produit;
+                $moyenne_du_mois = $produit->getMoyenneProduit();
+            };
+        }
+        $this->addFlash(
+            'info',
+            'Ceci est un produit récemment créé (moins d\'un mois) et le mieux côté d\'après les avis de nos utilisateurs enregistrés.'
+        );
+        return $this->redirectToRoute('affichage_produit',[
+            'id' => $produit_du_mois->getId()
+        ]);
+    }
+
+    /**
+     * @param Produit $produit
+     * @return bool
+     * Vérifie si le user a déjà donné son avis sur le produit
+     */
+    private function avisDejaDonne(Produit $produit) : bool
+    {
+        $avis_deja_donne = false;
+        if (!$this->getUser()) {
+            return $avis_deja_donne;
+        }
+        $array_avis = $this->getUser()->getAvisProduits();
+        /** @var AvisProduit $avis */
+        foreach ($array_avis as $avis) {
+            if ($avis->getProduit()->getId() === $produit->getId()) {
+                $avis_deja_donne = true;
+            }
+        }
+        return $avis_deja_donne;
     }
 }

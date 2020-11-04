@@ -33,7 +33,7 @@
                             <td class="px-2">{{ avis_produit.id }}</td>
                             <td class="has-text-left">{{ avis_produit.auteur.prenom ~ ' ' ~ avis_produit.auteur.nom  }}</td>
                             <td class="has-text-left">{{ avis_produit.produit.titre }}</td>
-                            <td>{{ avis_produit.note }}/100</td>
+                            <td>{{ avis_produit.note }}/10</td>
                             <td class="has-text-left fixed_width_commentaire">
                                 {% if (avis_produit.commentaire | length > 100) %}
                                     <div class="notification visible">{{ avis_produit.commentaire | slice(0, 100)}}
@@ -50,7 +50,7 @@
                                 {% endif %}
                             </td>
                             <td>{% if(avis_produit.approuve == 0) %}Non{% else %}Oui{% endif %}</td>
-                            <td>{{ avis_produit.creation | date('m/yy') }}</td>
+                            <td>{{ avis_produit.creation | date('d/m/yy') }}</td>
                             <td>
                                 <div class="buttons is-pulled-right">
                                     <a href="{{ path('admin_avisproduit_approuver', {id:avis_produit.id}) }}" class="button {{ avis_produit.approuve == 1 ? 'is-danger' : 'is-success' }} is-small">
