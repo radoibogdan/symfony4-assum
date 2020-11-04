@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AvisProduit;
 use App\Entity\Produit;
 use App\Form\AvisProduitFormType;
+use App\Repository\ArticleRepository;
 use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +22,7 @@ class ProduitController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @param ProduitRepository $produitRepository
+     * @param ArticleRepository $articleRepository
      * @param FondsEuroRepository $fondsEuroRepository
      * @return Response
      */
@@ -28,6 +30,7 @@ class ProduitController extends AbstractController
         PaginatorInterface $paginator,
         Request $request,
         ProduitRepository $produitRepository,
+        ArticleRepository $articleRepository,
         FondsEuroRepository $fondsEuroRepository)
     {
         $annee_en_cours = date('Y');
@@ -41,6 +44,7 @@ class ProduitController extends AbstractController
             'list_produits' => $list_produits,
             'meilleur_taux' => $meilleur_taux,
             'annee_en_cours'=> $annee_en_cours,
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
 
@@ -49,9 +53,10 @@ class ProduitController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
+     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit) : Response
+    public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit, ArticleRepository $articleRepository) : Response
     {
         // Obtenir la moyenne de ce produit
         $moyenne= $produit->getMoyenneProduit();
@@ -81,7 +86,8 @@ class ProduitController extends AbstractController
             'formAvisProduit'   => $form->createView(),
             'touslesavis'       => $produit->getAvisProduits(),
             'moyenne'           => $moyenne,
-            'avis_deja_donne'   => $avis_deja_donne
+            'avis_deja_donne'   => $avis_deja_donne,
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
 

@@ -1,0 +1,15 @@
+{% extends "_template.html.twig" %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <div class="container is-fullhd">
+            <h1 class="title mt-4">Liste des articles</h1>
+            {% include "includes/article_list.html.twig" with {articles: list_articles} %}
+            <div class="pagination mt-2">
+                {{ knp_pagination_render(list_articles) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

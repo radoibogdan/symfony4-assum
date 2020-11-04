@@ -1,0 +1,52 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block content %}
+    <div class="section">
+
+        <h1 class="title has-text-centered">Liste des articles</h1>
+
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-half">
+                <a href="{{ path('admin_article_add') }}" class="button is-success mb-4">
+                    Nouveau Article
+                </a>
+
+                {% include 'includes/flashes.html.twig' %}
+
+                <table class="table is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titre de l'article</th>
+                        <th>Auteur</th>
+                        <th>Créé le</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# La boucle sur list_articles, dernière colonne : Modifier & Supprimer #}
+                    {% for article in list_articles %}
+                        <tr>
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.titre }}</td>
+                            <td>{{ article.auteur.prenom ~ ' ' ~ article.auteur.nom |upper }}</td>
+                            <td>{{ article.creation | date('d/m/yy') }}</td>
+                            <td>
+                                <div class="buttons is-pulled-right">
+                                    <a href="{{ path('admin_article_edit', {id:article.id}) }}" class="button is-success">Modifier</a>
+                                    <a href="{{ path('admin_article_delete', {id:article.id}) }}" class="button is-danger">Supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}

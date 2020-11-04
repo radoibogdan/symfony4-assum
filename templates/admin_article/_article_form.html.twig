@@ -1,0 +1,11 @@
+{{ form_start(articleForm) }}
+    {{ form_row(articleForm.titre, {
+        label : 'Article nom'
+    }) }}
+    {{ form_row(articleForm.contenu, {
+        label : 'Contenu de l\'article'
+    }) }}
+<button type="submit" class="button is-success is-fullwidth">
+    Enregistrer
+</button>
+{{ form_end(articleForm) }}

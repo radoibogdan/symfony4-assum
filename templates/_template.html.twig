@@ -36,6 +36,11 @@
                             <span>Voir tous les produits</span>
                         </a>
                     </div>
+                    <div class="navbar-item pt-0 pb-1">
+                        <a class="navbar-item button is-light" href="{{ path('articles') }}">
+                            <span>Articles</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="navbar-end">
@@ -79,8 +84,9 @@
                     <div class="tile is-7 is-parent">
                         <div class="tile is-child box">
                             <p class="title">Dernier article publié</p>
-                            <p class="subtitle">Titre article</p>
-                            <p class="content"> Début de l'article, ensuite des ... (<a href="">Lire la suite</a>)</p>
+                            <p class="subtitle">{{ dernier_article.titre }}</p>
+                            <p class="content"> {{ dernier_article.contenu | slice(0, 250) }} ...
+                                (<a href="{{ path('affichage_article', {id: dernier_article.id} ) }}">Lire la suite</a>)</p>
                         </div>
                     </div>
                     <div class="tile is-parent">

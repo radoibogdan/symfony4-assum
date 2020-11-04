@@ -77,10 +77,16 @@ class User implements UserInterface
      */
     private $avisAssureurs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="auteur")
+     */
+    private $articles;
+
       public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
         $this->avisAssureurs = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -289,6 +295,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($avisAssureur->getAuteur() === $this) {
                 $avisAssureur->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuteur() === $this) {
+                $article->setAuteur(null);
             }
         }
 

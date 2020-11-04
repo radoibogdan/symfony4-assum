@@ -1,0 +1,35 @@
+<div class="columns is-multiline">
+    {% for article in articles %}
+        <div class="column is-full-mobile is-full-touch is-half-desktop">
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <a href="{{ path('affichage_article',{id: article.id}) }}" class="has-text-primary">
+                                    <strong>{{article.titre}}</strong>
+                                </a>
+                                <br>
+                                Créé le : {{article.creation|date('m/yy')}}
+                                <br>
+                                {{article.contenu|slice(0,100) ~ ' (...)'}}
+                            </p>
+                            <strong class="has-text-primary">Auteur :</strong>
+                            <div class="tags has-addons">
+                                <span class="tag">
+                                    {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
+                                 </span>
+                                <span class="tag is-primary">
+                                    <span class="icon">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+

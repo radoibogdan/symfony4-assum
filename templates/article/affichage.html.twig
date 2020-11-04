@@ -1,0 +1,17 @@
+{% extends "_template.html.twig" %}
+
+{% block title %} {{article.titre}} {% endblock %}
+
+{% block content %}
+    <section class="section px-0 py-0">
+        <div class="container pt-5 has-background-info-light">
+            <h1 class="title has-text-primary">
+                {{article.titre}}
+            </h1>
+            <p class="content has-text-left-mobile">
+                {{article.contenu}}
+            </p>
+        </div>
+    </section>
+{% endblock %}
+

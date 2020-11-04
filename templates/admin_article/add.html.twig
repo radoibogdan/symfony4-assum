@@ -1,0 +1,16 @@
+{% extends '_admin_template.html.twig' %}
+
+{% block title %}Nouveau Article{% endblock %}
+
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Nouveau Article</h1>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-one-third">
+                {% include 'admin_article/_article_form.html.twig' %}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}

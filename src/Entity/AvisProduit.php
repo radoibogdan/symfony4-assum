@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=AvisProduitRepository::class)
  * @ORM\HasLifecycleCallbacks()
  * HasLifecycleCallbacks + méthode prePersist =>
- * Permet de modifier l’entité pour enregister la date de création  à la date ou on valide le produit
+ * Permet de modifier l’entité pour enregister la date de création à la date ou on valide l'avis
  */
 class AvisProduit
 {
