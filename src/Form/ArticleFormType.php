@@ -31,7 +31,8 @@ class ArticleFormType extends AbstractType
                     new NotBlank(['message' => 'Veuillez indiaquer le contenu de l\'article.'])
                 ],
                 'attr' => [
-                    'placeholder' => 'Cette zone supporte le Markdown.'
+                    'placeholder' => 'Cette zone supporte le Markdown.',
+                    'min-height' => '30em'
                 ]
             ])
         ;

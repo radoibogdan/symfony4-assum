@@ -4,13 +4,17 @@
 
 {% block content %}
     <section class="section px-0 py-0">
-        <div class="container pt-5 has-background-info-light">
-            <h1 class="title has-text-primary">
-                {{article.titre}}
-            </h1>
-            <p class="content has-text-left-mobile">
-                {{article.contenu}}
-            </p>
+        <div class="container pt-5 pl-2 pr-2 has-background-info-light">
+            <div class="columns is-centered mb-0">
+                <div class="column is-three-fifths">
+                    <h1 class="title has-text-primary">
+                        {{ article.titre }}
+                    </h1>
+                    <div class="markdown_bulma">
+                        {{ article.contenu|commonmark('my_custom_converter') }}
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}

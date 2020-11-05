@@ -299,7 +299,7 @@ class Produit
      */
     public function getMoyenneProduit()
     {
-        if (!$this->avisProduits){
+        if (!$this->avisProduits[0]){
             return null;
         }
 
@@ -309,6 +309,7 @@ class Produit
             $cumul_notes += $avis_individuel->getNote();
             $nombre_notes++;
         }
+        
         return $cumul_notes/$nombre_notes;
     }
 

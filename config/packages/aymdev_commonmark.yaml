@@ -1,0 +1,19 @@
+aymdev_commonmark:
+  converters:
+    # add any converter here
+    my_custom_converter:
+      type: 'github'
+      options:
+        enable_strong: true
+        use_underscore: true
+        use_asterisk: true
+        unordered_list_markers: ["-", "*", "+"]
+#        renderer: {'block_separator': "\n",'inner_separator': "\n",'soft_break': "\n",}
+
+    my_other_converter:
+      type: 'commonmark'
+      extensions:
+        - League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension
+      options:
+        unordered_list_markers: ['-', '*', '+']
+        enable_em: true

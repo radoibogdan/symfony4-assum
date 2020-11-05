@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\ResetPasswordFormType;
+use App\Repository\ArticleRepository;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -23,9 +24,10 @@ class SecurityController extends AbstractController
      * @Route("/login", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
+     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request, ArticleRepository $articleRepository): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -38,7 +40,8 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'back_to_produit' => $request->headers->get('referer')
+            'back_to_produit' => $request->headers->get('referer'),
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
 
@@ -69,9 +72,10 @@ class SecurityController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
+     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ArticleRepository $articleRepository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
@@ -106,6 +110,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
 

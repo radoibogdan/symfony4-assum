@@ -16,10 +16,10 @@
 
                 {% include 'includes/flashes.html.twig' %}
 
-                <table class="table is-fullwidth">
+                <table class="table is-fullwidth has-text-centered">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th class="px-1">#</th>
                         <th>Titre de l'article</th>
                         <th>Auteur</th>
                         <th>Créé le</th>
@@ -31,7 +31,7 @@
                     {% for article in list_articles %}
                         <tr>
                             <td>{{ article.id }}</td>
-                            <td>{{ article.titre }}</td>
+                            <td class="has-text-left">{{ article.titre }}</td>
                             <td>{{ article.auteur.prenom ~ ' ' ~ article.auteur.nom |upper }}</td>
                             <td>{{ article.creation | date('d/m/yy') }}</td>
                             <td>

@@ -1,4 +1,7 @@
 {
+    "aymdev/commonmark-bundle": {
+        "version": "v1.2.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
     },
@@ -113,6 +116,9 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "league/commonmark": {
+        "version": "1.5.7"
     },
     "monolog/monolog": {
         "version": "1.25.5"
