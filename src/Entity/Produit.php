@@ -309,7 +309,7 @@ class Produit
             $cumul_notes += $avis_individuel->getNote();
             $nombre_notes++;
         }
-        
+
         return $cumul_notes/$nombre_notes;
     }
 
