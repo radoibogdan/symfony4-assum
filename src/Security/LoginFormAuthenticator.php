@@ -103,8 +103,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($this->security->isGranted("ROLE_ADMIN")) {
             return new RedirectResponse($this->urlGenerator->generate('admin_produit_liste'));
         }
-        return new RedirectResponse($request->get('_target_path'));
 
+        // Nécéssaire quand l'utilisateur se connecte pour donner son avis pour revenir vers la page du produit
+        // depuis le formulaire de login récupérer la valeur du champ hidden _target_path
+        if ($request->get('_target_path')) {
+            return new RedirectResponse($request->get('_target_path'));
+        }
+        return new RedirectResponse($this->urlGenerator->generate('home'));
         // Utilisateurs avec ROLE_USER => vers home
         // return new RedirectResponse($this->urlGenerator->generate('home'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));

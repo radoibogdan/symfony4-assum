@@ -132,7 +132,16 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>{{ avis.auteur.prenom | capitalize}} {{ avis.auteur.nom | upper }}</strong> <small>@{{ avis.auteur.pseudo }}</small>
+                                        <strong>
+                                            {{ avis.auteur.prenom | default('Non disponible') }} {{ avis.auteur.nom | default('') }}
+                                        </strong>
+                                        <small>
+                                            {% if (avis.auteur.pseudo is defined) %}
+                                                @{{ avis.auteur.pseudo }}
+                                            {% else %}
+
+                                            {% endif %}
+                                        </small>
                                         <br>
                                         {{ avis.commentaire }}
                                     </p>

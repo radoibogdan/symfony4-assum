@@ -77,9 +77,9 @@ class SecurityController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ArticleRepository $articleRepository): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('home');
-        }
+//        if ($this->getUser()) {
+//            return $this->redirectToRoute('home');
+//        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
