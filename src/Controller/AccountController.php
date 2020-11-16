@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\UserProfileFormType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,9 +18,10 @@ class AccountController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function index(Request $request, EntityManagerInterface $entityManager)
+    public function index(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository)
     {
         $form = $this->createForm(UserProfileFormType::class,$this->getUser());
         // Récupérer l'utilisateur actuel $this->getUser()
@@ -33,7 +35,8 @@ class AccountController extends AbstractController
         }
 
         return $this->render('compte/profil.html.twig', [
-            'profilForm' => $form->createView()
+            'profilForm' => $form->createView(),
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
 }

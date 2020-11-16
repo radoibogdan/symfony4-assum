@@ -31,4 +31,52 @@ class HomeController extends AbstractController
             'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
+
+    /**
+     * @Route ("/qui-sommes-nous",name="qui_sommes_nous")
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function whoAreWe(ArticleRepository $articleRepository)
+    {
+        return $this->render('home/qui_sommes_nous.html.twig',[
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+        ]);
+    }
+
+    /**
+     * @Route ("/mentions_legales",name="mentions_legales")
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function legal(ArticleRepository $articleRepository)
+    {
+        return $this->render('home/mentions_legales.html.twig',[
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+        ]);
+    }
+
+    /**
+     * @Route ("/donnees_personnelles",name="donnees_personnelles")
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function personal_data(ArticleRepository $articleRepository)
+    {
+        return $this->render('home/donnees_personnelles.html.twig',[
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+        ]);
+    }
+
+    /**
+     * @Route ("/nous_contacter",name="nous_contacter")
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function contact(ArticleRepository $articleRepository)
+    {
+        return $this->render('home/nous_contacter.html.twig',[
+            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+        ]);
+    }
 }

@@ -1,0 +1,62 @@
+{% extends "_template.html.twig" %}
+
+{% block title %}
+    Données personnelles
+{% endblock %}
+
+{% block content %}
+    <div class="section px-3 py-3">
+        <div class="container pt-5 has-background-info-light">
+            <h1 class="title">Données personnelles</h1>
+            <p> Sur cette page vous trouverez les informations concernant les données personnelles récoltées par Assum, leur traitement et à leur conservation.</p>
+
+            <h2 class="title is-size-4 mt-3">Quelles données personnelles nous collectons ?</h2>
+            <div class="content">
+                <p>Les données personnelles collectées auprès des utilisateurs n'ont pas une finalité commerciale.
+                    Elles servent uniquement à acceder aux fonctionnalités avancées du site. <br>
+                    Les informations recueillies depuis le formulaire de création de comptes:
+                </p>
+                <ul>
+                    <li>nom</li>
+                    <li>prénom</li>
+                    <li>pseudo</li>
+                    <li>adresse e-mail</li>
+                    <li>téléphone</li>
+                </ul>
+                <p>Ces informations sont enregistrées dans un fichier informatisé.</p>
+            </div>
+
+            <h2 class="title is-size-4 mt-3">Comment sont utilisées les données personnelles collectées ?</h2>
+            <div class="content">
+                <p>
+                    Le site Assum.fr est un service en ligne d'evaluation des produits d'assurance-vie où les utilisateurs donnent leur avis. <br>
+                    Afin de réaliser certains traitements le site collecte vos données. Celles-ce permettent :
+                </p>
+                <ul>
+                    <li>A l'utilisateur de pouvoir donner son avis</li>
+                    <li>d'afficher les avis des utilisateurs</li>
+                    <li>de certifier les avis que vous avez déposés.</li>
+                    <li>de vous enregistrer en tant qu'utilisateur du site</li>
+                </ul>
+                <p>Les données collectées sont traitées en France et ne sont pas transmises à des tiers.</p>
+            </div>
+            <h2 class="title is-size-4 mt-3">Les droits de l'utilisateur sur ses données personnelles</h2>
+            <p>
+                L'utilisateur à le droit d'opposition, d'interrogation, d'accès et de rectification de vos données personnelles. Pour cela merci de
+                <a href="{{ path('nous_contacter') }}"> nous contacter</a> <br>
+                Auncun transfert de données à caractère personnel n'est envisagé ou traitement de données.<br>
+                Vous avez le droit d'introduire une réclamation (plainte) auprès de la Cnil si vos droits ne sont pas respectés.
+            </p>
+            <div class="content mb-5">
+                <ul>
+                    <li>Point de contact sur les questions de protection des données personnelles : radoi.office@gmail.com </li>
+                    <li>Finalité poursuivie par le traitement auquel les données sont destinées : création de compte d'utilisateur pour donner son avis </li>
+                    <li>Numéro de téléphone et adresse de courrier électronique</li>
+                    <li>Nom du directeur: Bogdan RADOI</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -126,13 +126,13 @@
                     </table>
                 </div>
                 <div class="column is-half">
-                    <h1 class="has-text-left title is-size-4">Avis produit</h1>
+                    <h1 class="has-text-left title is-size-4">Avis récents</h1>
                     {% for avis in touslesavis |slice(0, 2) %}
                         <div class="box">
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>{{ avis.auteur.prenom }} {{ avis.auteur.nom | upper }}</strong> <small>@{{ avis.auteur.pseudo }}</small>
+                                        <strong>{{ avis.auteur.prenom | capitalize}} {{ avis.auteur.nom | upper }}</strong> <small>@{{ avis.auteur.pseudo }}</small>
                                         <br>
                                         {{ avis.commentaire }}
                                     </p>
