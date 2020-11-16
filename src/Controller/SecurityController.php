@@ -101,9 +101,9 @@ class SecurityController extends AbstractController
             // after validating the user and saving them to the database
             // authenticate the user and use onAuthenticationSuccess on the authenticator
             return $guardHandler->authenticateUserAndHandleSuccess(
-                $user, // the User object you just created
+                $user,            // the User object you just created
                 $request,
-                $authenticator, // authenticator whose onAuthenticationSuccess you want to use
+                $authenticator,   // authenticator whose onAuthenticationSuccess you want to use
                 'main' // firewall name in security.yaml
             );
         }
