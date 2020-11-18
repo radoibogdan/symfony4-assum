@@ -99,6 +99,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "egulias/email-validator": {
+        "version": "2.1.24"
+    },
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
@@ -119,6 +122,9 @@
     },
     "league/commonmark": {
         "version": "1.5.7"
+    },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
     },
     "monolog/monolog": {
         "version": "1.25.5"
@@ -177,6 +183,9 @@
             "./bin/console",
             "./config/bootstrap.php"
         ]
+    },
+    "symfony/css-selector": {
+        "version": "v4.4.16"
     },
     "symfony/debug": {
         "version": "v4.4.13"
@@ -258,6 +267,12 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v4.4.16"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.3.1"
+    },
     "symfony/http-foundation": {
         "version": "v4.4.13"
     },
@@ -270,6 +285,27 @@
     "symfony/intl": {
         "version": "v4.4.13"
     },
+    "symfony/mailchimp-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "1be490e068472fc87e226cf54bc95fb6f2e49117"
+        }
+    },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "./config/packages/mailer.yaml"
+        ]
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -278,6 +314,18 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
+    },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
+        },
+        "files": [
+            "./config/packages/messenger.yaml"
+        ]
     },
     "symfony/mime": {
         "version": "v4.4.13"
@@ -468,8 +516,17 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.1.1"
+    },
     "twig/extra-bundle": {
         "version": "v3.0.5"
+    },
+    "twig/inky-extra": {
+        "version": "v3.1.1"
     },
     "twig/twig": {
         "version": "v3.0.5"

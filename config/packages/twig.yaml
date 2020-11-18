@@ -4,3 +4,5 @@ twig:
     strict_variables: '%kernel.debug%'
     exception_controller: null
     form_themes: ['includes/_form_theme_bulma.html.twig']
+    paths:
+        '%kernel.project_dir%/assets': css

@@ -2,11 +2,17 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use App\Repository\ArticleRepository;
 use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -69,14 +75,36 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route ("/nous_contacter",name="nous_contacter")
+     * @Route("/nous_contacter", name="nous_contacter")
      * @param ArticleRepository $articleRepository
+     * @param Request $request
+     * @param MailerInterface $mailer
      * @return Response
+     * @throws TransportExceptionInterface
      */
-    public function contact(ArticleRepository $articleRepository)
+    public function contact(ArticleRepository $articleRepository, Request $request, MailerInterface $mailer)
     {
-        return $this->render('home/nous_contacter.html.twig',[
+        $contactForm = $this->createForm(ContactType::class);
+        $contactForm->handleRequest($request);
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $contact = (new TemplatedEmail())
+                ->from(new Address('radoi.office@gmail.com'))
+                ->to(new Address('radoibogdan2003@yahoo.com', 'Bogdan RADOI'))
+                ->subject('Envoyé avec Symfony Mailer')
+                ->htmlTemplate('contact/notification.html.twig')
+                ->context([
+                    'message' => $contactForm['message']->getData(),
+                ]);
+                $mailer->send($contact);
+
+            $this->addFlash('success', 'Message envoyé !');
+        }
+
+        return $this->render('home/nous_contacter.html.twig', [
+            'contact_form' => $contactForm->createView(),
             'dernier_article' => $articleRepository->findLastArticlePublished()[0]
         ]);
     }
+
 }

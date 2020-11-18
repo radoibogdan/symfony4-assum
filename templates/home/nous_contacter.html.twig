@@ -1,10 +1,37 @@
-{% extends '_template.html.twig' %}
-
-{% block content %}
-
-{% endblock %}
+{% extends "_template.html.twig" %}
 
 {% block title %}
-
+    Nous contacter
 {% endblock %}
 
+{% block content %}
+    <div class="section">
+        <h1 class="title has-text-centered">Nous contacter</h1>
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-one-third">
+                {{ form_start(contact_form) }}
+                {{ form_row(contact_form.prenom, {
+                    label: 'Prénom:'
+                }) }}
+                {{ form_row(contact_form.nom, {
+                    label: 'Nom:'
+                }) }}
+                {{ form_row(contact_form.telephone, {
+                    label: 'Téléphone:'
+                }) }}
+                {{ form_row(contact_form.email, {
+                    label: 'Email:'
+                }) }}
+                {{ form_row(contact_form.message, {
+                    label: 'Message:'
+                }) }}
+                <button type="submit" class="button is-primary">
+                    Envoyer le message
+                </button>
+                {{ form_end(contact_form) }}
+            </div>
+            <div class="column"></div>
+        </div>
+    </div>
+{% endblock %}
