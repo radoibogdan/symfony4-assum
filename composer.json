@@ -21,6 +21,7 @@
         "symfony/framework-bundle": "4.4.*",
         "symfony/mailchimp-mailer": "4.4.*",
         "symfony/mailer": "4.4.*",
+        "symfony/mailgun-mailer": "4.4.*",
         "symfony/messenger": "4.4.*",
         "symfony/monolog-bundle": "^3.6",
         "symfony/security-bundle": "4.4.*",

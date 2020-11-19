@@ -89,7 +89,7 @@ class HomeController extends AbstractController
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $contact = (new TemplatedEmail())
-                ->from(new Address('radoi.office@gmail.com'))
+                ->from(new Address('radoibogdan2003@yahoo.com'))
                 ->to(new Address('radoibogdan2003@yahoo.com', 'Bogdan RADOI'))
                 ->subject('Envoyé avec Symfony Mailer')
                 ->htmlTemplate('contact/notification.html.twig')
