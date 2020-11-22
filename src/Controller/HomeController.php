@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
-use App\Repository\ArticleRepository;
 use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -21,10 +20,9 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @param ProduitRepository $produitRepository
      * @param FondsEuroRepository $fondsEuroRepository
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function index(ProduitRepository $produitRepository, FondsEuroRepository $fondsEuroRepository, ArticleRepository $articleRepository)
+    public function index(ProduitRepository $produitRepository, FondsEuroRepository $fondsEuroRepository)
     {
         $annee_en_cours = date('Y');
         $list_produits = $produitRepository->findNewProduits();
@@ -33,56 +31,45 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'list_produits' => $list_produits,
             'meilleur_taux' => $meilleur_taux,
-            'annee_en_cours' => $annee_en_cours,
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'annee_en_cours' => $annee_en_cours
         ]);
     }
 
     /**
      * @Route ("/qui-sommes-nous",name="qui_sommes_nous")
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function whoAreWe(ArticleRepository $articleRepository)
+    public function whoAreWe()
     {
-        return $this->render('home/qui_sommes_nous.html.twig',[
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
-        ]);
+        return $this->render('home/qui_sommes_nous.html.twig');
     }
 
     /**
      * @Route ("/mentions_legales",name="mentions_legales")
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function legal(ArticleRepository $articleRepository)
+    public function legal()
     {
-        return $this->render('home/mentions_legales.html.twig',[
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
-        ]);
+        return $this->render('home/mentions_legales.html.twig');
     }
 
     /**
      * @Route ("/donnees_personnelles",name="donnees_personnelles")
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function personal_data(ArticleRepository $articleRepository)
+    public function personal_data()
     {
-        return $this->render('home/donnees_personnelles.html.twig',[
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
-        ]);
+        return $this->render('home/donnees_personnelles.html.twig');
     }
 
     /**
      * @Route("/nous_contacter", name="nous_contacter")
-     * @param ArticleRepository $articleRepository
      * @param Request $request
      * @param MailerInterface $mailer
      * @return Response
      * @throws TransportExceptionInterface
      */
-    public function contact(ArticleRepository $articleRepository, Request $request, MailerInterface $mailer)
+    public function contact(Request $request, MailerInterface $mailer)
     {
         $contactForm = $this->createForm(ContactType::class);
         $contactForm->handleRequest($request);
@@ -102,8 +89,7 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/nous_contacter.html.twig', [
-            'contact_form' => $contactForm->createView(),
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'contact_form' => $contactForm->createView()
         ]);
     }
 

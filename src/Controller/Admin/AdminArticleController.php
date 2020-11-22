@@ -9,6 +9,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,9 +37,10 @@ class AdminArticleController extends AbstractController
      * @Route ("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
+     * @param TagAwareAdapterInterface $cache
      * @return Response
      */
-    public function add(EntityManagerInterface $entityManager, Request $request)
+    public function add(EntityManagerInterface $entityManager, Request $request, TagAwareAdapterInterface $cache)
     {
         $form = $this->createForm(ArticleFormType::class);
         $form->handleRequest($request);
@@ -50,6 +52,8 @@ class AdminArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success','L\'article a été ajouté dans la base de données.');
+            // suppréssion du cache dans le footer
+            $cache->invalidateTags(['footer_article']);
             return $this->redirectToRoute('admin_article_liste');
         }
         return $this->render('admin_article/add.html.twig',[

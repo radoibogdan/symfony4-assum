@@ -82,12 +82,7 @@
             <div class="tile is-ancestor">
                 <div class="tile">
                     <div class="tile is-7 is-parent">
-                        <div class="tile is-child box">
-                            <p class="title">Dernier article publié</p>
-                            <p class="subtitle">{{ dernier_article.titre }}</p>
-                            <p class="content"> {{ dernier_article.contenu | slice(0, 250) |commonmark('my_custom_converter') }} ...
-                                (<a href="{{ path('affichage_article', {id: dernier_article.id} ) }}">Lire la suite</a>)</p>
-                        </div>
+                        {{ footer_dernier_article() }}
                     </div>
                     <div class="tile is-parent">
                         <div class="tile is-child box">

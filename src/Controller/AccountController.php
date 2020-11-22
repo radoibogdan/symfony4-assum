@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\ConfirmDeletionFormType;
 use App\Form\UserProfileFormType;
 use App\Repository\ArticleRepository;
@@ -21,10 +20,9 @@ class AccountController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function index(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository)
+    public function index(Request $request, EntityManagerInterface $entityManager)
     {
         $form = $this->createForm(UserProfileFormType::class,$this->getUser());
         // Récupérer l'utilisateur actuel $this->getUser()
@@ -38,8 +36,7 @@ class AccountController extends AbstractController
         }
 
         return $this->render('compte/profil.html.twig', [
-            'profilForm' => $form->createView(),
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'profilForm' => $form->createView()
         ]);
     }
 
@@ -47,10 +44,9 @@ class AccountController extends AbstractController
      * @Route ("/compte/suppression", name="user_suppression_compte")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function delete(EntityManagerInterface $entityManager, Request $request, ArticleRepository $articleRepository)
+    public function delete(EntityManagerInterface $entityManager, Request $request)
     {
         $form = $this->createForm(ConfirmDeletionFormType::class);
         $form->handleRequest($request);
@@ -68,8 +64,7 @@ class AccountController extends AbstractController
 
         return $this->render('compte/delete.html.twig',[
             'deleteForm' => $form->createView(),
-            'user'      => $user,
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'user'      => $user
         ]);
     }
 }

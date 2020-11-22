@@ -32,22 +32,19 @@ class ArticleController extends AbstractController
         );
         return $this->render('article/liste.html.twig', [
             'list_articles' => $list_articles,
-            'annee_en_cours'=> $annee_en_cours,
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'annee_en_cours'=> $annee_en_cours
         ]);
     }
 
     /**
      * @Route ("/article/{id}", name="affichage_article")
      * @param Article $article
-     * @param ArticleRepository $articleRepository
      * @return Response;
      */
-    public function show(Article $article, ArticleRepository $articleRepository)
+    public function show(Article $article)
     {
         return $this->render('article/affichage.html.twig',[
-           'article' => $article,
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+           'article' => $article
         ]);
     }
 }

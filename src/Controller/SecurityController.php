@@ -40,8 +40,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'back_to_produit' => $request->headers->get('referer'),
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'back_to_produit' => $request->headers->get('referer')
         ]);
     }
 
@@ -72,10 +71,9 @@ class SecurityController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
-     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, ArticleRepository $articleRepository): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
@@ -109,8 +107,7 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/register.html.twig', [
-            'registrationForm' => $form->createView(),
-            'dernier_article' => $articleRepository->findLastArticlePublished()[0]
+            'registrationForm' => $form->createView()
         ]);
     }
 
