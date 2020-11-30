@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
-use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,18 +18,14 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      * @param ProduitRepository $produitRepository
-     * @param FondsEuroRepository $fondsEuroRepository
      * @return Response
      */
-    public function index(ProduitRepository $produitRepository, FondsEuroRepository $fondsEuroRepository)
+    public function index(ProduitRepository $produitRepository)
     {
-        $annee_en_cours = date('Y');
+        $annee_en_cours = date('Y') -1 ;
         $list_produits = $produitRepository->findNewProduits();
-        $meilleur_taux = $fondsEuroRepository->meilleurTauxDeCetteAnnee($annee_en_cours);
-
         return $this->render('home/index.html.twig', [
             'list_produits' => $list_produits,
-            'meilleur_taux' => $meilleur_taux,
             'annee_en_cours' => $annee_en_cours
         ]);
     }

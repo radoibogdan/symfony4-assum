@@ -24,7 +24,8 @@ class FondsEuroRepository extends ServiceEntityRepository
      * @param $annee
      * @return FondsEuro[] Returns an array of FondsEuro objects
      */
-    public function meilleurTauxDeCetteAnnee ($annee) {
+    public function meilleurFondsDeLanneeX($annee) : array
+    {
         # Création d'un QueryBuilder (constructeur de requête)
         return $this->createQueryBuilder('a')
             ->where('a.annee = :this_year')
@@ -33,7 +34,7 @@ class FondsEuroRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()        # obtenir la requête
             ->getResult()       # obtenir un tableau d'entités
-            ;
+        ;
     }
 
     // /**

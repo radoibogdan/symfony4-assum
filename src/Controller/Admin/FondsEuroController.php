@@ -76,6 +76,7 @@ class FondsEuroController extends AbstractController
             // pas besoin de getData et persist(). Les modifications sont faites automatiquement
             $entityManager->flush();
             $this->addFlash('success','Les modifications apportées au fonds euro ont été enregistrées!');
+            return $this->redirectToRoute('admin_fonds_euro_liste');
         }
         return $this->render('/admin_fonds_euro/edit.html.twig', [
             'fonds_euro' => $fonds_euro, // pour rajouter des informations en plus du formulaire

@@ -11,9 +11,7 @@
                     <h1 class="title has-text-primary">
                         {{produit.titre}}
                     </h1>
-                    <a class="has-background-success has-text-white px-1">
-                        <strong> {{produit.categorie.nom | default('catégorie non disponible')}}</strong>
-                    </a>
+                    <span class="tag is-info is-normal">{{produit.categorie.nom | default('catégorie non disponible')}}</span>
                     <p class="content has-text-left-mobile">
                         {{produit.description}}
                     </p>
@@ -47,12 +45,12 @@
                 {# Column 2/2 #}
                 <div class="column is-narrow px-5 has-text-centered">
                     {% if produit.imageFilename %}
-                        <figure>
-                            <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                        <figure class="is-hidden-mobile">
+                            <img class="image-border-3" width="300" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="Image du produit">
                         </figure>
                     {% else %}
-                        <figure class="image is-1by1">
-                            <img src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}" alt="img">
+                        <figure class="is-hidden-mobile">
+                            <img class="image-border-3" width="300" src="https://loremflickr.com/1024/1024/clothes/all?lock={{ produit.id }}" alt="img">
                         </figure>
                     {% endif %}
                 </div>

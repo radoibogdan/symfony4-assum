@@ -22,14 +22,12 @@ class ProduitController extends AbstractController
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @param ProduitRepository $produitRepository
-     * @param FondsEuroRepository $fondsEuroRepository
      * @return Response
      */
     public function index(
         PaginatorInterface $paginator,
         Request $request,
-        ProduitRepository $produitRepository,
-        FondsEuroRepository $fondsEuroRepository)
+        ProduitRepository $produitRepository)
     {
         $annee_en_cours = date('Y');
         $list_produits = $paginator->paginate(
@@ -37,10 +35,8 @@ class ProduitController extends AbstractController
           $request->query->getInt('page',1),
           6
         );
-        $meilleur_taux = $fondsEuroRepository->meilleurTauxDeCetteAnnee($annee_en_cours);
         return $this->render('produit/liste.html.twig', [
             'list_produits' => $list_produits,
-            'meilleur_taux' => $meilleur_taux,
             'annee_en_cours'=> $annee_en_cours
         ]);
     }

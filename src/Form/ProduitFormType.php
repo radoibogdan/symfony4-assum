@@ -40,7 +40,14 @@ class ProduitFormType extends AbstractType
                 'required' => false
             ])
             ->add('description',TextareaType::class,[
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new Length([
+                        'max' => 300,
+                        'maxMessage' => 'La description ne peut contenir plus de {{ limit }} caractères.'
+                    ])
+                ],
+                'help' => 'La description courte du produit est limitée à 300 caractères.'
             ])
             ->add('frais_adhesion',NumberType::class, [
                 'constraints' =>[

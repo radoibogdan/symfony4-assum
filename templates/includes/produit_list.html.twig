@@ -4,14 +4,14 @@
         <div class="column is-full-mobile is-full-touch is-half-desktop"> {# is-one-half / is-one-quarter #}
 {#        <div class="column is-half-tablet is-one-third-widescreen"> #}{# is-one-half / is-one-quarter #}
             <div class="box">
-                <article class="media">
+                <article class="media produit-wrap">
                     <div class="media-left">
 {#                        <figure class="image is-128x128">#}
 {#                            <img src="https://loremflickr.com/256/256/clothes/all?lock={{produit.id}}" alt="Image">#}
 {#                        </figure>#}
                         {% if produit.imageFilename %}
                             <figure>
-                                <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="">
+                                <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="Image representative du produit">
                             </figure>
                         {% else %}
                             <figure>
@@ -19,16 +19,14 @@
                             </figure>
                         {% endif %}
                     </div>
-                    <div class="media-content">
+                    <div class="media-content is-clipped">  {# is-clipped <=> overflow: hidden #}
                         <div class="content">
                             <p>
-                                <a href="{{ path('affichage_produit',{id: produit.id}) }}" class="has-text-primary">
+                                <a href="{{ path('affichage_produit',{ id: produit.id }) }}" class="has-text-primary">
                                     <strong>{{produit.titre}}</strong>
                                 </a>
                                 <br>
-                                <a href="{#{{ path('category_show',{id: produit.category.id}) }}#}" class="has-background-success has-text-white px-1">
-                                    <strong>{{produit.categorie.nom | default('non disponible')}}</strong>
-                                </a>
+                                    <span class="tag is-info is-normal">{{ produit.categorie.nom | default('non disponible') }}</span>
                                 <br>
                                 Disponible depuis : {{produit.creation|date('m/yy')}}
                                 {#
@@ -37,9 +35,11 @@
                                     <br>
                                 #}
                                 <br>
-                                {{produit.description|slice(0,100) ~ ' (...)'}}
+                                {{ produit.description }}
                             </p>
+                            {% if is_taux_available(produit)  %}
                             <strong class="has-text-primary">Rendement:</strong>
+                            {% endif %}
                             <div class="tags has-addons">
 {#                                <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
                                     {% for fonds_euro in produit.fondsEuro %}
