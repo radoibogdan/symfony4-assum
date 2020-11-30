@@ -35,7 +35,6 @@ class ProduitController extends AbstractController
           $request->query->getInt('page',1),
           6
         );
-        dump($list_produits->getItems());
         return $this->render('produit/liste.html.twig', [
             // 'list_produits' => $list_produits->getItems(),
             'annee_en_cours'=> $annee_en_cours,
