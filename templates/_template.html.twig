@@ -7,8 +7,8 @@
 
     <nav class="navbar is-light">
         <div class="container is-widescreen">
-            <div class="p navbar-brand">
-                <a class="navbar-item" href="{{ path('home') }}">
+            <div class="p navbar-brand mx-0">
+                <a class="navbar-item px-5" href="{{ path('home') }}">
                     <p class="subtitle is-4 has-text-primary">
                         <b>ASSUM</b>
                     </p>
@@ -77,9 +77,9 @@
         {# Bloc qui contiendra le contenu de chaque page #}
     {% endblock %}
 
-    <footer class="footer">
+    <footer class="footer" style="background-image: url('{{asset('uploads/images/homepage_footer.jpg')}}'); border-radius: 5px">
         <div class="container is-fullhd">
-            <div class="tile is-ancestor">
+            <div class="tile is-ancestor homepage-footer-background-image" >
                 <div class="tile">
                     <div class="tile is-7 is-parent">
                         {{ footer_dernier_article() }}
@@ -98,8 +98,18 @@
                         </div>
                     </div>
                     <div class="tile is-parent">
-                        <div class="tile is-child box">
-                            Un forum bientôt en ligne
+                        <div class="tile is-child box has-text-centered">
+                            {% for key, value in meilleur_taux() %}
+                            <p class="title is-size-5-touch is-size-3-desktop pb-2">
+                               Le meilleur taux de l'année {{ key }}
+                            </p>
+                            <button class="button is-medium is-static">
+                                <span class=""><strong>{{ value }}</strong></span>
+                                <span class="icon">
+                                    <i class="fas fa-percent"></i>
+                                </span>
+                            </button>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
