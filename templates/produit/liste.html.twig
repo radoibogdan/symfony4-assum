@@ -6,7 +6,7 @@
     <div class="section">
         <div class="container is-fullhd">
            <h1 class="title mt-4">Liste des produits</h1>
-           {% include "includes/produit_list.html.twig" with {produits: list_produits} %}
+           {% include "includes/produit_list.html.twig" with { produits:list_produits } %}
             <div class="pagination mt-2">
                 {{ knp_pagination_render(list_produits) }}
             </div>

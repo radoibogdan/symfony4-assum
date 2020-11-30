@@ -29,15 +29,17 @@ class ProduitController extends AbstractController
         Request $request,
         ProduitRepository $produitRepository)
     {
-        $annee_en_cours = date('Y');
+        $annee_en_cours = date('Y') -1;
         $list_produits = $paginator->paginate(
           $produitRepository->findAllQuery(),
           $request->query->getInt('page',1),
           6
         );
+        dump($list_produits->getItems());
         return $this->render('produit/liste.html.twig', [
-            'list_produits' => $list_produits,
-            'annee_en_cours'=> $annee_en_cours
+            // 'list_produits' => $list_produits->getItems(),
+            'annee_en_cours'=> $annee_en_cours,
+            'list_produits' => $list_produits
         ]);
     }
 

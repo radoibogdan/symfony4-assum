@@ -23,17 +23,12 @@
                         <div class="content">
                             <p>
                                 <a href="{{ path('affichage_produit',{ id: produit.id }) }}" class="has-text-primary">
-                                    <strong>{{produit.titre}}</strong>
+                                    <strong>{{ produit.titre }}</strong>
                                 </a>
                                 <br>
                                     <span class="tag is-info is-normal">{{ produit.categorie.nom | default('non disponible') }}</span>
                                 <br>
-                                Disponible depuis : {{produit.creation|date('m/yy')}}
-                                {#
-                                    <br>
-                                    <small class="has-background-success has-text-white">{{product.category.name}}</small>
-                                    <br>
-                                #}
+                                Disponible depuis : {{ produit.creation|date('m/yy') }}
                                 <br>
                                 {{ produit.description }}
                             </p>
@@ -41,19 +36,19 @@
                             <strong class="has-text-primary">Rendement:</strong>
                             {% endif %}
                             <div class="tags has-addons">
-{#                                <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
-                                    {% for fonds_euro in produit.fondsEuro %}
-                                        {% if fonds_euro.annee == annee_en_cours %}
-                                        <span class="tag">
-                                            {{ fonds_euro.tauxpbfloat }}
-                                         </span>
-                                        <span class="tag is-primary">
-                                            <span class="icon">
-                                                <i class="fas fa-percent"></i>
-                                            </span>
+{#                              <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
+                                {% for fonds_euro in produit.fondsEuro %}
+                                    {% if fonds_euro.annee == annee_en_cours %}
+                                    <span class="tag">
+                                        {{ fonds_euro.tauxpbfloat }}
+                                     </span>
+                                    <span class="tag is-primary">
+                                        <span class="icon">
+                                            <i class="fas fa-percent"></i>
                                         </span>
-                                        {% endif %}
-                                    {% endfor %}
+                                    </span>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

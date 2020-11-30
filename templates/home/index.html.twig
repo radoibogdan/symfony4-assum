@@ -1,9 +1,6 @@
-
 {% extends "_template.html.twig" %}
 
-{% block title %}
-    Accueil
-{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block content %}
     <div class="section">
@@ -21,7 +18,8 @@
             </div>
             <h1 class="title is-size-4-touch is-size-2-desktop">Les nouveaux produits</h1>
             {# inclusion de fichier & passage de variables #}
-            {% include "includes/produit_list.html.twig" with {produits:list_produits} %}
+            {% include "includes/produit_list.html.twig" with { produits:list_produits } %}
+
         </div>
     </div>
 {% endblock %}

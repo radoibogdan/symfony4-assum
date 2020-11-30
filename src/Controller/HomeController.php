@@ -24,6 +24,7 @@ class HomeController extends AbstractController
     {
         $annee_en_cours = date('Y') -1 ;
         $list_produits = $produitRepository->findNewProduits();
+        dump($list_produits);
         return $this->render('home/index.html.twig', [
             'list_produits' => $list_produits,
             'annee_en_cours' => $annee_en_cours
