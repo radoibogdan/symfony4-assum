@@ -1,3 +1,76 @@
+
+<div class="box">
+    <p class="subtitle is-size-5">
+        La création d'article utilise le style Markdown. Vous trouverez ci-dessous quelque exemples. <br>
+        Pour la documentation complète et plus d'exemples voir la page officielle de
+        <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Github</a> ou
+        <a href="https://fr.wikipedia.org/wiki/Markdown">Wikipedia</a>.
+    </p>
+</div>
+
+<div class="card mb-3">
+    <header class="card-header">
+        <p class="card-header-title">
+            Exemples Markdown
+        </p>
+        <div class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i id="toggle_dropdown" class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </div>
+    </header>
+    <div class="card-content hide">
+        <div class="content">
+            <h2 class="is-size-5 has-text-weight-bold">Headers</h2>
+            <p class="subtitle is-size-7">
+                Mettre un ou plusieurs "#" devant le texte pour créer des titres de différentes tailles <br>
+                # H1      => Créé une balise h1, avec le texte H1 à l'intérieur <br>
+                ## H2     => Créé une balise h2<br>
+                ... <br>
+                ###### H6 => Créé une balise h6 <br>
+            </p>
+            <h2 class="is-size-5 has-text-weight-bold">Formatage</h2>
+            <p class="subtitle is-size-7">
+                Mettre un ou plusieurs "*" devant et après le texte pour le formatage d'une mot ou paragraphe
+                *italique* => <i>italique</i><br>
+                **bold**   => <strong>bold</strong><br>
+                ***italique et bold*** => <strong><i>italique et bold</i></strong><br>
+            </p>
+            <h2 class="is-size-5 has-text-weight-bold">Liens et images</h2>
+            <p class="subtitle is-size-7">
+                Lien => [texte du lien](url_du_lien "texte pour le titre, facultatif") <br>
+                Image => ![Texte alternatif](url_de_l'image "texte pour le titre, facultatif")
+            </p>
+            <h2 class="is-size-5 has-text-weight-bold">Blocs formatés</h2>
+            <p class="subtitle is-size-7">
+                Plusieurs types de styles disponibles, il suffit de mettre le symbole devant le texte :
+            </p>
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <th class="has-text-centered">Symbole</th>
+                    <th>Résultat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="has-text-centered"> > </td>
+                    <td>bloc citation, avec une ligne verticale devant</td>
+                </tr>
+                <tr>
+                    <td class="has-text-centered"> ` </td>
+                    <td>bloc de code inline</td>
+                </tr>
+                <tr>
+                    <td class="has-text-centered"> ``` </td>
+                    <td>bloc de code paragraphe</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 {{ form_start(articleForm) }}
     {{ form_row(articleForm.titre, {
         label : 'Article nom'
@@ -10,3 +83,25 @@
     Enregistrer
 </button>
 {{ form_end(articleForm) }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.card-header-icon') || []).forEach(($content) =>{
+            $content.addEventListener('click', () => {
+               //document.querySelector('.card-content').classList.toggle("is-hidden");
+
+                var $examples =  document.querySelector('.card-content');
+                if ($examples.getAttribute("class") === "card-content hide")
+                    $examples.setAttribute("class", "card-content show")
+                else
+                    $examples.setAttribute("class", "card-content hide");
+
+               var $span_i =  $content.querySelector('#toggle_dropdown');
+               if ($span_i.getAttribute("class") === "fas fa-angle-down")
+                   $span_i.setAttribute("class", "fas fa-angle-up")
+                else
+                   $span_i.setAttribute("class", "fas fa-angle-down");
+            });
+        });
+    });
+</script>

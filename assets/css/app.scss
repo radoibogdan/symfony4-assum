@@ -14,34 +14,34 @@ $footer-padding           : 3rem 1.5rem 3rem ;
   font-size: 0.9em;
 }
 
+// Section Articles, pour mettre imposer une largeur à la colonne de commentaires
 .fixed_width_commentaire {
   width: 40vw;
 }
 
-.is-anim {
-  //-webkit-animation-name: cssAnimation;
-  //-webkit-animation-duration:3s !important;
-  //-webkit-animation-iteration-count: 1;
-  //-webkit-animation-timing-function: ease;
-  //-webkit-animation-fill-mode: forwards;
-  transition: width 2s, height 4s;
-}
-//@-webkit-keyframes cssAnimation {
-//  from {
-//    -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(100px);
-//  }
-//  to {
-//    -webkit-transform: rotate(0deg) scale(2) skew(0deg) translate(100px);
-//  }
-//}
-
+// SHOW et HIDE utilisées dans les pages admin - modif et création d'article - pour afficher les exemples Markdown
 .show {
   opacity: 1;
-  transition: opacity 2s;
+  height: auto;
+  transition: all 1s ease-out;
 }
 .hide {
   opacity: 0;
-  transition: opacity 2s;
+  overflow: hidden;
+  position: absolute;
+  transition: all 0s ease-out;
+}
+
+// Home, Produit wrap + flex pour l'image
+.produit-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; // le flex-wrap de Bulma ne fonctionne pas
+}
+
+// Class générale pour les images
+.image-border-3 {
+  border-radius: 3px;
 }
 
 // ###### MARKDOWN ARTICLE ###### //
