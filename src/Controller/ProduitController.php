@@ -6,6 +6,7 @@ use App\Entity\AvisProduit;
 use App\Entity\Produit;
 use App\Form\AvisProduitFormType;
 use App\Repository\ArticleRepository;
+use App\Repository\AvisProduitRepository;
 use App\Repository\FondsEuroRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,9 +48,16 @@ class ProduitController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
+     * @param AvisProduitRepository $avisProduitRepository
      * @return Response
      */
-    public function show(Request $request, EntityManagerInterface $entityManager, Produit $produit) : Response
+    public function show
+    (
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Produit $produit,
+        AvisProduitRepository $avisProduitRepository
+    ) : Response
     {
         // Obtenir la moyenne de ce produit
         $moyenne= $produit->getMoyenneProduit();
@@ -72,12 +80,15 @@ class ProduitController extends AbstractController
             $this->addFlash('success','Votre commentaire est enregistré et soumis pour validation.');
             return $this->redirect($request->getUri());
         }
+        dump($avisProduitRepository->findLastXAvis(2, $produit->getId()));
+        dump($produit->getId());
         $annee_en_cours = date('Y');
         return $this->render('produit/affichage.html.twig',[
             'produit'           => $produit,
             'annee_en_cours'    => $annee_en_cours,
             'formAvisProduit'   => $form->createView(),
-            'touslesavis'       => $produit->getAvisProduits(),
+            //'touslesavis'       => $produit->getAvisProduits(),
+            'derniersAvis'       => $avisProduitRepository->findLastXAvis(2, $produit->getId()),
             'moyenne'           => $moyenne,
             'avis_deja_donne'   => $avis_deja_donne
         ]);
@@ -121,9 +132,12 @@ class ProduitController extends AbstractController
     private function avisDejaDonne(Produit $produit) : bool
     {
         $avis_deja_donne = false;
+        // Si le user n'est pas connecté on renvoie false
         if (!$this->getUser()) {
             return $avis_deja_donne;
         }
+
+        // récupère tous les avis de l'utilisateur et vérifie s'il a déjà donné son avis sur le produit passé en argument
         $array_avis = $this->getUser()->getAvisProduits();
         /** @var AvisProduit $avis */
         foreach ($array_avis as $avis) {

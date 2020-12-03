@@ -9,7 +9,9 @@
         <div class="container is-widescreen">
             <div class="p navbar-brand mx-0">
                 <a class="navbar-item px-5" href="{{ path('home') }}">
+                    <img src="{{asset('uploads/images_site/logo_assum.png')}}" alt="Logo Assum">
                     <p class="subtitle is-4 has-text-primary">
+
                         <b>ASSUM</b>
                     </p>
                 </a>
@@ -77,7 +79,7 @@
         {# Bloc qui contiendra le contenu de chaque page #}
     {% endblock %}
 
-    <footer class="footer" style="background-image: url('{{asset('uploads/images/homepage_footer.jpg')}}'); border-radius: 5px">
+    <footer class="footer" style="background-image: url('{{asset('uploads/images_site/homepage_footer.jpg')}}'); border-radius: 5px">
         <div class="container is-fullhd">
             <div class="tile is-ancestor homepage-footer-background-image" >
                 <div class="tile">
@@ -124,10 +126,13 @@
                             <p class="level-item has-text-centered">
                                 <a href="{{ path('mentions_legales') }}" class="link is-info">Mentions légales</a>
                             </p>
-                            <p class="level-item has-text-centered is-size-2">
+{#                            <p class="level-item has-text-centered is-size-2">#}
 {#                                <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">#}
-                                ASSUM
-                            </p>
+{#                                ASSUM#}
+{#                            </p>#}
+                            <div class="level-item has-text-centered">
+                                <img width="50px" src="{{asset('uploads/images_site/logo_assum.png')}}" alt="Logo Assum">
+                            </div>
                             <p class="level-item has-text-centered">
                                 <a href="{{ path('qui_sommes_nous') }}" class="link is-info">Qui sommes nous</a>
                             </p>

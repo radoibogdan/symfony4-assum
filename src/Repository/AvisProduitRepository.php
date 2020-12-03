@@ -32,6 +32,20 @@ class AvisProduitRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findLastXAvis($value, $produit_id)
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.produit','p')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $produit_id)
+            ->andWhere('a.approuve = 1')
+            ->orderBy('a.creation', 'DESC')
+            ->setMaxResults($value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return AvisProduit[] Returns an array of AvisProduit objects
 //     */

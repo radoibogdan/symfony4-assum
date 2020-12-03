@@ -8,11 +8,26 @@
             <div class="columns my-0 is-tablet is-multiline is-centered">
                 {# Column 1/2 #}
                 <div class="column px-5">
-                    <h1 class="title has-text-primary">
-                        {{produit.titre}}
+                    <h1 class="title has-text-primary is-relative">
+                        {{ produit.titre }}
+                        {% if produit.label == 1 %}
+                            <div>
+                                <img class="bounce" style="position: absolute; top: -30px ; left: {{ produit.titre | length  }}vw" width="80"
+                                     src="{{ asset('uploads/images_site/assum_small_label.png') }}"
+                                     alt="Label qualité Assum"
+                                >
+                            </div>
+                        {% endif %}
                     </h1>
-                    <span class="tag is-info is-normal">{{produit.categorie.nom | default('catégorie non disponible')}}</span>
-                    <p class="content has-text-left-mobile">
+                    <span class="tag is-info is-normal">{{ produit.categorie.nom | default('catégorie non disponible') }}</span>
+                    {% if produit.label == 1 %}
+                        <span class="tag is-primary is-normal">label qualité Assum</span>
+                        <p class="subtitle is-size-5 has-text-justified">
+                            Ce produit d'assurance-vie a été analysé et approuvé par nos experts techniques recevant ainsi le label de qualité ASSUM. Voir plus sur notre méthodologie
+                            <a href="{{ path('qui_sommes_nous') }}">ici.</a>
+                        </p>
+                    {% endif %}
+                    <p class="content has-text-left-mobile has-text-justified">
                         {{produit.description}}
                     </p>
                     <div class="tags has-addons are-medium mt-4">
@@ -29,7 +44,7 @@
                             {% endif %}
                         {% endfor %}
                         <span class="tag">
-                            {{produit.fraisGestionFloat |number_format(2 , '.' , ' ')}}
+                            {{ produit.fraisGestionFloat |number_format(2 , '.' , ' ') }}
                         </span>
                         <span class="tag is-danger">
                             <span class="icon"><i class="fas fa-percent"></i></span>
@@ -38,7 +53,7 @@
 {#                    <hr>#}
                     <h6 class="is-size-7">
                         <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
-                        <span>Produit disponible depuis {{produit.creation|date('d/m/Y')}}</span>
+                        <span>Produit disponible depuis {{ produit.creation|date('d/m/Y') }}</span>
                     </h6>
                 </div>
 
@@ -125,7 +140,7 @@
                 </div>
                 <div class="column is-half">
                     <h1 class="has-text-left title is-size-4">Avis récents</h1>
-                    {% for avis in touslesavis |slice(0, 2) %}
+                    {% for avis in derniersAvis %}
                         <div class="box">
                             <div class="media-content">
                                 <div class="content">

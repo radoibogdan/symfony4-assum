@@ -39,6 +39,22 @@ $footer-padding           : 3rem 1.5rem 3rem ;
   flex-wrap: wrap; // le flex-wrap de Bulma ne fonctionne pas
 }
 
+// Page affichage produit - produit/affichage
+
+// Animation Label de qualité
+.bounce {
+  animation-name: bounce_label;
+  animation-duration: 1.5s;
+  animation-delay: 2s;
+  //animation-timing-function: cubic-bezier(.68,-0.55,1,1);
+  animation-timing-function: cubic-bezier(.38,-0.17,1,1);
+}
+@keyframes bounce_label {
+  0%   {transform:scale(1, 1) rotate(0deg)}
+  50%  {transform:scale(1.5, 1.5) rotate(20deg)}
+  100% {transform:scale(1, 1) rotate(0deg)}
+}
+
 // Class générale pour les images
 .image-border-3 {
   border-radius: 3px;
