@@ -80,8 +80,6 @@ class ProduitController extends AbstractController
             $this->addFlash('success','Votre commentaire est enregistré et soumis pour validation.');
             return $this->redirect($request->getUri());
         }
-        dump($avisProduitRepository->findLastXAvis(2, $produit->getId()));
-        dump($produit->getId());
         $annee_en_cours = date('Y');
         return $this->render('produit/affichage.html.twig',[
             'produit'           => $produit,
