@@ -73,12 +73,13 @@ class HomeController extends AbstractController
             $contact = (new TemplatedEmail())
                 ->from(new Address('radoi.office@gmail.com'))
                 ->to(new Address('radoi.office@gmail.com', 'Bogdan RADOI'))
-                ->subject('Envoyé avec Symfony Mailer')
+                ->subject('Notification Assum')
                 ->htmlTemplate('contact/notification.html.twig')
                 ->context([
                     'message' => $contactForm['message']->getData(),
-                ]);
-                $mailer->send($contact);
+                ])
+            ;
+            $mailer->send($contact);
 
             $this->addFlash('success', 'Message envoyé !');
         }

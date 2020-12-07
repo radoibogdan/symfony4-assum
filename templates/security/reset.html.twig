@@ -14,6 +14,7 @@
                 {{ form_row(resetForm.plainPassword.second, {
                     label : 'Confirmer le mot de passe'
                 }) }}
+                <input type="hidden" value="{{ token | default('') }}">
                 <button class="button is-fullwitdh is-primary">Modifier</button>
                 {{ form_end(resetForm) }}
             </div>

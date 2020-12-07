@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -39,6 +40,10 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Regex(
+     *     pattern="/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ÿ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ÿ0-9]).{12,}$/",
+     *     message="Le mot de passe doit être composé de 12 caractères dont un minimum : 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial (dans un ordre aléatoire)."
+     * )
      */
     private $password;
 
@@ -81,6 +86,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="auteur")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $reset_token;
 
       public function __construct()
     {
@@ -328,6 +343,30 @@ class User implements UserInterface
                 $article->setAuteur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
 
         return $this;
     }
