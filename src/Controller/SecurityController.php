@@ -125,20 +125,20 @@ class SecurityController extends AbstractController
             $email_activation = (new TemplatedEmail())
                 ->from(new Address('radoi.office@gmail.com'))
                 ->to($user->getEmail())
-                ->subject('Activation de votre compte')
+                ->subject('Authentification de votre compte')
                 ->htmlTemplate('contact/activation.html.twig')
                 ->context([
                     'token' => $user->getActivationToken()
                 ])
             ;
             $mailer->send($email_activation);
-
+            $this->addFlash('info', 'Votre compte est créé, mais pas authentifié. L\'authentification vous permet de donner des avis sur nos produits. Pour cela, il faut cliquer sur le lien envoyé à l\'adresse e-mail renseignée.');
             // after validating the user and saving them to the database
             // authenticate the user and use onAuthenticationSuccess on the authenticator
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,            // the User object you just created
                 $request,
-                $authenticator,   // authenticator whose onAuthenticationSuccess you want to use
+                $authenticator,   // authenticator whose onAuthenticationSuccess method you want to use => LoginFormAuthenticator->onAuthenticationSuccess()
                 'main' // firewall name in security.yaml
             );
         }
@@ -156,7 +156,7 @@ class SecurityController extends AbstractController
      * @param UserRepository $userRepository
      * @return RedirectResponse
      */
-    public function activate_account($token, UserRepository $userRepository)
+    public function activate_account($token, UserRepository $userRepository): RedirectResponse
     {
         // Check if any user has an account with the token provided in the url
         $user = $userRepository->findOneBy([
@@ -176,7 +176,7 @@ class SecurityController extends AbstractController
         $entityManager->flush();
 
         // Generate flash message
-        $this->addFlash('info', 'Vous avez bien activé votre compte.');
+        $this->addFlash('info', 'Votre compte a bien été authentifié!');
 
         // Redirect to homepage
         return $this->redirectToRoute('home');

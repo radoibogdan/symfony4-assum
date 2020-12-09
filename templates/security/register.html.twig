@@ -3,6 +3,7 @@
 {% block title %} Inscription {% endblock %}
 
 {% block content %}
+
     <div class="section">
         <h1 class="title has-text-centered">Inscription</h1>
         <div class="columns is-centered">
@@ -29,6 +30,12 @@
         {{ form_row(registrationForm.plainPassword.second, {
             label : 'Confirmer le mot de passe'
         }) }}
+        {# CONSENTEMENT EXPLICIT #}
+        {% set termsOfUseFormGroup %}
+            {{ form_row(registrationForm.consentement) }}
+        {% endset %}
+        {{ termsOfUseFormGroup|replace({'#DOCUMENTATION#':'<a class="has-text-underline" href="' ~ absolute_url(path('donnees_personnelles')) ~ '">documentation RGPD</a>'})|raw }}
+
         <button type="submit" class="button is-primary is-fullwidth">Inscription</button>
         {{ form_end(registrationForm) }}
             </div>

@@ -347,6 +347,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * If user clicks on the link he receives after he registers, his activation token is deleted, thus making him VERIFIED
+     * @return bool
+     */
+    public function isVerified(): bool
+    {
+        if ($this->activation_token === null) {
+            return true;
+        }
+        return false;
+    }
+
     public function getActivationToken(): ?string
     {
         return $this->activation_token;

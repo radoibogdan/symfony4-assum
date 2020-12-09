@@ -170,36 +170,60 @@
                 </div>
             </div>
         </div>
+
+        {################# USER INPUT AREA FOR REVIEWS #################}
         <div class="container has-background-white-bis">
             <div class="columns is-centered mb-0">
 
                 {% if app.user and not(avis_deja_donne) %}
                 <div class="column is-half px-5">
-                    {{ form_start(formAvisProduit) }}
-                    {{ form_row(formAvisProduit.note, {
-                        label : 'Note'
-                    }) }}
-                    <div class="tags has-addons are-medium mt-4">
-                        <span class="tag is-success" id="note_js">5</span><span class="tag is-primary">/10</span>
-                    </div>
-                    {{ form_row(formAvisProduit.commentaire, {
-                        label : 'Commentaire'
-                    }) }}
-                    <button type="submit" class="button is-primary is-fullwidth">Valider</button>
-                    {{ form_end(formAvisProduit) }}
+                    {% if app.user.verified %}
+                        {{ form_start(formAvisProduit) }}
+                        {{ form_row(formAvisProduit.note, {
+                            label : 'Note'
+                        }) }}
+                        <div class="tags has-addons are-medium mt-4">
+                            <span class="tag is-success" id="note_js">5</span><span class="tag is-primary">/10</span>
+                        </div>
+                        {{ form_row(formAvisProduit.commentaire, {
+                            label : 'Commentaire'
+                        }) }}
+                        <button type="submit" class="button is-primary is-fullwidth">Valider</button>
+                        {{ form_end(formAvisProduit) }}
+                    {% else %}
+                        <div class="box">
+                            <p class="help is-info ">
+                                <span><i class="fas fa-info-circle"></i></span>
+                                Vous devez être authentifié pour donner votre avis. <br>
+                                Pour cela vous devez cliquer sur le lien d'authentification qui vous a été envoyé par e-mail.
+                            </p>
+                        </div>
+                    {% endif %}
                 </div>
                 {% elseif app.user and avis_deja_donne %}
                 <div class="column is-half px-5">
-                    <span>Vous avez déjà donné votre avis concernant ce produit.</span>
+                    <div class="box">
+                        <p class="help is-info">
+                            <span><i class="fas fa-info-circle"></i></span>
+                            <span>Vous avez déjà donné votre avis concernant ce produit.</span>
+                        </p>
+                    </div>
                 </div>
                 {% else %}
                 <div class="column is-half px-5">
-                    <span><a href="{{ path('app_login') }}">Se connecter</a> pour donner son avis</span>
+                    <div class="box">
+                        <p class="help is-info">
+                            <span><i class="fas fa-info-circle"></i></span>
+                            <span><a class="has-text-underlined" href="{{ path('app_login') }}">Se connecter/S'inscrire.</a> Il faut être authentifié pour donner son avis.</span>
+                        </p>
+                    </div>
                 </div>
                 {% endif %}
             </div>
         </div>
     </section>
+
+    {################ SCRIPTS  ################}
     <script>
         function setNoteJs(val) {
             document.getElementById("note_js").innerHTML = val;

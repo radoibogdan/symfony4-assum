@@ -1,10 +1,10 @@
 {% apply inky_to_html|inline_css(source('@css/foundation-emails.css')) %}
-    <spacer size="16"></spacer>
+    <spacer size="8"></spacer>
 
     <container class="header">
         <row>
             <columns>
-                <h1 class="text-center">Activation de votre compte</h1>
+                <h1 class="text-center">Authentification de votre compte</h1>
             </columns>
         </row>
     </container>
@@ -12,11 +12,20 @@
     <container class="body-border">
         <row>
             <columns>
-                <spacer size="16"></spacer>
-                <p>Vous avez crée un compte sur notre site, veuillez cliquer sur le lien ci-dessous pour l'activer.</p>
+                <spacer size="8"></spacer>
+                <h4>Bonjour,</h4>
+                <p>
+                    Vous venez de créer un compte sur notre site. <br>
+                    Celui-ci n'est pas authentifié pour le moment. L'authentification vous permet de donner des avis sur nos produits.<br>
+                    Veuillez cliquer sur le lien ci-dessous pour l'authentifier.
+                </p>
                 <p><a href="{{ absolute_url(path('activation', {'token': token})) }}">Activer mon compte</a></p>
+                <p>
+                    Cordialement, <br>
+                    L'équipe <a href="{{ absolute_url(path('home')) }}">Assum</a>
+                </p>
             </columns>
         </row>
-        <spacer size="16"></spacer>
+        <spacer size="8"></spacer>
     </container>
 {% endapply %}

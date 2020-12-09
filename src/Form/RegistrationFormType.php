@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -89,6 +91,15 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
                 'required' => true
+            ])
+            ->add('consentement',CheckboxType::class,[
+                'attr' => ['class' => 'is-flex-checkbox'],
+                'constraints' => [
+                    new IsTrue(['message' => 'Avez-vu lu notre politique de traitement de données ?'])
+                ],
+                'mapped' => false, // pour ne pas lier le consentement à la base de données
+                'required' => false,
+                'label' => 'Je confirme avoir lu la #DOCUMENTATION# concernant le traitement de mes données personnelles.'
             ])
         ;
     }
