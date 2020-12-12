@@ -26,6 +26,8 @@
                 {{ form_row(contact_form.message, {
                     label: 'Message:'
                 }) }}
+                {# Honey Pot - antispam #}
+                {{ form_row(contact_form.phone) }}
                 <button type="submit" class="button is-primary">
                     Envoyer le message
                 </button>

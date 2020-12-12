@@ -123,7 +123,7 @@ class SecurityController extends AbstractController
 
             // SEND ACTIVATION EMAIL with TOKEN
             $email_activation = (new TemplatedEmail())
-                ->from(new Address('radoi.office@gmail.com'))
+                ->from(new Address('radoi.office@gmail.com','Assum'))
                 ->to($user->getEmail())
                 ->subject('Authentification de votre compte')
                 ->htmlTemplate('contact/activation.html.twig')
@@ -141,6 +141,12 @@ class SecurityController extends AbstractController
                 $authenticator,   // authenticator whose onAuthenticationSuccess method you want to use => LoginFormAuthenticator->onAuthenticationSuccess()
                 'main' // firewall name in security.yaml
             );
+        }
+
+        // Honey Pot (referer) for l'antispam
+        // If bot accesses page directly, it will redirect to homepage.
+        if ($request->headers->get('referer') === null) {
+           return $this->redirectToRoute('home');
         }
 
         return $this->render('security/register.html.twig', [
@@ -263,7 +269,7 @@ class SecurityController extends AbstractController
 
             // Create and send e-mail with RESET URL
             $email_reset = (new TemplatedEmail())
-                ->from(new Address('radoi.office@gmail.com','Bogdan'))
+                ->from(new Address('radoi.office@gmail.com','Assum'))
                 ->to($user->getEmail())
                 ->subject('Réinitialisation du mot de passe')
                 ->htmlTemplate('contact/reset_password.html.twig')

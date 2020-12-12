@@ -84,6 +84,12 @@ class HomeController extends AbstractController
             $this->addFlash('success', 'Message envoyé !');
         }
 
+        // Honey Pot (referer) for l'antispam
+        // If bot accesses page directly, it will redirect to homepage.
+        if ($request->headers->get('referer') === null) {
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('home/nous_contacter.html.twig', [
             'contact_form' => $contactForm->createView()
         ]);

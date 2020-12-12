@@ -30,12 +30,13 @@
         {{ form_row(registrationForm.plainPassword.second, {
             label : 'Confirmer le mot de passe'
         }) }}
-        {# CONSENTEMENT EXPLICIT #}
+        {# CONSENTEMENT EXPLICIT RGPD #}
         {% set termsOfUseFormGroup %}
             {{ form_row(registrationForm.consentement) }}
         {% endset %}
         {{ termsOfUseFormGroup|replace({'#DOCUMENTATION#':'<a class="has-text-underline" href="' ~ absolute_url(path('donnees_personnelles')) ~ '">documentation RGPD</a>'})|raw }}
-
+        {# Honey Pot - antispam #}
+        {{ form_row(registrationForm.phone) }}
         <button type="submit" class="button is-primary is-fullwidth">Inscription</button>
         {{ form_end(registrationForm) }}
             </div>

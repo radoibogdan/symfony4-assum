@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Validator\Constraints\Blank;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\AbstractType;
@@ -80,11 +82,11 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer un mot de passe']),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères.',
-                        'max' => 4096
-                    ]),
+//                    new Length([
+//                        'min' => 8,
+//                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères.',
+//                        'max' => 4096
+//                    ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ÿ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ÿ0-9]).{12,}$/',
                         'message' => 'Le mot de passe doit être composé de 12 caractères dont un minimum : 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial (dans un ordre aléatoire).'
@@ -100,6 +102,13 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false, // pour ne pas lier le consentement à la base de données
                 'required' => false,
                 'label' => 'Je confirme avoir lu la #DOCUMENTATION# concernant le traitement de mes données personnelles.'
+            ])
+            // Honey Pot - Anti spam, if value present in input present => probably a robot
+            ->add('phone',HiddenType::class,[
+                'mapped' => false,
+                'constraints' => [
+                    new Blank()
+                ]
             ])
         ;
     }

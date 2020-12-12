@@ -25,11 +25,11 @@ class ResetPasswordFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer un mot de passe.']),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères.',
-                        'max' => 4096
-                    ]),
+//                    new Length([
+//                        'min' => 8,
+//                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères.',
+//                        'max' => 4096
+//                    ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ÿ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ÿ0-9]).{12,}$/',
                         'message' => 'Le mot de passe doit être composé de 12 caractères dont un minimum : 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial (dans un ordre aléatoire).'
