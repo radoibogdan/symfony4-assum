@@ -5,16 +5,12 @@
         <row>
             <columns>
                 <h1 class="text-center">Notification</h1>
-
                 <center>
                     <menu class="text-center">
-                        <item href="https://symfony.com/">Symfony</item>
-                        <item href="https://symfony.com/doc/current/mailer.html">Mailer</item>
-                        <item href="https://symfony.com/doc/current/components/messenger.html">Messenger</item>
-                        <item href="https://twig.symfony.com/">Twig</item>
+                        <item href="{{ absolute_url(path('home')) }}">Expert-Assum</item>
+                        <item href="{{ absolute_url(path('admin_produit_liste')) }}">Accès Admin</item>
                     </menu>
                 </center>
-
             </columns>
         </row>
     </container>
@@ -24,13 +20,17 @@
             <columns>
                 <spacer size="32"></spacer>
                 <center>
-                    <img src="https://media.giphy.com/media/QpOZPQQ2wbjOM/giphy.gif">
+                    {# <img src="https://media.giphy.com/media/QpOZPQQ2wbjOM/giphy.gif"> #}
+                    {# cid:logo - insert image path declared in HomeController route when creating the e-mail #}
+                    <img src="cid:logo" alt="Image logo" style="max-width: 20%">
                 </center>
                 <spacer size="16"></spacer>
 
-                <h4>Le message suivant a été envoyé depuis le site ASSUM :</h4>
+                <h6>Le message suivant a été envoyé depuis le formulaire de contact du site <a href="{{ absolute_url(path('home')) }}">expert-assum.fr</a> :</h6>
                 <p>{{ message }}</p>
-
+                <p>De la part de : {{ prenom ~ ' ' ~ nom }}</p>
+                <p>E-mail : {{ email_contact }}</p>
+                <p>Téléphone : {{ telephone }}</p>
             </columns>
         </row>
         <spacer size="16"></spacer>

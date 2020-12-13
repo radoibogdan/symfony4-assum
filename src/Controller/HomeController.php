@@ -75,8 +75,13 @@ class HomeController extends AbstractController
                 ->to(new Address('radoi.office@gmail.com', 'Bogdan RADOI'))
                 ->subject('Notification Assum')
                 ->htmlTemplate('contact/notification.html.twig')
+                ->embed(fopen('uploads/images_site/logo_assum.png', 'r'), 'logo')
                 ->context([
-                    'message' => $contactForm['message']->getData(),
+                    'message'   => $contactForm['message']->getData(),
+                    'nom'       => $contactForm['nom']->getData(),
+                    'prenom'    => $contactForm['prenom']->getData(),
+                    'telephone' => $contactForm['telephone']->getData(),
+                    'email_contact'     => $contactForm['email']->getData()
                 ])
             ;
             $mailer->send($contact);
