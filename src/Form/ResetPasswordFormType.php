@@ -20,7 +20,10 @@ class ResetPasswordFormType extends AbstractType
             ->add('plainPassword',RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
-                'first_options' => ['label' => 'Mot de passe'],
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'help' => 'Le mot de passe doit être composé de 12 caractères dont un minimum : 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial'
+                ],
                 'second_options' => ['label' => 'Confirmation mot de passe'],
                 'mapped' => false,
                 'constraints' => [

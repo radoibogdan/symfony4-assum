@@ -40,10 +40,6 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Regex(
-     *     pattern="/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ÿ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ÿ0-9]).{12,}$/",
-     *     message="Le mot de passe doit être composé de 12 caractères dont un minimum : 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial (dans un ordre aléatoire)."
-     * )
      */
     private $password;
 
@@ -64,6 +60,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/",
+     *     message="Merci de renseigner que des chiffres."
+     * )
      */
     private $telephone;
 

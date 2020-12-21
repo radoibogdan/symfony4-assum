@@ -327,6 +327,9 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             // Delete RESET TOKEN in the database
             $user->setResetToken(null);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
             // Add flash message
             $this->addFlash('success','Le mot de pass a été modifié.');
             // Redirect to Login Page

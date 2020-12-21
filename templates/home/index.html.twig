@@ -5,18 +5,18 @@
 {% block content %}
     <div class="section">
         <div class="container is-fullhd">
-            <h1 class="title is-size-4-touch is-size-2-desktop">L'assurance-vie à la portée de tous</h1>
+            <h1 class="title is-size-4-touch is-size-3-desktop">L'assurance-vie à la portée de tous</h1>
             <div class="content is-medium">
-                <p class="title is-size-5-touch is-size-3-desktop">
+                <h2 class="title is-size-6-touch is-size-5-desktop">
                     Assum fait l'analyse des produits d'assurance-vie sur le marché et essaie de répondre aux questions les plus posées.
-                </p>
-                <ul>
+                </h2>
+                <ul class="is-family-secondary is-size-6">
                     <li>Comment choisir son contrat d'assurance-vie ?</li>
                     <li>Quels sont les frais de gestion, les rendements ?</li>
                     <li>Comment résilier une assurance-vie ?</li>
                 </ul>
             </div>
-            <h1 class="title is-size-4-touch is-size-2-desktop">Les nouveaux produits</h1>
+            <h1 class="title is-size-4-touch is-size-3-desktop">Les nouveaux produits</h1>
             {# inclusion de fichier & passage de variables #}
             {% include "includes/produit_list.html.twig" with { produits:list_produits } %}
 
