@@ -1,5 +1,5 @@
 <div class="tile is-child box">
-    <p class="title">Dernier article publié</p>
+    <h2 class="title is-size-6-touch is-size-4-desktop">Dernier article publié</h2>
     <p class="subtitle">{{ dernier_article.titre }}</p>
     <p class="content"> {{ dernier_article.contenu | slice(0, 250) |commonmark('my_custom_converter') }} ...
         (<a href="{{ path('affichage_article', {id: dernier_article.id} ) }}">Lire la suite</a>)</p>

@@ -1,22 +1,59 @@
 {% extends "_template.html.twig" %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Comparatif produits Assurance-Vie | Frais de gestion | Éthique | Épargne{% endblock %}
 
 {% block content %}
     <div class="section">
         <div class="container is-fullhd">
-            <h1 class="title is-size-4-touch is-size-3-desktop">L'assurance-vie à la portée de tous</h1>
-            <div class="content is-medium">
-                <h2 class="title is-size-6-touch is-size-5-desktop">
-                    Assum fait l'analyse des produits d'assurance-vie sur le marché et essaie de répondre aux questions les plus posées.
-                </h2>
-                <ul class="is-family-secondary is-size-6">
-                    <li>Comment choisir son contrat d'assurance-vie ?</li>
-                    <li>Quels sont les frais de gestion, les rendements ?</li>
-                    <li>Comment résilier une assurance-vie ?</li>
-                </ul>
+            <h1 class="title is-size-4-touch is-size-3-desktop">Comparateur de produits d’assurance vie en ligne.</h1>
+            <div class="content mb-0">
+                <div class="columns">
+                    <div class="column is-three-fifths">
+                        <h2 class="title is-size-6-touch is-size-5-desktop">
+                            Assum fait l'analyse des produits d'assurance-vie sur le marché et essaie de répondre aux questions les plus posées.
+                        </h2>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">
+                            Instrument préféré des français pour faire fructifier leurs épargnes, l’assurance-vie n’a plus de secret pour nous. Que ce soit le fonctionnement d’un contrat d’assurance-vie, les derniers produits sur le marché ou les réformes législatives du domaine, Assum vous tient informés et vous accompagne dans votre quête pour le produit le plus adéquat à votre profil d’investissement.<br>
+
+                            Adaptés aux prudents mais aussi aux audacieux, aux novices mais également aux expérimentés, nos articles et comparatifs répondent aux questions  les plus fréquentes dont vous trouvez ci-dessous quelques exemples :
+                        </p>
+                    </div>
+                    <div class="column is-two-fifths">
+                        <figure class="image">
+                            <img class="is-rounded" src="{{ asset('uploads/images_site/solution-epargne-rentable.jpg') }}" alt="Comparatifs produits assurance-vie | Frais de gestion | Actualités">
+                        </figure>
+                    </div>
+                </div>
             </div>
-            <h1 class="title is-size-4-touch is-size-3-desktop">Les nouveaux produits</h1>
+            <div class="content">
+                <div class="columns">
+                    <div class="column">
+                        <ul class="is-family-secondary is-size-6-touch is-size-5-desktop mt-0">
+                            <li>Qu’est-ce que l’assurance-vie ?</li>
+                            <li>Pourquoi investir dans l’assurance-vie ?</li>
+                            <li>Comment fonctionne une assurance-vie ?</li>
+                            <li>Qui peut souscrire à une assurance-vie ?</li>
+                            <li>Combien rapporte le meilleur produit d’assurance-vie ?</li>
+                            <li>Comment souscrire un placement écologique et socialement responsable ?</li>
+                            <li>Quels sont les frais de gestion pour un produit d’assurance-vie ?</li>
+                            <li>Quelles sont les caractéristiques des produits d’assurance-vie ?</li>
+                            <li>Comment comparer les contrats d’assurance-vie ?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {#      DIVIDER       #}
+            <div class="divider is-info">expert-assum</div>
+            <h2 class="title is-size-6-touch is-size-5-desktop">Les nouveaux produits</h2>
+            <p class="is-size-6-touch is-size-5-desktop has-text-justified mb-5">
+                L’année 2020 a été, sans doute, éprouvante pour les assureurs. Même si les épargnants n’ont pas effectué des rachats massifs, la décollecte s’élevait à 7 milliards d’euro en fin septembre, ce qui se doit à une forte baisse des cotisations. Plus réticents, les clients ont préféré orienter leur capital vers le livret A, moins performant mais plus liquide.
+            </p>
+            <p class="is-size-6-touch is-size-5-desktop has-text-justified mb-5">
+                Cependant les assureurs n’ont pas abandonné la bataille et ont créé des nouveaux produits pour attirer les clients.
+            </p>
+            <p class="is-size-6-touch is-size-5-desktop has-text-justified mb-5">
+                Découvrez nos choix parmi les produits d’assurance-vie lancés dans le dernier semestre sur le marché :
+            </p>
             {# inclusion de fichier & passage de variables #}
             {% include "includes/produit_list.html.twig" with { produits:list_produits } %}
 

@@ -50,6 +50,7 @@ class FonctionsCreated extends AbstractExtension
         }
         return true;
     }
+
     // utilisé dans _template, dans le footer, renvoie le meilleur taux de cette année
     public function findMeilleurTaux(): array
     {

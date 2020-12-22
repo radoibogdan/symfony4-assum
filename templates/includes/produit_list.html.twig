@@ -31,12 +31,13 @@
                     </div>
                     <div class="media-content is-clipped">  {# is-clipped <=> overflow: hidden #}
                         <div class="content">
-                            <p>
+                            <h3 class="title is-size-6-touch is-size-4-desktop mb-2">
                                 <a href="{{ path('affichage_produit',{ id: produit.id }) }}" class="has-text-primary">
                                     <strong>{{ produit.titre }}</strong>
                                 </a>
-                                <br>
-                                    <span class="tag is-info is-normal">{{ produit.categorie.nom | default('non disponible') }}</span>
+                            </h3>
+                            <p>
+                                <span class="tag is-info is-normal">{{ produit.categorie.nom | default('non disponible') }}</span>
                                 <br>
                                 Disponible depuis : {{ produit.creation|date('m/yy') }}
                                 <br>

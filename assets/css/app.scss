@@ -1,6 +1,7 @@
 // Importer FontAwesome
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
+
 // Personnalisation & import de Bulma
 $primary                  : #0219A1;
 $light                    : #a8b2ea;
@@ -9,6 +10,7 @@ $footer-background-color  : #a8b2ea;
 $footer-padding           : 3rem 1.5rem 3rem ;
 $family-sans-serif        : "Segoe UI", Roboto, sans-serif;
 @import "~bulma";
+@import "~@creativebulma/bulma-divider";
 
 .liste-produits-admin {
   font-size: 0.9em;

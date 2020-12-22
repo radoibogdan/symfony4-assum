@@ -1,11 +1,14 @@
 {% extends "_template.html.twig" %}
 
-{% block title %}Liste des produits d'assurance vie{% endblock %}
+{% block title %}Liste des produits d'assurance-vie{% endblock %}
 
 {% block content %}
     <div class="section">
-        <div class="container is-fullhd">
-           <h1 class="title mt-4">Liste des produits</h1>
+        <div class="container is-fullhd has-text-justified">
+            <h1 class="title is-size-4-touch is-size-3-desktop">Top produits, solutions d'épargne ... vous avez le choix !</h1>
+            <p class="mb-3">Les produits pris au crible. On ne vous cache rien. Les assureurs seront-ils contents ?</p>
+
+            <h2 class="title is-size-6-touch is-size-5-desktop mt-5">Liste des produits : découvrez les assureurs les plus rentables</h2>
            {% include "includes/produit_list.html.twig" with { produits:list_produits } %}
             <div class="pagination mt-2">
                 {{ knp_pagination_render(list_produits) }}

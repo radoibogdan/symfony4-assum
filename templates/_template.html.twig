@@ -1,6 +1,11 @@
 
 {% extends 'base.html.twig' %}
 
+{% block meta_description %}
+{# SEO - ne pas indexer les pages admin #}
+<meta name="robots" content="noindex, nofollow"/>
+{% endblock %}
+
 {% block body %}
     {#################       NAVBAR      #################}
     {# sera affiché sur toutes les pages du Front-Office #}
@@ -76,7 +81,7 @@
     </div>
 
     {% block content %}
-        {# Bloc qui contiendra le contenu de chaque page #}
+        {# Block qui contiendra le contenu de chaque page #}
     {% endblock %}
 
     <footer class="footer" style="background-image: url('{{asset('uploads/images_site/homepage_footer.jpg')}}'); border-radius: 5px">
@@ -88,8 +93,8 @@
                     </div>
                     <div class="tile is-parent">
                         <div class="tile is-child box">
-                            <p class="title is-size-5-touch is-size-3-desktop pb-2 has-text-centered">Décovrez le produit du mois</p>
-                            <p>{{ produit.title | default('') }}</p>
+                            <h3 class="title is-size-6-touch is-size-4-desktop pb-2 has-text-centered mb-6">Découvrez le produit du mois</h3>
+                            {# <p>{{ produit.title | default('') }}</p> #}
                             <div class="tile is-child has-text-centered">
                                 <a href="{{ path('show_best_produit') }}" class="">
                                 <span class="icon is-large has-text-success ">
@@ -102,9 +107,7 @@
                     <div class="tile is-parent">
                         <div class="tile is-child box has-text-centered">
                             {% for key, value in meilleur_taux() %}
-                            <p class="title is-size-5-touch is-size-3-desktop pb-2">
-                               Le meilleur taux de l'année {{ key }}
-                            </p>
+                            <h3 class="title is-size-6-touch is-size-4-desktop pb-2">Le meilleur taux de l'année {{ key }}</h3>
                             <button class="button is-medium is-static">
                                 <span class=""><strong>{{ value }}</strong></span>
                                 <span class="icon">

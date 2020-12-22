@@ -5,11 +5,12 @@
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
+                                <h3 class="title is-size-6-touch is-size-4-desktop">
+                                    <a href="{{ path('affichage_article',{id: article.id}) }}" class="has-text-primary">
+                                        <strong>{{article.titre}}</strong>
+                                    </a>
+                                </h3>
                             <p>
-                                <a href="{{ path('affichage_article',{id: article.id}) }}" class="has-text-primary">
-                                    <strong>{{article.titre}}</strong>
-                                </a>
-                                <br>
                                 Créé le : {{article.creation|date('m/yy')}}
                                 <br>
                                 {{article.contenu|slice(0,100) ~ ' (...)'}}
