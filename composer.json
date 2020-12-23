@@ -33,8 +33,7 @@
         "twig/cssinliner-extra": "^3.1",
         "twig/extra-bundle": "^3.1",
         "twig/inky-extra": "^3.1",
-        "twig/twig": "^2.12|^3.0",
-        "ext-mongodb": "*"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
