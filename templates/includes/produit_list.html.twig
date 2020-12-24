@@ -50,10 +50,10 @@
 {#                              <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
                                 {% for fonds_euro in produit.fondsEuro %}
                                     {% if fonds_euro.annee == annee_en_cours %}
-                                    <span class="tag">
+                                    <span class="tag" title="Rendement">
                                         {{ fonds_euro.tauxpbfloat }}
                                      </span>
-                                    <span class="tag is-primary">
+                                    <span class="tag is-primary" title="Rendement">
                                         <span class="icon">
                                             <i class="fas fa-percent"></i>
                                         </span>

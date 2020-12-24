@@ -80,7 +80,7 @@ class ProduitController extends AbstractController
             $this->addFlash('success','Votre commentaire est enregistré et soumis pour validation.');
             return $this->redirect($request->getUri());
         }
-        $annee_en_cours = date('Y');
+        $annee_en_cours = date('Y') -1;
         return $this->render('produit/affichage.html.twig',[
             'produit'           => $produit,
             'annee_en_cours'    => $annee_en_cours,

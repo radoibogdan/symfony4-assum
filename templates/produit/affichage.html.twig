@@ -33,20 +33,20 @@
                     <div class="tags has-addons are-medium mt-4">
                         {% for fonds_euro in produit.fondsEuro %}
                             {% if fonds_euro.annee == annee_en_cours %}
-                                <span class="tag">
+                                <span class="tag" title="Rendement">
                                     {{ fonds_euro.tauxpbfloat }}
                                 </span>
-                                <span class="tag is-primary">
+                                <span class="tag is-primary" title="Rendement">
                                     <span class="icon">
                                         <i class="fas fa-percent"></i>
                                     </span>
                                 </span>
                             {% endif %}
                         {% endfor %}
-                        <span class="tag">
+                        <span class="tag" title="Frais de gestion">
                             {{ produit.fraisGestionFloat |number_format(2 , '.' , ' ') }}
                         </span>
-                        <span class="tag is-danger">
+                        <span class="tag is-danger" title="Frais de gestion">
                             <span class="icon"><i class="fas fa-percent"></i></span>
                         </span>
                     </div>
