@@ -6,10 +6,21 @@
     <div class="section">
         <div class="container is-fullhd has-text-justified">
             <h1 class="title is-size-4-touch is-size-3-desktop">Fructifier son portefeuille ? développement durable ? Comprendre les frais de gestion ?</h1>
-            <h2 class="title is-size-6-touch is-size-5-desktop mt-5">Quel sujet vous intéresse? Ici vous aurez de la transparence.</h2>
-            <p class="mb-3">Dans cette section nous vous mettons à disposition les leviers pour maitriser le monde de l’assurance-vie et pour prendre les meilleures décisions d’investissement en la matière.</p>
-            <p class="mb-3">Notre équipe vous invite à découvrir les bases des contrats d’assurance vie, les produits les plus performants du marché, les impacts des dernières lois et réformes et toutes les nouveautés du domaine.</p>
-            <p class="mb-3">Partons ensemble pour un tour du monde assuranciel.</p>
+            <div class="content mb-0">
+                <div class="columns">
+                    <div class="column is-three-fifths">
+                        <h2 class="title is-size-6-touch is-size-5-desktop mt-5">Quel sujet vous intéresse? Ici vous aurez de la transparence.</h2>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">Dans cette section nous vous mettons à disposition les leviers pour maitriser le monde de l’assurance-vie et pour prendre les meilleures décisions d’investissement en la matière.</p>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">Notre équipe vous invite à découvrir les bases des contrats d’assurance vie, les produits les plus performants du marché, les impacts des dernières lois et réformes et toutes les nouveautés du domaine.</p>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">Partons ensemble pour un tour du monde assuranciel.</p>
+                    </div>
+                    <div class="column is-two-fifths">
+                        <figure class="image">
+                            <img class="is-rounded" src="{{ asset('uploads/images_site/épargne-verte-solidaire.jpg') }}" alt="Comparatifs produits assurance-vie | Frais de gestion | Actualités">
+                        </figure>
+                    </div>
+                </div>
+            </div>
 
             <h2 class="title is-size-6-touch is-size-5-desktop mt-5">On discute de tout : profitabilité, théorie, participation aux bénéfices</h2>
             {% include "includes/article_list.html.twig" with {articles: list_articles} %}

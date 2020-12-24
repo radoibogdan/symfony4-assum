@@ -6,7 +6,21 @@
     <div class="section">
         <div class="container is-fullhd has-text-justified">
             <h1 class="title is-size-4-touch is-size-3-desktop">Top produits, solutions d'épargne ... vous avez le choix !</h1>
-            <p class="mb-3">Les produits pris au crible. On ne vous cache rien. Les assureurs seront-ils contents ?</p>
+            <div class="content mb-0">
+                <div class="columns">
+                    <div class="column is-three-fifths">
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">Les produits passés au crible. On ne vous cache rien. Les assureurs seront-ils contents ?</p>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">Jetez un coup d’œil sur nos propositions des contrats d’assurance-vie: les descriptions vous présentent les points forts et/ou faibles en quelques mots.</p>
+                        <p class="is-size-6-touch is-size-5-desktop has-text-justified">À vous de jouer pour découvrir plusieurs détails (rendement, frais, option gestion etc) en cliquant sur le nom du produit qui vous intéresse.</p>
+                    </div>
+                    <div class="column is-two-fifths">
+                        <figure class="image">
+                            <img class="is-rounded" src="{{ asset('uploads/images_site/comparateur-meilleurs-assureurs.jpg') }}" alt="Comparatifs produits assurance-vie | Frais de gestion | Actualités">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
 
             <h2 class="title is-size-6-touch is-size-5-desktop mt-5">Liste des produits : découvrez les assureurs les plus rentables</h2>
            {% include "includes/produit_list.html.twig" with { produits:list_produits } %}

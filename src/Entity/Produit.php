@@ -231,7 +231,7 @@ class Produit
         return $this->creation;
     }
 
-    public function setCreation(\DateTimeInterface $creation): self
+    public function setCreation(?\DateTimeInterface $creation): self
     {
         $this->creation = $creation;
 

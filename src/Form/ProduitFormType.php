@@ -11,7 +11,6 @@ use App\Repository\FondsEuroRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -19,9 +18,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class ProduitFormType extends AbstractType
@@ -40,20 +41,21 @@ class ProduitFormType extends AbstractType
                 'required' => false
             ])
             ->add('description',TextareaType::class,[
-                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 300,
                         'maxMessage' => 'La description ne peut contenir plus de {{ limit }} caractères.'
                     ])
                 ],
-                'help' => 'La description courte du produit est limitée à 300 caractères.'
+                'help' => 'La description courte du produit est limitée à 300 caractères.',
+                'required' => false
             ])
             ->add('frais_adhesion',NumberType::class, [
                 'constraints' =>[
                     new PositiveOrZero(['message' => 'Les frais d\'adhéshion doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais d\'adhéshion sont manquants.'])
                 ],
+                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
                 'required' => false
             ])
             ->add('frais_versement', NumberType::class,[
@@ -61,19 +63,24 @@ class ProduitFormType extends AbstractType
                     new PositiveOrZero(['message' => 'Les frais de versement doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais de versement sont manquants.'])
                 ],
-                'required' => false
+                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
+                'required' => false,
             ])
             ->add('frais_gestion',NumberType::class, [
                 'constraints' => [
                     new PositiveOrZero(['message' => 'Les frais de gestion doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais de gestion sont manquants.'])
-                ]
+                ],
+                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
+                'required' => false,
             ])
             ->add('frais_arbitrage',NumberType::class, [
                 'constraints' => [
                     new PositiveOrZero(['message' => 'Les frais d\'arbitrage doivent être positifs.']),
                     new NotBlank(['message' => 'Les frais d\'arbitrage sont manquants.'])
-                ]
+                ],
+                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
+                'required' => false,
             ])
             ->add('assureur', EntityType::class, [
                 'class' => Assureur::class,
@@ -106,6 +113,9 @@ class ProduitFormType extends AbstractType
 //                'group_by' => 'annee'
             ])
             ->add('label', ChoiceType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Le produit détient-il le label de qualité ?'])
+                ],
                 'choices' => [
                     'Oui' => true,
                     'Non' => false
@@ -113,7 +123,11 @@ class ProduitFormType extends AbstractType
                 'required' => false
             ])
             ->add('creation', DateType::class, [
-                'widget' => 'single_text'
+                'constraints' => [
+                    new NotNull(['message' => 'Merci de renseigner une date'])
+                ],
+                'widget' => 'single_text',
+                'required' => false
             ])
             ->add('image', FileType::class, [
                 'label' => 'Télécharger une nouvelle image pour le logo:',

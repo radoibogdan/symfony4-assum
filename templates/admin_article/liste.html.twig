@@ -31,11 +31,13 @@
                     {% for article in list_articles %}
                         <tr>
                             <td class="px-1">{{ article.id }}</td>
-                            <td class="px-1 has-text-left">{{ article.titre }}</td>
+                            <td class="px-1 has-text-left">
+                                <a href="{{ path('affichage_article', {id: article.id}) }}" target="_blank">{{ article.titre }}</a>
+                            </td>
                             <td class="px-1">{{ article.auteur.prenom ~ ' ' ~ article.auteur.nom |upper }}</td>
                             <td class="px-1">{{ article.creation | date('d/m/yy') }}</td>
                             <td class="px-1">
-                                <div class="buttons is-pulled-right">
+                                <div class="buttons are-small is-pulled-right">
                                     <a href="{{ path('admin_article_edit', {id:article.id}) }}" class="button is-success">Modifier</a>
                                     <a href="{{ path('admin_article_delete', {id:article.id}) }}" class="button is-danger">Supprimer</a>
                                 </div>

@@ -16,7 +16,6 @@
             <tr class="has-text-centered">
                 <th>#</th>
                 <th>Nom</th>
-                <th>Description</th>
                 <th>Frais d'adhésion</th>
                 <th>Frais versement</th>
                 <th>Frais de gestion</th>
@@ -33,14 +32,12 @@
             {# La boucle sur produits_list, dernière colonne : Modifier & Supprimer #}
             {% for produit in list_produits %}
                 <tr>
-                    <td>{{ produit.id }}</td>
+                    <td class="pr-1">{{ produit.id }}</td>
                     <td>
-                        {#<a href="{{ path('produit_show', {id:produit.id}) }}" target="_blank">#}
-                        {#{{ produit.titre }}#}
-                        {#</a>#}
+                        <a href="{{ path('affichage_produit', {id:produit.id}) }}" target="_blank">
                         {{ produit.titre }}
+                        </a>
                     </td>
-                    <td>{{ produit.description | slice(0, 20) }}</td>
                     <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
@@ -51,7 +48,7 @@
                             {{ gest.nom }} <br>
                         {% endfor %}</td>
                     <td class="has-text-centered">{{ produit.labelValue }} </td>
-                    <td class="has-text-centered">{{ produit.creation | date("d/m/yy") }} </td>
+                    <td class="has-text-centered">{{ produit.creation | date("m/Y") }} </td>
                     <td>
                         <div class="buttons are-small is-pulled-right">
                             <a href="{{ path('admin_produit_edit', {id:produit.id}) }} " class="button is-success is-outlined">
