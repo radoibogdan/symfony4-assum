@@ -77,7 +77,11 @@
     }) }}
     {{ form_row(articleForm.contenu, {
         label : 'Contenu de l\'article',
-        attr : {'rows': '50'}
+        attr : {'rows': '50'},
+        id: 'slide_content',
+        attr: {
+            'data-slide-id': (slide is defined ? slide.id : 'new')
+        }
     }) }}
 <button type="submit" class="button is-success is-fullwidth">
     Enregistrer
