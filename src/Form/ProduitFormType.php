@@ -114,7 +114,7 @@ class ProduitFormType extends AbstractType
             ])
             ->add('label', ChoiceType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Le produit détient-il le label de qualité ?'])
+                    new NotNull(['message' => 'Le produit détient-il le label de qualité ?'])
                 ],
                 'choices' => [
                     'Oui' => true,

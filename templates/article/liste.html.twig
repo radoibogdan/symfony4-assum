@@ -10,6 +10,26 @@
                 <div class="columns">
                     <div class="column is-three-fifths">
                         <h2 class="title is-size-6-touch is-size-5-desktop mt-5">Quel sujet vous intéresse? Ici vous aurez de la transparence.</h2>
+
+                        {################# Barre de recherche #################}
+                        {{ form_start(formSearchArticle) }}
+                        <div class="field are-small has-addons">
+                            <div class="control has-icons-left is-expanded">
+                                {{ form_widget(formSearchArticle.mots) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-search"></i>
+                                </span>
+                                <p class="help is-success">Champ limité à 40 caractères</p>
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">Rechercher</button>
+                            </div>
+                        </div>
+                        <div class="form-error">
+                            {{ form_errors(formSearchArticle.mots) }}
+                        </div>
+                        {{ form_end(formSearchArticle) }}
+
                         <p class="is-size-6-touch is-size-5-desktop has-text-justified">Dans cette section nous vous mettons à disposition les leviers pour maitriser le monde de l’assurance-vie et pour prendre les meilleures décisions d’investissement en la matière.</p>
                         <p class="is-size-6-touch is-size-5-desktop has-text-justified">Notre équipe vous invite à découvrir les bases des contrats d’assurance vie, les produits les plus performants du marché, les impacts des dernières lois et réformes et toutes les nouveautés du domaine.</p>
                         <p class="is-size-6-touch is-size-5-desktop has-text-justified">Partons ensemble pour un tour du monde assuranciel.</p>

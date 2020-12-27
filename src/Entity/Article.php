@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\Date;
  * @ORM\HasLifecycleCallbacks()
  * HasLifecycleCallbacks et la méthode prePersist retrouvée plus bas
  * permet de modifier l’entité pour enregister la date de création à la date ou on crée l'article dans le BO
+ * @ORM\Table(name="article", indexes={@ORM\Index(columns={"titre", "contenu"}, flags={"fulltext"})})
  */
 class Article
 {

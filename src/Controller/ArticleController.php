@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\SearchArticleFormType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,20 +20,30 @@ class ArticleController extends AbstractController
      * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function index(
-        PaginatorInterface $paginator,
-        Request $request,
-        ArticleRepository $articleRepository)
+    public function index(PaginatorInterface $paginator, Request $request, ArticleRepository $articleRepository)
     {
+        $form = $this->createForm(SearchArticleFormType::class);
+        $search = $form->handleRequest($request);
+
         $annee_en_cours = date('Y');
         $list_articles = $paginator->paginate(
             $articleRepository->findAllQuery(),
             $request->query->getInt('page',1),
             6
         );
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $list_articles = $paginator->paginate(
+                $articleRepository->search($search->get('mots')->getData()),
+                $request->query->getInt('page',1),
+                6
+            );
+        }
+
         return $this->render('article/liste.html.twig', [
             'list_articles' => $list_articles,
-            'annee_en_cours'=> $annee_en_cours
+            'annee_en_cours'=> $annee_en_cours,
+            'formSearchArticle' => $form->createView()
         ]);
     }
 

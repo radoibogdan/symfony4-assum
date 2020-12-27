@@ -43,6 +43,23 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * Recherche les titre et les contenu en fonction de ce qui est mis dans le formulaire de recherche
+     * Section utilisateur Articles
+     * @param $mots
+     * @return Query
+     */
+    public function search($mots): Query
+    {
+        $query = $this->createQueryBuilder('a');
+        if ($mots != null) {
+            $query->where('MATCH_AGAINST(a.titre, a.contenu) AGAINST(:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        return $query->getQuery();
+
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */
