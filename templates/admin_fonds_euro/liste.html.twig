@@ -19,7 +19,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                     <tr class="has-text-centered">
-                        <th>#</th>
+                        <th class="px-2">#</th>
                         <th>Libellé du fonds</th>
                         <th>Nom du fonds</th>
                         <th>Année</th>
@@ -33,7 +33,7 @@
                     {# La boucle sur list_categories, dernière colonne : Modifier & Supprimer #}
                     {% for fonds_euro in list_fonds_euros %}
                         <tr class="has-text-centered">
-                            <td class="px-1">{{ fonds_euro.id }}</td>
+                            <td class="px-2">{{ fonds_euro.id }}</td>
                             <td>{{ fonds_euro.labelFonds }}</td>
                             <td>{{ fonds_euro.nom }}</td>
                             <td>{{ fonds_euro.annee }}</td>

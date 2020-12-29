@@ -2,13 +2,9 @@
 <div class="columns is-multiline">
     {% for produit in produits %}
         <div class="column is-full-mobile is-full-touch is-half-desktop"> {# is-one-half / is-one-quarter #}
-{#        <div class="column is-half-tablet is-one-third-widescreen"> #}{# is-one-half / is-one-quarter #}
             <div class="box">
                 <article class="media produit-wrap">
                     <div class="media-left">
-{#                        <figure class="image is-128x128">#}
-{#                            <img src="https://loremflickr.com/256/256/clothes/all?lock={{produit.id}}" alt="Image">#}
-{#                        </figure>#}
                         {% if produit.imageFilename %}
                             <figure class="is-relative">
                                 <img width="200" src="{{ asset('uploads/images/' ~ produit.imageFilename) }}" alt="Image representative du produit">
@@ -36,18 +32,19 @@
                                     <strong>{{ produit.titre }}</strong>
                                 </a>
                             </h3>
-                            <p>
+                            <p class="my-0">
                                 <span class="tag is-info is-normal">{{ produit.categorie.nom | default('non disponible') }}</span>
-                                <br>
-                                Disponible depuis : {{ produit.creation|date('m/yy') }}
-                                <br>
-                                {{ produit.description }}
                             </p>
+                            <div class="tags mt-1">
+                                {% for categorie_uc in produit.CategoriesUc %}
+                                    <span class="tag">{{ categorie_uc.nom }}</span>
+                                {% endfor %}
+                            </div>
+                            <p class="mt-0 subtitle is-size-7">Disponible depuis : {{ produit.creation|date('m/yy') }}</p>
+                            <p class="my-0">{{ produit.description }}</p>
                             {% if is_taux_available(produit)  %}
                             <strong class="has-text-primary">Rendement:</strong>
-                            {% endif %}
                             <div class="tags has-addons">
-{#                              <span class="tag is-primary">{{ meilleur_taux[0].tauxPbFloat }}</span>#}
                                 {% for fonds_euro in produit.fondsEuro %}
                                     {% if fonds_euro.annee == annee_en_cours %}
                                     <span class="tag" title="Rendement">
@@ -61,6 +58,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </article>

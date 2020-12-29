@@ -32,7 +32,7 @@
             {# La boucle sur produits_list, dernière colonne : Modifier & Supprimer #}
             {% for produit in list_produits %}
                 <tr>
-                    <td class="pr-1">{{ produit.id }}</td>
+                    <td class="pr-1 has-text-centered">{{ produit.id }}</td>
                     <td>
                         <a href="{{ path('affichage_produit', {id:produit.id}) }}" target="_blank">
                         {{ produit.titre }}

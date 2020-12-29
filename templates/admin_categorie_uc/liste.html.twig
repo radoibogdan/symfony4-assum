@@ -1,17 +1,17 @@
 {% extends '_admin_template.html.twig' %}
 
-{% block title %}Liste des types de gestion{% endblock %}
+{% block title %}Liste des catégories UC{% endblock %}
 
 {% block content %}
     <div class="section">
 
-        <h1 class="title has-text-centered">Liste des types de gestion</h1>
+        <h1 class="title has-text-centered">Liste des catégories UC</h1>
 
         <div class="columns">
             <div class="column"></div>
             <div class="column is-half">
-                <a href="{{ path('admin_gestion_add') }}" class="button is-success mb-4">
-                    Créer un nouveau type de gestion
+                <a href="{{ path('admin_categorie_uc_add') }}" class="button is-success mb-4">
+                    Nouvelle catégorie UC
                 </a>
 
                 {% include 'includes/flashes.html.twig' %}
@@ -20,22 +20,22 @@
                     <thead>
                     <tr>
                         <th class="px-2 has-text-centered">#</th>
-                        <th>Nom de la gestion</th>
+                        <th>Nom de la catégorie UC</th>
                         <th>Nombre de produits</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {# La boucle sur list_gestions, dernière colonne : Modifier & Supprimer #}
-                    {% for gestion in list_gestions %}
+                    {# La boucle sur list_categories, dernière colonne : Modifier & Supprimer #}
+                    {% for categorie_uc in list_categories_uc %}
                         <tr>
-                            <td class="px-2 has-text-centered">{{ gestion.id }}</td>
-                            <td>{{ gestion.nom }}</td>
-                            <td>{{ gestion.getProduits|length }}</td>
+                            <td class="px-2 has-text-centered">{{ categorie_uc.id }}</td>
+                            <td>{{ categorie_uc.nom }}</td>
+                            <td>{{ categorie_uc.getProduits|length }}</td>
                             <td>
                                 <div class="buttons is-pulled-right">
-                                    <a href="{{ path('admin_gestion_edit', {id:gestion.id}) }}" class="button is-success">Modifier</a>
-                                    <a href="{{ path('admin_gestion_delete', {id:gestion.id}) }}" class="button is-danger">Supprimer</a>
+                                    <a href="{{ path('admin_categorie_uc_edit', {id:categorie_uc.id}) }}" class="button is-success">Modifier</a>
+                                    <a href="{{ path('admin_categorie_uc_delete', {id:categorie_uc.id}) }}" class="button is-danger">Supprimer</a>
                                 </div>
                             </td>
                         </tr>

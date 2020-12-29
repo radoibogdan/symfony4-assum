@@ -19,7 +19,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th class="px-2 has-text-centered">#</th>
                         <th>Nom de l'assureur</th>
                         <th>Site internet</th>
                         <th>Nombre de produits</th>
@@ -30,7 +30,7 @@
                     {# La boucle sur list_assureurs, dernière colonne : Modifier & Supprimer #}
                     {% for assureur in list_assureurs %}
                         <tr>
-                            <td>{{ assureur.id }}</td>
+                            <td class="px-2 has-text-centered">{{ assureur.id }}</td>
                             <td>{{ assureur.nom }}</td>
                             <td>{{ assureur.site }}</td>
                             <td>{{ assureur.getProduits|length }}</td>

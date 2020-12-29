@@ -108,11 +108,17 @@ class Produit
      */
     private $nb_uc_disponibles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=CategorieUC::class, inversedBy="produits")
+     */
+    private $categories_uc;
+
     public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
         $this->gestion = new ArrayCollection();
         $this->fonds_euro = new ArrayCollection();
+        $this->categories_uc = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -424,6 +430,32 @@ class Produit
     public function setNbUcDisponibles(?string $nb_uc_disponibles): self
     {
         $this->nb_uc_disponibles = $nb_uc_disponibles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CategorieUC[]
+     */
+    public function getCategoriesUc(): Collection
+    {
+        return $this->categories_uc;
+    }
+
+    public function addCategoriesUc(CategorieUC $categoriesUc): self
+    {
+        if (!$this->categories_uc->contains($categoriesUc)) {
+            $this->categories_uc[] = $categoriesUc;
+        }
+
+        return $this;
+    }
+
+    public function removeCategoriesUc(CategorieUC $categoriesUc): self
+    {
+        if ($this->categories_uc->contains($categoriesUc)) {
+            $this->categories_uc->removeElement($categoriesUc);
+        }
 
         return $this;
     }

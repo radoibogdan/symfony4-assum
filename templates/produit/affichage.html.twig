@@ -19,6 +19,11 @@
                             </div>
                         {% endif %}
                     </h1>
+                    <div class="tags my-0">
+                        {% for categorie_uc in produit.CategoriesUc %}
+                            <span class="tag is-white">{{ categorie_uc.nom }}</span>
+                        {% endfor %}
+                    </div>
                     <span class="tag is-info is-normal">{{ produit.categorie.nom | default('catégorie non disponible') }}</span>
                     {% if produit.label == 1 %}
                         <span class="tag is-primary is-normal">label qualité Assum</span>
@@ -33,7 +38,7 @@
                     <div class="tags has-addons are-medium mt-4">
                         {% for fonds_euro in produit.fondsEuro %}
                             {% if fonds_euro.annee == annee_en_cours %}
-                                <span class="tag" title="Rendement">
+                                <span class="tag is-white" title="Rendement">
                                     {{ fonds_euro.tauxpbfloat }}
                                 </span>
                                 <span class="tag is-primary" title="Rendement">
@@ -43,7 +48,7 @@
                                 </span>
                             {% endif %}
                         {% endfor %}
-                        <span class="tag" title="Frais de gestion">
+                        <span class="tag is-white" title="Frais de gestion">
                             {{ produit.fraisGestionEuroFloat |number_format(2 , '.' , ' ') }}
                         </span>
                         <span class="tag is-danger" title="Frais de gestion">

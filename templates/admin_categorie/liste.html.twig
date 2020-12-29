@@ -5,7 +5,7 @@
 {% block content %}
     <div class="section">
 
-        <h1 class="title has-text-centered">Liste des catégories</h1>
+        <h1 class="title has-text-centered">Liste des catégories d'investissement</h1>
 
         <div class="columns">
             <div class="column"></div>
@@ -19,7 +19,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th class="px-2 has-text-centered">#</th>
                         <th>Nom de la catégorie</th>
                         <th>Nombre de produits</th>
                         <th></th>
@@ -29,7 +29,7 @@
                     {# La boucle sur list_categories, dernière colonne : Modifier & Supprimer #}
                     {% for categorie in list_categories %}
                         <tr>
-                            <td>{{ categorie.id }}</td>
+                            <td class="px-2 has-text-centered">{{ categorie.id }}</td>
                             <td>{{ categorie.nom }}</td>
                             <td>{{ categorie.getProduits|length }}</td>
                             <td>

@@ -80,7 +80,7 @@ class AdminProduitController extends AbstractController
      * @param Request $request
      * @param FileUploader $fileUploader
      * @return Response
-     * @Route ("{id}/edit", name="edit")
+     * @Route ("/{id}/edit", name="edit")
      */
     public function edit(EntityManagerInterface $entityManager, Produit $produit, Request $request, FileUploader $fileUploader)
     {
