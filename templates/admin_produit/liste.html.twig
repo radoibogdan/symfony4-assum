@@ -18,11 +18,11 @@
                 <th>Nom</th>
                 <th>Frais d'adhésion</th>
                 <th>Frais versement</th>
-                <th>Frais de gestion</th>
+                <th>Frais de gestion <br> (fonds euro)</th>
+                <th>Frais de gestion <br> (UC)</th>
                 <th>Frais d'arbitrage</th>
                 <th>Assureur</th>
                 <th>Catégorie</th>
-                <th>Type Gestion</th>
                 <th>Label Assum</th>
                 <th>Disponible depuis</th>
                 <th></th>
@@ -38,15 +38,13 @@
                         {{ produit.titre }}
                         </a>
                     </td>
-                    <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisAdhesion }} </td>
                     <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', ' ') }} % </td>
-                    <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisGestionEuroFloat | number_format(2, '.', ' ') }} % </td>
+                    <td class="has-text-centered">{{ produit.fraisGestionUcFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.fraisArbitrageFloat | number_format(2, '.', ' ') }} % </td>
                     <td class="has-text-centered">{{ produit.assureur.nom | default('non disponible') }} </td>
                     <td class="has-text-centered">{{ produit.categorie.nom | default('non disponible') }} </td>
-                    <td>{% for gest in produit.getGestion %}
-                            {{ gest.nom }} <br>
-                        {% endfor %}</td>
                     <td class="has-text-centered">{{ produit.labelValue }} </td>
                     <td class="has-text-centered">{{ produit.creation | date("m/Y") }} </td>
                     <td>

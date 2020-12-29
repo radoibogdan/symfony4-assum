@@ -25,9 +25,8 @@ class ProduitFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($faker->realText(200))
                 ->setFraisAdhesion($faker->numberBetween(0,100))
                 ->setFraisVersement($faker->numberBetween(0,500))
-                ->setFraisGestion($faker->numberBetween(0,60))
+                ->setFraisGestionEuro($faker->numberBetween(0,60))
                 ->setFraisArbitrage($faker->numberBetween(0,100))
-                ->setRendement($faker->numberBetween(50,300))
                 ->setLabel($faker->boolean())
                 ->setCreation($faker->dateTimeBetween('-1year'))
             ;

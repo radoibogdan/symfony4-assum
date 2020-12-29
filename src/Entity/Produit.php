@@ -30,7 +30,7 @@ class Produit
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $frais_adhesion;
 
@@ -42,7 +42,12 @@ class Produit
     /**
      * @ORM\Column(type="integer")
      */
-    private $frais_gestion;
+    private $frais_gestion_euro;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $frais_gestion_uc;
 
     /**
      * @ORM\Column(type="integer")
@@ -93,6 +98,16 @@ class Produit
      */
     private $fonds_euro;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $versement_initial;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nb_uc_disponibles;
+
     public function __construct()
     {
         $this->avisProduits = new ArrayCollection();
@@ -129,20 +144,12 @@ class Produit
         return $this;
     }
 
-    public function getFraisAdhesion(): ?int
+    public function getFraisAdhesion(): ?string
     {
         return $this->frais_adhesion;
     }
 
-    /**
-     * Obtenir les frais_adhesion en décimal: 1500 -> 15.00
-     */
-    public function getFraisAdhesionFloat(): ?float
-    {
-        return $this->frais_adhesion === null ? null : $this->frais_adhesion/100;
-    }
-
-    public function setFraisAdhesion(int $frais_adhesion): self
+    public function setFraisAdhesion(string $frais_adhesion): self
     {
         $this->frais_adhesion = $frais_adhesion;
 
@@ -169,22 +176,42 @@ class Produit
         return $this;
     }
 
-    public function getFraisGestion(): ?int
+    public function getFraisGestionEuro(): ?int
     {
-        return $this->frais_gestion;
+        return $this->frais_gestion_euro;
     }
 
     /**
-     * Obtenir les frais_gestion en décimal: 1500 -> 15.00
+     * Obtenir les frais_gestion_euro en décimal: 1500 -> 15.00
      */
-    public function getFraisGestionFloat(): ?float
+    public function getFraisGestionEuroFloat(): ?float
     {
-        return $this->frais_gestion === null ? null : $this->frais_gestion/100;
+        return $this->frais_gestion_euro === null ? null : $this->frais_gestion_euro/100;
     }
 
-    public function setFraisGestion(int $frais_gestion): self
+    public function setFraisGestionEuro(int $frais_gestion_euro): self
     {
-        $this->frais_gestion = $frais_gestion;
+        $this->frais_gestion_euro = $frais_gestion_euro;
+
+        return $this;
+    }
+
+    public function getFraisGestionUc(): ?int
+    {
+        return $this->frais_gestion_uc;
+    }
+
+    /**
+     * Obtenir les frais_gestion_uc en décimal: 1500 -> 15.00
+     */
+    public function getFraisGestionUcFloat(): ?float
+    {
+        return $this->frais_gestion_uc === null ? null : $this->frais_gestion_uc/100;
+    }
+
+    public function setFraisGestionUc(int $frais_gestion_uc): self
+    {
+        $this->frais_gestion_uc = $frais_gestion_uc;
 
         return $this;
     }
@@ -373,6 +400,30 @@ class Produit
         if ($this->fonds_euro->contains($fondsEuro)) {
             $this->fonds_euro->removeElement($fondsEuro);
         }
+
+        return $this;
+    }
+
+    public function getVersementInitial(): ?int
+    {
+        return $this->versement_initial;
+    }
+
+    public function setVersementInitial(?int $versement_initial): self
+    {
+        $this->versement_initial = $versement_initial;
+
+        return $this;
+    }
+
+    public function getNbUcDisponibles(): ?string
+    {
+        return $this->nb_uc_disponibles;
+    }
+
+    public function setNbUcDisponibles(?string $nb_uc_disponibles): self
+    {
+        $this->nb_uc_disponibles = $nb_uc_disponibles;
 
         return $this;
     }

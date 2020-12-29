@@ -129,7 +129,7 @@ class AdminProduitController extends AbstractController
             // pas besoin de getData(). Les modifications sont faites automatiquement
             $entityManager->remove($produit);
             $entityManager->flush();
-            $this->addFlash('success','Le produit a été supprimé.');
+            $this->addFlash('danger','Le produit a été supprimé.');
             return $this->redirectToRoute('admin_produit_liste');
         }
         return $this->render('admin_produit/delete.html.twig', [

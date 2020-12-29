@@ -44,7 +44,7 @@
                             {% endif %}
                         {% endfor %}
                         <span class="tag" title="Frais de gestion">
-                            {{ produit.fraisGestionFloat |number_format(2 , '.' , ' ') }}
+                            {{ produit.fraisGestionEuroFloat |number_format(2 , '.' , ' ') }}
                         </span>
                         <span class="tag is-danger" title="Frais de gestion">
                             <span class="icon"><i class="fas fa-percent"></i></span>
@@ -72,12 +72,14 @@
             </div>
         </div>
     </section>
+
+    {##################### TABLEAU CARACTERISTIQUES PRINCIPALES #####################}
     <section class="section px-0 py-0">
         <div class="container has-background-white-bis ">
             <div class="columns is-centered mx-0 my-0">
                 <div class="column is-half mt-0 pb-5 mx-0 has-text-centered-mobile">
                     <h1 class="has-text-left title is-size-4">Caracteristiques principales</h1>
-                    <table class="table is-bordered">
+                    <table class="table is-bordered is-fullwidth">
                         <thead>
                         <tr>
                             <th></th>
@@ -98,16 +100,28 @@
                         </tfoot>
                         <tbody>
                         <tr>
+                            <td class="px-3">Versement initial</td>
+                            <td class="has-text-centered">{{ produit.versementInitial }} euros</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Nombre UC disponibles</td>
+                            <td class="has-text-centered">{{ produit.nbUcdisponibles }}</td>
+                        </tr>
+                        <tr>
                             <td class="px-3">Frais d'adhésion</td>
-                            <td class="has-text-centered">{{ produit.fraisAdhesionFloat | number_format(2, '.', '') }} %</td>
+                            <td class="has-text-centered">{{ produit.fraisAdhesion }}</td>
                         </tr>
                         <tr>
                             <td class="px-3">Frais de versement</td>
                             <td class="has-text-centered">{{ produit.fraisVersementFloat | number_format(2, '.', '') }} %</td>
                         </tr>
                         <tr>
-                            <td class="px-3">Frais de gestion</td>
-                            <td class="has-text-centered">{{ produit.fraisGestionFloat | number_format(2, '.', '') }} %</td>
+                            <td class="px-3">Frais de gestion(fonds euro)</td>
+                            <td class="has-text-centered">{{ produit.fraisGestionEuroFloat | number_format(2, '.', '') }} %</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3">Frais de gestion(UC)</td>
+                            <td class="has-text-centered">{{ produit.fraisGestionUcFloat| number_format(2, '.', '') }} %</td>
                         </tr>
                         <tr>
                             <td class="px-3">Frais d'arbitrage</td>
@@ -185,7 +199,7 @@
             </div>
         </div>
 
-        {################# USER INPUT AREA FOR REVIEWS #################}
+        {##################### USER INPUT AREA FOR REVIEWS #####################}
         <div class="container has-background-white-bis">
             <div class="columns is-centered mb-0">
 

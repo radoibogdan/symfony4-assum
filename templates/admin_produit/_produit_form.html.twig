@@ -5,14 +5,23 @@
                 {{ form_row(produitForm.description,{
                     label : 'Description'
                 }) }}
+                {{ form_row(produitForm.versementInitial, {
+                    label : 'Versement initial'
+                }) }}
+                {{ form_row(produitForm.nbUcDisponibles, {
+                    label : 'Nombre UC disponibles'
+                }) }}
                 {{ form_row(produitForm.frais_adhesion,{
                     label : 'Frais d\'adhésion'
                 }) }}
                 {{ form_row(produitForm.frais_versement,{
                     label : 'Frais de versement'
                 }) }}
-                {{ form_row(produitForm.frais_gestion,{
-                    label : 'Frais de gestion'
+                {{ form_row(produitForm.frais_gestion_euro,{
+                    label : 'Frais de gestion(fonds euro)'
+                }) }}
+                {{ form_row(produitForm.frais_gestion_uc,{
+                    label : 'Frais de gestion(UC)'
                 }) }}
                 {{ form_row(produitForm.frais_arbitrage,{
                     label : 'Frais d\'arbitrage'
@@ -21,7 +30,7 @@
                     label : 'Assureur'
                 }) }}
                 {{ form_row(produitForm.categorie,{
-                    label : 'Catégorie de l\'produit'
+                    label : 'Catégorie'
                 }) }}
                 {{ form_row(produitForm.categorie,{
                     label : 'Catégorie'

@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ProduitFormType extends AbstractType
 {
@@ -50,12 +51,29 @@ class ProduitFormType extends AbstractType
                 'help' => 'La description courte du produit est limitée à 300 caractères.',
                 'required' => false
             ])
-            ->add('frais_adhesion',NumberType::class, [
-                'constraints' =>[
-                    new PositiveOrZero(['message' => 'Les frais d\'adhéshion doivent être positifs ou zéro.']),
-                    new NotBlank(['message' => 'Les frais d\'adhéshion sont manquants.'])
+            ->add('versementInitial',NumberType::class,[
+                'constraints' => [
+                    new PositiveOrZero(['message' => 'Le versement initial doit être positif ou zéro.']),
+                    new NotBlank(['message' => 'Le versement initial est manquant.'])
                 ],
-                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
+                'required' => false
+            ])
+            ->add('nbUcDisponibles',TextType::class,[
+                'constraints' => [
+                    new NotBlank(['message' => 'Ce champ doit être renseigné.'])
+                ],
+                'help' => 'Exemple: +20 UC, +40 UC',
+                'required' => false
+            ])
+            ->add('frais_adhesion',TextType::class, [
+                'constraints' =>[
+                    new NotBlank(['message' => 'Les frais d\'adhéshion sont manquants.']),
+                    new Regex([
+                        'pattern' => '/(euros|%)/',
+                        'message' => 'Il faut renseigner à la fin le type: euros ou %'
+                    ])
+                ],
+                'help' => 'Il faut renseigner si c\'est en euros ou en %',
                 'required' => false
             ])
             ->add('frais_versement', NumberType::class,[
@@ -66,7 +84,15 @@ class ProduitFormType extends AbstractType
                 'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
                 'required' => false,
             ])
-            ->add('frais_gestion',NumberType::class, [
+            ->add('frais_gestion_euro',NumberType::class, [
+                'constraints' => [
+                    new PositiveOrZero(['message' => 'Les frais de gestion doivent être positifs ou zéro.']),
+                    new NotBlank(['message' => 'Les frais de gestion sont manquants.'])
+                ],
+                'help' => 'Le chiffre doit être multiplié par 100. Ex: 0,60% => 60',
+                'required' => false,
+            ])
+            ->add('frais_gestion_uc',NumberType::class, [
                 'constraints' => [
                     new PositiveOrZero(['message' => 'Les frais de gestion doivent être positifs ou zéro.']),
                     new NotBlank(['message' => 'Les frais de gestion sont manquants.'])
@@ -87,9 +113,10 @@ class ProduitFormType extends AbstractType
                 'choice_label' => 'nom'
             ])
             ->add('categorie', EntityType::class, [
-                    'class' => Categorie::class,
-                    'choice_label' => 'nom'
-                ])
+                'class' => Categorie::class,
+                'choice_label' => 'nom'
+
+            ])
             ->add('gestion', EntityType::class, [
                 'class' => Gestion::class,
                 'choice_label' => 'nom',
