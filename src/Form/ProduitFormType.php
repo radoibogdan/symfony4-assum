@@ -135,7 +135,7 @@ class ProduitFormType extends AbstractType
                 'query_builder' => function (FondsEuroRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.annee >= :this_year')
-                        ->setParameter('this_year', date('Y')-1)
+                        ->setParameter('this_year', date('Y')-2)
                         ->orderBy('u.nom', 'ASC');
                 },
                 'choice_label' => function ($fonds_euro) {

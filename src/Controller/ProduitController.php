@@ -30,7 +30,7 @@ class ProduitController extends AbstractController
         Request $request,
         ProduitRepository $produitRepository)
     {
-        $annee_en_cours = date('Y') -1;
+        $annee_en_cours = date('Y') -2;
         $list_produits = $paginator->paginate(
           $produitRepository->findAllQuery(),
           $request->query->getInt('page',1),

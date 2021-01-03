@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let editor_name = 'slide_' + textarea.dataset.slideId;
 
     var simplemde = new SimpleMDE({
-        autosave: {
-            enabled: true,
-            uniqueId: editor_name
-        },
+        // autosave: {
+        //     enabled: true,
+        //     uniqueId: editor_name
+        // }, // bug quand on change d'article
         element: textarea,
         forceSync: true,
         spellChecker: false,

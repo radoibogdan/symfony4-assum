@@ -40,7 +40,7 @@
                                     <span class="tag">{{ categorie_uc.nom }}</span>
                                 {% endfor %}
                             </div>
-                            <p class="mt-0 subtitle is-size-7">Disponible depuis : {{ produit.creation|date('m/yy') }}</p>
+                            <p class="mt-0 subtitle is-size-7">Disponible depuis : {{ produit.creation|date('m/Y') }}</p>
                             <p class="my-0">{{ produit.description }}</p>
                             {% if is_taux_available(produit)  %}
                             <strong class="has-text-primary">Rendement:</strong>
