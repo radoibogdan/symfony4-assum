@@ -33,9 +33,14 @@ class Article
     private $contenu;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $creation;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
@@ -74,13 +79,27 @@ class Article
 
     /**
      * Méthode exécutée avant l'insertion en base / après la création de l'article dans le BO
-     * Modifie l'entité pour enregistrer une date de création pour l'article
+     * Modifie l'entité pour enregistrer une date de création de l'article
      * @ORM\PrePersist()
      */
     public function prePersist()
     {
         if ($this->creation === null) {
             $this->creation = new \DateTime();
+        }
+    }
+
+    /**
+     * Méthode exécutée avant l'insertion en base / après la création de l'article dans le BO
+     * Modifie l'entité pour enregistrer une modification de l'article
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        if ($this->updatedAt === null) {
+            $this->updatedAt = new \DateTime();
+        } else {
+            $this->updatedAt = new \DateTime();
         }
     }
 
@@ -92,6 +111,18 @@ class Article
     public function setCreation(\DateTimeInterface $creation): self
     {
         $this->creation = $creation;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

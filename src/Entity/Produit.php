@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ * HasLifecycleCallbacks et la méthode prePersist retrouvée plus bas
+ * permet de modifier l’entité pour enregister la date de création à la date ou on crée l'article dans le BO
  */
 class Produit
 {
@@ -112,6 +115,16 @@ class Produit
      * @ORM\ManyToMany(targetEntity=CategorieUC::class, inversedBy="produits")
      */
     private $categories_uc;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -456,6 +469,56 @@ class Produit
         if ($this->categories_uc->contains($categoriesUc)) {
             $this->categories_uc->removeElement($categoriesUc);
         }
+
+        return $this;
+    }
+
+    /**
+     * Méthode exécutée avant l'insertion en base / après la création du produit dans le BO
+     * Modifie l'entité pour enregistrer une date de création du produit
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if ($this->createdAt === null) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    /**
+     * Méthode exécutée avant la modification en base / après la création du produit dans le BO
+     * Modifie l'entité pour enregistrer une date de modification du produit
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        if ($this->updatedAt === null) {
+            $this->updatedAt = new \DateTime();
+        } else {
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

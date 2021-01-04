@@ -60,10 +60,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Regex(
-     *     pattern="/^[0-9]+$/",
-     *     message="Merci de renseigner que des chiffres."
-     * )
      */
     private $telephone;
 
