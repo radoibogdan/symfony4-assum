@@ -40,24 +40,33 @@
                                     <span class="tag">{{ categorie_uc.nom }}</span>
                                 {% endfor %}
                             </div>
-                            <p class="mt-0 subtitle is-size-7">Disponible depuis : {{ produit.creation|date('m/Y') }}</p>
+                            <p class="mt-0 subtitle is-size-7">Disponible depuis : {{ produit.creation|date('Y') }}</p>
                             <p class="my-0">{{ produit.description }}</p>
-                            {% if is_taux_available(produit)  %}
-                            <strong class="has-text-primary">Rendement:</strong>
-                            <div class="tags has-addons">
-                                {% for fonds_euro in produit.fondsEuro %}
-                                    {% if fonds_euro.annee == annee_en_cours %}
-                                    <span class="tag" title="Rendement">
-                                        {{ fonds_euro.tauxpbfloat }}
-                                     </span>
-                                    <span class="tag is-primary" title="Rendement">
-                                        <span class="icon">
-                                            <i class="fas fa-percent"></i>
+                            {# Si des fonds sont disponibles sur le produit #}
+                            {% if is_taux_available(produit) %}
+                                <strong class="has-text-primary">Rendement:</strong>
+                                {# pour chaque fonds euro dispo sur le produit #}
+                                {# afficher le taux que pour ceux qui ont l'annee = au dernier annee où il y a un fonds avec un taux non null #}
+                                <div class="tags has-addons mb-0">
+                                    {% for fonds_euro in produit.fondsEuro %}
+                                        {% if fonds_euro.annee == annee_fonds_euro_non_null() %}
+                                        <span class="tag" title="Rendement {{ fonds_euro.annee }} {{ fonds_euro.nom }}">
+                                            {{ fonds_euro.tauxpbfloat }}
+                                         </span>
+                                        <span class="tag is-primary" title="Rendement {{ fonds_euro.annee }} {{ fonds_euro.nom }}">
+                                            <span class="icon">
+                                                <i class="fas fa-percent"></i>
+                                            </span>
                                         </span>
-                                    </span>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {# Si l'annee du fonds sur le contrat est plus ancien que l'anndee du dernier fonds_euro_non_null on va afficher un message #}
+                                    {% for fonds_euro in produit.fondsEuro %}
+                                        {% if fonds_euro.annee < annee_fonds_euro_non_null() %}
+                                            <span>Pas de fonds euro récent disponible</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             {% endif %}
                         </div>
                     </div>

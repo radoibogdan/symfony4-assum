@@ -30,7 +30,6 @@ class ProduitController extends AbstractController
         Request $request,
         ProduitRepository $produitRepository)
     {
-        $annee_en_cours = date('Y') -2;
         $list_produits = $paginator->paginate(
           $produitRepository->findAllQuery(),
           $request->query->getInt('page',1),
@@ -38,7 +37,6 @@ class ProduitController extends AbstractController
         );
         return $this->render('produit/liste.html.twig', [
             // 'list_produits' => $list_produits->getItems(),
-            'annee_en_cours'=> $annee_en_cours,
             'list_produits' => $list_produits
         ]);
     }
@@ -80,10 +78,8 @@ class ProduitController extends AbstractController
             $this->addFlash('success','Votre commentaire est enregistré et soumis pour validation.');
             return $this->redirect($request->getUri());
         }
-        $annee_en_cours = date('Y') -1;
         return $this->render('produit/affichage.html.twig',[
             'produit'           => $produit,
-            'annee_en_cours'    => $annee_en_cours,
             'formAvisProduit'   => $form->createView(),
             //'touslesavis'       => $produit->getAvisProduits(),
             'derniersAvis'       => $avisProduitRepository->findLastXAvis(2, $produit->getId()),
@@ -102,15 +98,19 @@ class ProduitController extends AbstractController
      */
     public function show_best(Request $request, EntityManagerInterface $entityManager, ProduitRepository $produitRepository) : Response
     {
-        $produits_mois_en_cours = $produitRepository->findNewProduits();
-        $moyenne_du_mois = 0;
-        $produit_du_mois = 0;
-        /** @var Produit $produit */
-        foreach ($produits_mois_en_cours as $produit) {
+        // Trouver les produits crées les derniers 12 mois
+        $produits_derniers_12_mois = $produitRepository->findNewProduits();
+        $moyenne = 0;
+        $produit_de_l_annee = 0;
+        /**
+         * Trouver le produit avec la plus grande moyenne des avis
+         * @var Produit $produit
+         */
+        foreach ($produits_derniers_12_mois as $produit) {
             // Obtenir la moyenne d'un produit
-            if ($produit->getMoyenneProduit() > $moyenne_du_mois) {
-                $produit_du_mois = $produit;
-                $moyenne_du_mois = $produit->getMoyenneProduit();
+            if ($produit->getMoyenneProduit() > $moyenne) {
+                $produit_de_l_annee = $produit;
+                $moyenne = $produit->getMoyenneProduit();
             };
         }
         $this->addFlash(
@@ -118,7 +118,7 @@ class ProduitController extends AbstractController
             'Ceci est un produit récemment créé (moins d\'un mois) et le mieux côté d\'après les avis de nos utilisateurs enregistrés.'
         );
         return $this->redirectToRoute('affichage_produit',[
-            'id' => $produit_du_mois->getId()
+            'id' => $produit_de_l_annee->getId()
         ]);
     }
 

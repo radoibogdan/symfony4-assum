@@ -37,7 +37,7 @@
                     </p>
                     <div class="tags has-addons are-medium mt-4">
                         {% for fonds_euro in produit.fondsEuro %}
-                            {% if fonds_euro.annee == annee_en_cours %}
+                            {% if fonds_euro.annee == annee_fonds_euro_non_null() %}
                                 <span class="tag is-white" title="Rendement">
                                     {{ fonds_euro.tauxpbfloat }}
                                 </span>
@@ -58,7 +58,7 @@
 {#                    <hr>#}
                     <h6 class="is-size-7">
                         <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
-                        <span>Produit disponible depuis {{ produit.creation|date('m/Y') }}</span>
+                        <span>Produit disponible depuis {{ produit.creation|date('Y') }}</span>
                     </h6>
                 </div>
 
@@ -137,7 +137,7 @@
                             <td class="has-text-centered">{{ produit.assureur.nom }}</td>
                         </tr>
                         <tr>
-                            <td class="px-3">Type de gestions disponibles</td>
+                            <td class="px-3">Types de gestions disponibles</td>
                             <td class="has-text-centered">
                                 {% for gestion in produit.gestion %}
                                     {{ gestion.nom }} <br>
@@ -148,7 +148,7 @@
                             <td class="is-vcentered px-3">Rendement</td>
                             <td class="has-text-centered">
                                 {% for fonds_euro in produit.fondsEuro %}
-                                    {% if fonds_euro.annee == annee_en_cours %}
+                                    {% if fonds_euro.annee == annee_fonds_euro_non_null() %}
                                         {{ fonds_euro.tauxpbfloat | number_format(2, '.', '') }} % - {{ fonds_euro.nom }} <br>
                                     {% endif %}
                                 {% endfor %}

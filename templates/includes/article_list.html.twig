@@ -11,14 +11,14 @@
                                     </a>
                                 </h3>
                             <p>
-                                Créé le : {{article.creation|date('m/yy')}}
+                                Créé le : {{article.creation|date('m/Y')}}
                                 <br>
                                 {{article.contenu|slice(0,100) ~ ' (...)'}}
                             </p>
                             <strong class="has-text-primary">Auteur :</strong>
                             <div class="tags has-addons">
                                 <span class="tag">
-                                    {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
+                                    {{ article.auteur.prenom | capitalize ~ ' ' ~ article.auteur.nom | capitalize }}
                                  </span>
                                 <span class="tag is-primary">
                                     <span class="icon">

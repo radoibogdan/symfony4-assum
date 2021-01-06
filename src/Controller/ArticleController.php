@@ -25,7 +25,6 @@ class ArticleController extends AbstractController
         $form = $this->createForm(SearchArticleFormType::class);
         $search = $form->handleRequest($request);
 
-        $annee_en_cours = date('Y');
         $list_articles = $paginator->paginate(
             $articleRepository->findAllQuery(),
             $request->query->getInt('page',1),
@@ -42,7 +41,6 @@ class ArticleController extends AbstractController
 
         return $this->render('article/liste.html.twig', [
             'list_articles' => $list_articles,
-            'annee_en_cours'=> $annee_en_cours,
             'formSearchArticle' => $form->createView()
         ]);
     }

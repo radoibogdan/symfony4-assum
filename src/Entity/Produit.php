@@ -340,7 +340,7 @@ class Produit
     }
 
     /**
-     * N'est pas reliée à la base de données, juste renvoie la moyenne des avis
+     * N'est pas reliée à la base de données, juste renvoie la moyenne des avis de tous les temps
      * @return null|integer
      */
     public function getMoyenneProduit()
@@ -351,12 +351,16 @@ class Produit
 
         $cumul_notes = 0;
         $nombre_notes = 0;
+        /** @var AvisProduit $avis_individuel */
         foreach ($this->avisProduits as $avis_individuel) {
-            $cumul_notes += $avis_individuel->getNote();
-            $nombre_notes++;
+            // si l'avis est approuvé, dans ce cas uniquement, on prends en compte la note
+           if ($avis_individuel->getApprouve()) {
+               $cumul_notes += $avis_individuel->getNote();
+               $nombre_notes++;
+           }
         }
 
-        return $cumul_notes/$nombre_notes;
+        return $nombre_notes === 0 ? null : $cumul_notes/$nombre_notes ;
     }
 
     /**
