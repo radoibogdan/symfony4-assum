@@ -48,6 +48,7 @@
                                 {# pour chaque fonds euro dispo sur le produit #}
                                 {# afficher le taux que pour ceux qui ont l'annee = au dernier annee où il y a un fonds avec un taux non null #}
                                 <div class="tags has-addons mb-0">
+                                    {% set break = false %}
                                     {% for fonds_euro in produit.fondsEuro %}
                                         {% if fonds_euro.annee == annee_fonds_euro_non_null() %}
                                         <span class="tag" title="Rendement {{ fonds_euro.annee }} {{ fonds_euro.nom }}">
@@ -58,12 +59,16 @@
                                                 <i class="fas fa-percent"></i>
                                             </span>
                                         </span>
+                                        {# Si on affiche le rendement ne pas afficher le message "Pas de fonds.." #}
+                                        {% set break = true %}
                                         {% endif %}
                                     {% endfor %}
                                     {# Si l'annee du fonds sur le contrat est plus ancien que l'anndee du dernier fonds_euro_non_null on va afficher un message #}
                                     {% for fonds_euro in produit.fondsEuro %}
-                                        {% if fonds_euro.annee < annee_fonds_euro_non_null() %}
+                                        {% if fonds_euro.annee < annee_fonds_euro_non_null() and break == false %}
                                             <span>Pas de fonds euro récent disponible</span>
+                                            {# Limiter a un seul message, car on peut avoir plusieurs années avec des fonds euros avec des valeurs non null #}
+                                            {% set break = true %}
                                         {% endif %}
                                     {% endfor %}
                                 </div>

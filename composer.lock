@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "683e5c06deed796723022b02bf20fbf5",
+    "content-hash": "8cce895e44892d5bc03e811fc8ae3c30",
     "packages": [
         {
             "name": "aymdev/commonmark-bundle",
