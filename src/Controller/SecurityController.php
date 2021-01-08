@@ -123,7 +123,7 @@ class SecurityController extends AbstractController
 
             // SEND ACTIVATION EMAIL with TOKEN
             $email_activation = (new TemplatedEmail())
-                ->from(new Address('no-reply@expert-assum.fr','Assum'))
+                ->from(new Address('no-reply@mg.expert-assum.fr','Assum'))
                 ->to($user->getEmail())
                 ->subject('Authentification de votre compte')
                 ->htmlTemplate('contact/activation.html.twig')
@@ -269,7 +269,7 @@ class SecurityController extends AbstractController
 
             // Create and send e-mail with RESET URL
             $email_reset = (new TemplatedEmail())
-                ->from(new Address('no-reply@expert-assum.fr','Assum'))
+                ->from(new Address('no-reply@mg.expert-assum.fr','Assum'))
                 ->to($user->getEmail())
                 ->subject('Réinitialisation du mot de passe')
                 ->htmlTemplate('contact/reset_password.html.twig')

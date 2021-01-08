@@ -69,8 +69,8 @@ class HomeController extends AbstractController
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $contact = (new TemplatedEmail())
-                ->from(new Address('no-reply@expert-assum.fr'))
-                ->to(new Address('no-reply@expert-assum.fr', 'Assum'))
+                ->from(new Address('no-reply@mg.expert-assum.fr'))
+                ->to(new Address('radoi.office@gmail.com', 'Assum'))
                 ->subject('Notification Assum')
                 ->htmlTemplate('contact/notification.html.twig')
                 ->embed(fopen('uploads/images_site/logo_assum.png', 'r'), 'logo')
