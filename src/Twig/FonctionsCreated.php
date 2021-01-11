@@ -70,7 +70,7 @@ class FonctionsCreated extends AbstractExtension
     }
 
     // utilisé pour afficher le dernier année ou un fonds euro a un taux différent de 0: Homepage, Tous produits, Produit individuel
-    public function anneeFondsEuroNonNull(): int
+    public function anneeFondsEuroNonNull(): ?int
     {
         return $this->cache->get('cache_fonds_euro_reference', function(ItemInterface $item){
             $item->tag('cache_fonds_euro');
@@ -82,7 +82,8 @@ class FonctionsCreated extends AbstractExtension
                 $annee--;
                 // tant qu'il n'y a pas de meilleur fonds et que ce fonds n'est pas 0 (le rendement s'affiche en mars)
             } while ($meilleur_fonds_euro === [] || $meilleur_fonds_euro[0]->getTauxPb() === 0);
-            return $meilleur_fonds_euro[0]->getAnnee();
+
+            return $meilleur_fonds_euro[0]->getTauxPb() == 0 ? null :$meilleur_fonds_euro[0]->getAnnee();
         });
     }
 }

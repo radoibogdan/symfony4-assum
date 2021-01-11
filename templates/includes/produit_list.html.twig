@@ -46,7 +46,7 @@
                             {% if is_taux_available(produit) %}
                                 <strong class="has-text-primary">Rendement:</strong>
                                 {# pour chaque fonds euro dispo sur le produit #}
-                                {# afficher le taux que pour ceux qui ont l'annee = au dernier annee où il y a un fonds avec un taux non null #}
+                                {# afficher le taux des fonds où l'année est égale au dernier annee où il y a un fonds avec un taux non null et non zéro #}
                                 <div class="tags has-addons mb-0">
                                     {% set break = false %}
                                     {% for fonds_euro in produit.fondsEuro %}
@@ -65,7 +65,7 @@
                                     {% endfor %}
                                     {# Si l'annee du fonds sur le contrat est plus ancien que l'anndee du dernier fonds_euro_non_null on va afficher un message #}
                                     {% for fonds_euro in produit.fondsEuro %}
-                                        {% if fonds_euro.annee < annee_fonds_euro_non_null() and break == false %}
+                                        {% if annee_fonds_euro_non_null() == null or break == false %}
                                             <span>Pas de fonds euro récent disponible</span>
                                             {# Limiter a un seul message, car on peut avoir plusieurs années avec des fonds euros avec des valeurs non null #}
                                             {% set break = true %}
