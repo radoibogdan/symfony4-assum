@@ -11,12 +11,10 @@
                     <h1 class="title has-text-primary is-relative">
                         {{ produit.titre }}
                         {% if produit.label == 1 %}
-                            <div>
                                 <img class="bounce" style="position: absolute; top: -30px ; left: {{ produit.titre | length  }}vw" width="80"
                                      src="{{ asset('uploads/images_site/assum_small_label.png') }}"
                                      alt="Label qualité Assum"
                                 >
-                            </div>
                         {% endif %}
                     </h1>
                     <div class="tags my-0">
@@ -91,18 +89,6 @@
                             <th class="px-3 has-text-centered">{{ produit.titre }}</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th class="px-3">Note Evaluation</th>
-                            <th class="has-text-centered">
-                                {% if moyenne is null %}
-                                    Non disponible
-                                {% else %}
-                                    {{ moyenne | number_format(2,'.','') }}/10
-                                {% endif %}
-                            </th>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <tr>
                             <td class="px-3">Versement initial</td>
@@ -155,6 +141,18 @@
                             </td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="px-3">Note Evaluation</th>
+                            <th class="has-text-centered">
+                                {% if moyenne is null %}
+                                    Non disponible
+                                {% else %}
+                                    {{ moyenne | number_format(2,'.','') }}/10
+                                {% endif %}
+                            </th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="column is-half">
