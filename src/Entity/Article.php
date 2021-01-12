@@ -87,6 +87,9 @@ class Article
         if ($this->creation === null) {
             $this->creation = new \DateTime();
         }
+        if ($this->updatedAt === null) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     /**

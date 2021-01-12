@@ -487,6 +487,9 @@ class Produit
         if ($this->createdAt === null) {
             $this->createdAt = new \DateTime();
         }
+        if ($this->updatedAt === null) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     /**
