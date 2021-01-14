@@ -23,7 +23,7 @@ class Contact
     /**
      * @var string|null
      * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/[0-9$]{10}/")
+     * @Assert\Regex(pattern="/[0-9$]{10}/", message="Pour pouvoir vous contacter, merci de renseigner au moins 10 chiffres pour le n° de téléphone")
      */
     private $telephone;
 

@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminArticleController extends AbstractController
 {
     /**
+     * Shows all the news articles
      * @Route("s", name="liste")
      * @param ArticleRepository $articleRepository
      * @return Response
@@ -34,6 +35,7 @@ class AdminArticleController extends AbstractController
     }
 
     /**
+     * Create a news article
      * @Route ("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -45,14 +47,15 @@ class AdminArticleController extends AbstractController
         $form = $this->createForm(ArticleFormType::class);
         $form->handleRequest($request);
 
+        // If form is submitted and valid => Insert news article in the database
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Article $article */
             $article = $form->getData();
-            $article->setAuteur($this->getUser());
+            $article->setAuteur($this->getUser()); // get current user and register as author
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success','L\'article a été ajouté dans la base de données.');
-            // suppréssion du cache dans le footer
+            // Delete footer cache
             $cache->invalidateTags(['footer_article']);
             return $this->redirectToRoute('admin_article_liste');
         }
@@ -62,6 +65,7 @@ class AdminArticleController extends AbstractController
     }
 
     /**
+     * Edit a news article
      * @param EntityManagerInterface $entityManager
      * @param Article $article
      * @param Request $request
@@ -74,6 +78,7 @@ class AdminArticleController extends AbstractController
         // Pas besoin de récupérer l'id dans la fonction et de le passer à la méthode find()
         $form = $this->createForm(ArticleFormType::class, $article);
         $form->handleRequest($request);
+        // If form is submitted and valid => Edit the news article in the database
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'Les modifications apportées à l\'article ont été enregistrées!');
@@ -85,6 +90,7 @@ class AdminArticleController extends AbstractController
         ]);
     }
     /**
+     * Delete confirmation form for article
      * @param EntityManagerInterface $entityManager
      * @param Article $article
      * @param Request $request
@@ -96,6 +102,7 @@ class AdminArticleController extends AbstractController
         // Pas besoin de récupérer l'id dans la fonction et de le passer à la méthode find()
         $form = $this->createForm(ConfirmDeletionFormType::class);
         $form->handleRequest($request);
+        // if checkbox ix clicked then delete article
         if ($form->isSubmitted() && $form->isValid()){
             // pas besoin de getData(). Les modifications sont faites automatiquement
             $entityManager->remove($article);

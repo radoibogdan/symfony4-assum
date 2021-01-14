@@ -40,7 +40,7 @@ class FonctionsCreated extends AbstractExtension
            new TwigFunction('is_taux_available',[$this, 'findIfTauxAvailable'],['is_safe' => ['html']]),
            // utilisé dans _template, dans le footer
            new TwigFunction('meilleur_taux',[$this, 'findMeilleurTaux'],['is_safe' => ['html']]),
-           // utilisé pour afficher le dernier année ou un fonds euro a un taux différent de 0: Homepage, Tous produits, Produit individuel
+           // utilisé pour afficher le dernier année ou un fonds euro a un taux différent de 0 et non null: Homepage, Tous produits, Produit individuel
            new TwigFunction('annee_fonds_euro_non_null',[$this, 'anneeFondsEuroNonNull'],['is_safe' => ['html']])
        ];
    }
@@ -74,15 +74,15 @@ class FonctionsCreated extends AbstractExtension
     {
         return $this->cache->get('cache_fonds_euro_reference', function(ItemInterface $item){
             $item->tag('cache_fonds_euro');
-
             $annee = date('Y');
+            // Loops through the years (starting at current year) until finding the last year where there was a "fonds euro" not null and not zero
             do {
                 /** @var FondsEuro $meilleur_fonds_euro */
                 $meilleur_fonds_euro = $this->fondsEuroRepository->meilleurFondsDeLanneeX($annee); // renvoie null si aucun fonds n'existe dans l'année
                 $annee--;
-                // tant qu'il n'y a pas de meilleur fonds et que ce fonds n'est pas 0 (le rendement s'affiche en mars)
             } while ($meilleur_fonds_euro === [] || $meilleur_fonds_euro[0]->getTauxPb() === 0);
 
+            // Returs null or the last year where the "fonds euro" is not null and not zero
             return $meilleur_fonds_euro[0]->getTauxPb() == 0 ? null :$meilleur_fonds_euro[0]->getAnnee();
         });
     }

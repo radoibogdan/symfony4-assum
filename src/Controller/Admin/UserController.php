@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
+     * List all users
      * @Route("s", name="liste")
      * @param UserRepository $userRepository
      * @return Response
@@ -34,6 +35,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * Edit specific user
      * @Route("/{id}/edit", name="edit")
      * @param EntityManagerInterface $entityManager
      * @param User $user
@@ -58,6 +60,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * Delete confirmation form for a specific user
      * @Route ("/{id}/delete", name="delete")
      * @param EntityManagerInterface $entityManager
      * @param User $user

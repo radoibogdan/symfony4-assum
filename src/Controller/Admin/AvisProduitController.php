@@ -21,12 +21,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AvisProduitController extends AbstractController
 {
     /**
+     * Lists all Product reviews
      * @Route("s", name="liste")
      * @param AvisProduitRepository $avisProduitRepository
      * @return Response
      */
     public function index(AvisProduitRepository $avisProduitRepository)
     {
+        // order by date
         $avisproduit_list = $avisProduitRepository->findAllDesc();
         return $this->render('admin_avis_produit/liste.html.twig', [
             'avisproduit_list' => $avisproduit_list
@@ -34,6 +36,7 @@ class AvisProduitController extends AbstractController
     }
 
     /**
+     * Delete confirmation form for product review
      * @param EntityManagerInterface $entityManager
      * @param AvisProduit $avisProduit
      * @param Request $request
@@ -59,6 +62,7 @@ class AvisProduitController extends AbstractController
     }
 
     /**
+     * Toggle validation for a product review
      * @param EntityManagerInterface $entityManager
      * @param AvisProduit $avisProduit
      * @param Request $request
@@ -68,6 +72,7 @@ class AvisProduitController extends AbstractController
     public function validate(EntityManagerInterface $entityManager, AvisProduit $avisProduit, Request $request) {
         // Le fait de mettre Produit comme argument va récupérer le bon Produit de la base
         // Pas besoin de récupérer l'id dans la fonction et de le passer à la méthode find()
+        // Toggle validation
         if ($avisProduit->getApprouve() == 0) {
             $avisProduit->setApprouve(1);
             $this->addFlash('success','L\'avis a été approuvé.');

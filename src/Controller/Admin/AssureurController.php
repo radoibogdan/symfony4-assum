@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssureurController extends AbstractController
 {
     /**
+     * List all the insurance companies
      * @Route("s", name="liste")
      * @param AssureurRepository $assureurRepository
      * @return Response
@@ -34,6 +35,7 @@ class AssureurController extends AbstractController
     }
 
     /**
+     * Add new insurance company
      * @Route("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -58,6 +60,7 @@ class AssureurController extends AbstractController
     }
 
     /**
+     * Edit a insurance company
      * @Route("/{id}/modifier", name="edit")
      * @param Assureur $assureur
      * @param Request $request
@@ -82,6 +85,7 @@ class AssureurController extends AbstractController
     }
 
     /**
+     * Delete confirmation form for insurance company
      * @Route("/{id}/suppression", name="delete")
      * @param Assureur $assureur
      * @param Request $request

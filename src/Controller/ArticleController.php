@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     /**
+     * Shows all articles, limited to 6 per page
      * @Route("/articles", name="articles")
      * @param PaginatorInterface $paginator
      * @param Request $request
@@ -25,17 +26,19 @@ class ArticleController extends AbstractController
         $form = $this->createForm(SearchArticleFormType::class);
         $search = $form->handleRequest($request);
 
+        // Show all Articles limited to 6 per page, KNP Pagination used
         $list_articles = $paginator->paginate(
             $articleRepository->findAllQuery(),
             $request->query->getInt('page',1),
             6
         );
 
+        // If form is submitted, paginate Articles according to user input
         if ($form->isSubmitted() && $form->isValid()) {
             $list_articles = $paginator->paginate(
                 $articleRepository->search($search->get('mots')->getData()),
-                $request->query->getInt('page',1),
-                6
+                $request->query->getInt('page',1), // start at page 1
+                6 // limit to 6 articles per page
             );
         }
 
@@ -46,6 +49,7 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * Shows specific news article
      * @Route ("/article/{id}", name="affichage_article")
      * @param Article $article
      * @return Response;

@@ -36,6 +36,7 @@ class AdminProduitController extends AbstractController
     }
 
     /**
+     * Add new product
      * @Route ("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -51,18 +52,20 @@ class AdminProduitController extends AbstractController
             $produit = $form->getData();
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
-            // this condition is needed because the 'image' field is not required (see FormType)
+            // This condition is needed because the 'image' field is not required (see FormType)
             // so the IMG file must be processed only when a file is uploaded
             if ($imageFile) {
                 $newFilename = $fileUploader->upload($imageFile);
-                // Supprimer l'ancien logo si il en existe un déjà enregistré
+                // Delete and replace old logo (if present)
                 if ($produit->getImageFilename()) {
                     $file_to_delete = $produit->getImageFilename();
                     unlink('uploads/images/'. $file_to_delete);
                 }
-                // updates the 'imageFilename' property to store the logo file name instead of its contents
+                // Updates the 'imageFilename' property to store the logo file name instead of its contents
                 $produit->setImageFilename($newFilename);
-                // pas besoin de getData(). Les modifications sont faites automatiquement
+                $entityManager->persist($produit);
+                $entityManager->flush();
+            } else {
                 $entityManager->persist($produit);
                 $entityManager->flush();
             }
@@ -75,6 +78,7 @@ class AdminProduitController extends AbstractController
     }
 
     /**
+     * Edit product
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
      * @param Request $request
@@ -114,6 +118,7 @@ class AdminProduitController extends AbstractController
         ]);
     }
     /**
+     * Delete confirmation form for a product
      * @param EntityManagerInterface $entityManager
      * @param Produit $produit
      * @param Request $request

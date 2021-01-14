@@ -16,7 +16,7 @@
                             </figure>
                         {% else %}
                             <figure class="is-relative">
-                                <img width="200" src="https://loremflickr.com/200/120?lock={{ produit.id }}" alt="Image">
+                                <img width="200" src="{{ asset('uploads/images_site/image_non_disponible.PNG') }}" alt="Image">
                                 {% if produit.label == 1 %}
                                 <div>
                                     <img style="position: absolute; top: -30px ; right: -30px" width="80" src="{{ asset('uploads/images_site/assum_small_label.png') }}" alt="Image representative du produit">

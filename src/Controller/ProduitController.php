@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProduitController extends AbstractController
 {
     /**
+     * Show all products, limit to 6 per page due to pagination
      * @Route("/produits", name="produits")
      * @param PaginatorInterface $paginator
      * @param Request $request
@@ -30,6 +31,7 @@ class ProduitController extends AbstractController
         Request $request,
         ProduitRepository $produitRepository)
     {
+        // Paginate products, 6 per page
         $list_produits = $paginator->paginate(
           $produitRepository->findAllQuery(),
           $request->query->getInt('page',1),
@@ -42,6 +44,7 @@ class ProduitController extends AbstractController
     }
 
     /**
+     * Shows individual product
      * @Route ("/produit/{id}", name="affichage_produit")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -89,7 +92,7 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * PRODUIT DU MOIS
+     * Shows product of the month based on user reviews
      * @Route ("/produit_du_mois", name="show_best_produit")
      * @param Request $request
      * @param EntityManagerInterface $entityManager

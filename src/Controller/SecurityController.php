@@ -35,23 +35,19 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-        // dump($request->headers->get('referer')); die();
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // Check if last URL is comming from the FORGOT PASS, RESET URL TOKEN PROCESS
+        // Check if last URL is comming from the FORGOT PASSWORD - RESET URL TOKEN PROCESS, => change variable
         $last_url_accessed = $request->headers->get('referer');
         if (strpos($last_url_accessed,'reset-pass-token')) {
             $last_url_accessed = $this->generateUrl('app_login',[],UrlGeneratorInterface::ABSOLUTE_URL);
         }
 
+        // pass the last accessed url to the template
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
@@ -80,8 +76,8 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * User Registration Form Page
      * @Route("/inscription", name="inscription")
-     * copié depuis le RegistrationController
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
@@ -98,6 +94,7 @@ class SecurityController extends AbstractController
         MailerInterface $mailer
     ): Response
     {
+        // If user already connected redirect to homepage
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
@@ -105,6 +102,7 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        // If form is submitted and is valid save user to database
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(

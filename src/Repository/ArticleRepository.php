@@ -44,8 +44,9 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche les titre et les contenu en fonction de ce qui est mis dans le formulaire de recherche
-     * Section utilisateur Articles
+     * Based on user input searches in Article titles and Article contents
+     * Must return a Query for the pagination to work
+     * Section Articles
      * @param $mots
      * @return Query
      */
@@ -53,11 +54,11 @@ class ArticleRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('a');
         if ($mots != null) {
+            // MATCH AGAINST = From Doctrine Site, found in Extension/Doctrine folder
             $query->where('MATCH_AGAINST(a.titre, a.contenu) AGAINST(:mots boolean)>0')
                 ->setParameter('mots', $mots);
         }
         return $query->getQuery();
-
     }
 
     // /**

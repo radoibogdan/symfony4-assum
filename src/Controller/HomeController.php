@@ -16,12 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * Shows all new products
      * @Route("/", name="home")
      * @param ProduitRepository $produitRepository
      * @return Response
      */
     public function index(ProduitRepository $produitRepository)
     {
+        // Finds products created in the last year
         $list_produits = $produitRepository->findNewProduits();
         return $this->render('home/index.html.twig', [
             'list_produits' => $list_produits
@@ -29,6 +31,7 @@ class HomeController extends AbstractController
     }
 
     /**
+     * Shows page with the quality criteria
      * @Route ("/qui-sommes-nous",name="qui_sommes_nous")
      * @return Response
      */
@@ -38,6 +41,7 @@ class HomeController extends AbstractController
     }
 
     /**
+     * Shows legal page
      * @Route ("/mentions_legales",name="mentions_legales")
      * @return Response
      */
@@ -47,6 +51,7 @@ class HomeController extends AbstractController
     }
 
     /**
+     * Shows page with regards to personal data and cookies
      * @Route ("/donnees_personnelles",name="donnees_personnelles")
      * @return Response
      */
@@ -56,6 +61,7 @@ class HomeController extends AbstractController
     }
 
     /**
+     * Shows page where user can contact the admin via e-mail (smtp)
      * @Route("/nous_contacter", name="nous_contacter")
      * @param Request $request
      * @param MailerInterface $mailer
@@ -67,23 +73,24 @@ class HomeController extends AbstractController
         $contactForm = $this->createForm(ContactType::class);
         $contactForm->handleRequest($request);
 
+        // If form is valid send e-mail
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $contact = (new TemplatedEmail())
                 ->from(new Address('no-reply@mg.expert-assum.fr'))
                 ->to(new Address('radoi.office@gmail.com', 'Assum'))
                 ->subject('Notification Assum')
                 ->htmlTemplate('contact/notification.html.twig')
-                ->embed(fopen('uploads/images_site/logo_assum.png', 'r'), 'logo')
+                ->embed(fopen('uploads/images_site/logo_assum.png', 'r'), 'logo') // insert image in email
                 ->context([
                     'message'   => $contactForm['message']->getData(),
                     'nom'       => $contactForm['nom']->getData(),
                     'prenom'    => $contactForm['prenom']->getData(),
                     'telephone' => $contactForm['telephone']->getData(),
                     'email_contact'     => $contactForm['email']->getData()
-                ])
+                ]) // load data from form to email body
             ;
-            $mailer->send($contact);
-
+            $mailer->send($contact); // send email
+            // Add flast
             $this->addFlash('success', 'Message envoyé !');
         }
 

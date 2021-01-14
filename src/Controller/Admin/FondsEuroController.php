@@ -23,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FondsEuroController extends AbstractController
 {
     /**
+     * List all Fonds Euro entities
      * @Route("s", name="liste")
      * @param FondsEuroRepository $fondsEuroRepository
      * @return Response
@@ -36,6 +37,7 @@ class FondsEuroController extends AbstractController
     }
 
     /**
+     * Add new Fonds Euro
      * @Route("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -60,6 +62,7 @@ class FondsEuroController extends AbstractController
     }
 
     /**
+     * Edit Fonds Euro
      * @Route("/{id}/modifier", name="edit")
      * @param FondsEuro $fonds_euro
      * @param Request $request
@@ -85,6 +88,7 @@ class FondsEuroController extends AbstractController
     }
 
     /**
+     * Delete confirmation form for Fonds Euro
      * @Route("/{id}/suppression", name="delete")
      * @param FondsEuro $fonds_euro
      * @param Request $request

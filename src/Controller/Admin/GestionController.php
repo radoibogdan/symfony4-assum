@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GestionController extends AbstractController
 {
     /**
+     * List all Gestion entities
      * @Route("s", name="liste")
      * @param GestionRepository $gestionRepository
      * @return Response
@@ -34,6 +35,7 @@ class GestionController extends AbstractController
     }
 
     /**
+     * Add new Gestion
      * @Route("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -58,6 +60,7 @@ class GestionController extends AbstractController
     }
 
     /**
+     * Edit Gestion
      * @Route("/{id}/modifier", name="edit")
      * @param Gestion $gestion
      * @param Request $request
@@ -82,6 +85,7 @@ class GestionController extends AbstractController
     }
 
     /**
+     * Delete confimatio form for Gestion
      * @Route("/{id}/suppression", name="delete")
      * @param Gestion $gestion
      * @param Request $request

@@ -64,7 +64,8 @@ class UserProfileFormType extends AbstractType
                         'maxMessage' => 'Le téléphone ne peut contenir plus de {{ limit }} caractères.'
                     ])
                 ],
-                'required' => false
+                'required' => false,
+                'help' => 'La collecte du numéro de téléphone n\'est pas réalisé dans un but commercial'
             ])
         ;
     }

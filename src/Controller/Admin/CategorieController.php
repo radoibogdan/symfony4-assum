@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     /**
+     * List all the Categories
      * @Route("s", name="liste")
      * @param CategorieRepository $categorieRepository
      * @return Response
@@ -34,6 +35,7 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * Add new category
      * @Route("/ajouter", name="add")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -58,6 +60,7 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * Edit category
      * @Route("/{id}/modifier", name="edit")
      * @param Categorie $categorie
      * @param Request $request
@@ -83,6 +86,7 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * Delete confirmation form for Category
      * @Route("/{id}/suppression", name="delete")
      * @param Categorie $categorie
      * @param Request $request

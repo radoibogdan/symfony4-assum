@@ -34,13 +34,14 @@ class AccountController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success','Votre profil a été mis à jour.');
         }
-
+        // renvoir le template
         return $this->render('compte/profil.html.twig', [
             'profilForm' => $form->createView()
         ]);
     }
 
     /**
+     * Used by the user to confirm he wants to delete his own account & Deletes q
      * @Route ("/compte/suppression", name="user_suppression_compte")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -50,18 +51,23 @@ class AccountController extends AbstractController
     {
         $form = $this->createForm(ConfirmDeletionFormType::class);
         $form->handleRequest($request);
+        // Get current connected user
         $user = $this->getUser();
+        // If form is submitted and valid => delete account
         if ($form->isSubmitted() && $form->isValid()) {
+            // Delete user from database
             $entityManager->remove($user);
             $entityManager->flush();
             $this->addFlash('success','Votre compte a été supprimé.');
+            // For the user to be able to delete his own account, we have to invalidate the session
             $session = $this->get('session');
             $session = new Session();
             $session->invalidate();
-
+            // Redirect to homepage
             return $this->redirectToRoute('home');
         }
 
+        // Render form where user confirms that he wants to delete his own account
         return $this->render('compte/delete.html.twig',[
             'deleteForm' => $form->createView(),
             'user'      => $user

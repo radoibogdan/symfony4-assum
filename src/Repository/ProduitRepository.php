@@ -20,6 +20,7 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    // Finds products created in the last year
     public function findNewProduits () {
         # Création d'un QueryBuilder (constructeur de requête)
         return $this->createQueryBuilder('a')
@@ -33,6 +34,7 @@ class ProduitRepository extends ServiceEntityRepository
 
     /**
      * @return Query
+     * Renvoie tous les produits du plus récent au plus ancien, ensuite ils sont paginés
      * Pour que la pagination fonctionne on a besoin de renvoyer une query et non le résultat
      */
     public function findAllQuery () : Query
