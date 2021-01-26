@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block meta_description %}
+    {# SEO - ne pas indexer les pages admin #}
+    <meta name="robots" content="noindex, nofollow"/>
+{% endblock %}
+
 {# Convention de préfixer avec underscore les fichiers qui sont des maquettes / qui ne sont pas des pages en soit #}
 {% block body %}
     {#################       NAVBAR      #################}

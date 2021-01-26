@@ -2,8 +2,8 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_description %}
-{# SEO - ne pas indexer les pages admin #}
-<meta name="robots" content="noindex, nofollow"/>
+    {# inclure la meta_description par défaut #}
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
