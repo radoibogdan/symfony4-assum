@@ -80,7 +80,7 @@ class Produit
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=AvisProduit::class, mappedBy="produit")
+     * @ORM\OneToMany(targetEntity=AvisProduit::class, mappedBy="produit", orphanRemoval=true)
      */
     private $avisProduits;
 

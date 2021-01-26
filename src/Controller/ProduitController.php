@@ -60,10 +60,10 @@ class ProduitController extends AbstractController
         AvisProduitRepository $avisProduitRepository
     ) : Response
     {
-        // Obtenir la moyenne de ce produit
+        // Obtenir la moyenne de ce produit, renvoie null ou la moyenne
         $moyenne= $produit->getMoyenneProduit();
 
-        // Vérifie si le user a déjà donné son avis sur ce produit
+        // Vérifie si le user a déjà donné son avis sur ce produit, renvoie true/false
         $avis_deja_donne = $this->avisDejaDonne($produit);
 
         $form = $this->createForm(AvisProduitFormType::class);

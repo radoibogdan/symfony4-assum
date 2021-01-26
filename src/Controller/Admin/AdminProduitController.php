@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FileUploader;
 
 /**
- * Autoriser l'accès qu'aux administrateurs et moderateurs sur toutes les routes de ce controlleur
+ * Autoriser l'accès qu'aux administrateurs sur toutes les routes de ce controlleur
  * @IsGranted("ROLE_ADMIN")
  * @Route("/admin/produit", name="admin_produit_")
  */

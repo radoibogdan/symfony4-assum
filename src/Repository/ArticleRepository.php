@@ -55,8 +55,10 @@ class ArticleRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a');
         if ($mots != null) {
             // MATCH AGAINST = From Doctrine Site, found in Extension/Doctrine folder
-            $query->where('MATCH_AGAINST(a.titre, a.contenu) AGAINST(:mots boolean)>0')
-                ->setParameter('mots', $mots);
+            $query
+                ->where('MATCH_AGAINST(a.titre, a.contenu) AGAINST(:mots boolean)>0')
+                ->setParameter('mots', $mots)
+            ;
         }
         return $query->getQuery();
     }

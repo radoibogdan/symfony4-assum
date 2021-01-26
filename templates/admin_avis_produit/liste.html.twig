@@ -32,7 +32,7 @@
                         <tr>
                             <td class="px-2">{{ avis_produit.id }}</td>
                             <td class="has-text-left">{{ avis_produit.auteur.prenom | default ('Non disponible') ~ ' ' ~ avis_produit.auteur.nom | default ('') }}</td>
-                            <td class="has-text-left">{{ avis_produit.produit.titre }}</td>
+                            <td class="has-text-left">{{ avis_produit.produit.titre | default ('') }}</td>
                             <td>{{ avis_produit.note }}/10</td>
                             <td class="has-text-left fixed_width_commentaire">
                                 {% if (avis_produit.commentaire | length > 100) %}
