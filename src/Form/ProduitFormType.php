@@ -9,7 +9,6 @@ use App\Entity\FondsEuro;
 use App\Entity\Gestion;
 use App\Entity\Produit;
 use App\Repository\FondsEuroRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
